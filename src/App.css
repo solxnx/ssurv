@@ -1,0 +1,81 @@
+body {
+  background-image: url("/public/img/mainBg.jpg");
+  color: white;
+}
+
+.mainTitle  {
+  font-size: 25pt;
+  margin: 1%;
+}
+
+.parent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: flex-start;
+}
+
+.title  {
+  display: flex;
+  justify-content: center;
+  font-size: 20pt;
+  margin: 5px;
+}
+
+.items  {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tooltipInfo  {
+  font-size: 12pt;
+}
+
+label > input {
+  visibility: hidden;
+  position: absolute;
+}
+label > input + img {
+  cursor: pointer;
+  border: 5px solid transparent;
+}
+.heroes > input:checked + img{
+  outline: 18px groove greenyellow;
+}
+.left, .center, .right  {
+  margin: 5px;
+}
+.left {
+  width: 16%;
+  zoom: 25%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.center {
+  width: 51%;
+  display: flex;
+  flex-direction: column;
+}
+.right  {
+  position: fixed;
+  right: 1px;
+  width: 30%;
+  zoom: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stages {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.allImgs:hover  {
+  outline: 5px groove greenyellow;
+}
