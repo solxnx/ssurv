@@ -11,11 +11,19 @@ export const store = observable({
   stage2: [],
   stage3: [],
   stage4: [],
+  banished: [],
   filter: 'All',
   heroesFilters: ["barbarian", "pyromancer", "houndmaster", "spellblade", "arcaneweaver", "sentinel", "paladin", "chaoswalker",
   "beastmaster", "assassin", "elementalist", "legionnaire", "necromancer", "deathknight", "monkeyking", "engineer", "myrmidon"],
   changeFilter (value)  {
     this.filter = value;
+  },
+  sOpacity (name) {
+    all.forEach((e) => e.sArray.forEach((i) => {
+      if (i.sName === name && i.opacity !== 0.2)  {
+        i.opacity = 0.2;
+      }
+    }));
   },
   add (name, img, arr) {
     if (arr === "weapons")  {
@@ -23,31 +31,33 @@ export const store = observable({
         if (i.wName === name && i.opacity !== 0.2)  {
           if (this.stage1.length < 6) {
             this.stage1.push({name: name, img: img, arr: arr});
+            i.opacity = 0.2;
           } else if (this.stage2.length < 6)  {
             this.stage2.push({name: name, img: img, arr: arr});
+            i.opacity = 0.2;
           } else if (this.stage3.length < 6)  {
             this.stage3.push({name: name, img: img, arr: arr});
+            i.opacity = 0.2;
           } else if (this.stage4.length < 6)  {
             this.stage4.push({name: name, img: img, arr: arr});
+            i.opacity = 0.2;
           }
-          i.opacity = 0.2;
         }
       }));
     } else if (arr === "skills") {
-      all.forEach((e) => e.sArray.forEach((i) => {
-        if (i.sName === name && i.opacity !== 0.2)  {
-          i.opacity = 0.2;
-        }
-      }));
-      if (this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
+      if (this.banished.filter((e) => e.name === name).length < 1 && this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
         if (this.stage1.length < 6) {
           this.stage1.push({name: name, img: img, arr: arr});
+          this.sOpacity(name);
         } else if (this.stage2.length < 6)  {
           this.stage2.push({name: name, img: img, arr: arr});
+          this.sOpacity(name);
         } else if (this.stage3.length < 6)  {
           this.stage3.push({name: name, img: img, arr: arr});
+          this.sOpacity(name);
         } else if (this.stage4.length < 6)  {
           this.stage4.push({name: name, img: img, arr: arr});
+          this.sOpacity(name);
         }
       }
     }
@@ -61,6 +71,8 @@ export const store = observable({
       this.stage3 = this.stage3.filter((e) => e.name !== name);
     } else if (num === 4) {
       this.stage4 = this.stage4.filter((e) => e.name !== name);
+    } else if (num === 5) {
+      this.banished = this.banished.filter((e) => e.name !== name);
     }
     if (arr === "weapons")  {
       all.forEach((e) => e.wArray.forEach((i) => {
@@ -76,11 +88,29 @@ export const store = observable({
       }));
     }
   },
+  banish (name, img, arr) {
+    if (this.banished.length < 10 && 
+      this.banished.filter((e) => e.name === name).length < 1 && 
+      this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && 
+      this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
+      this.banished.push({name: name, img: img, arr: arr});
+      if (arr === "weapons")  {
+        all.forEach((e) => e.wArray.forEach((i) => {
+          if (i.wName === name)  {
+            i.opacity = 0.2;
+          }
+        }));
+      } else if (arr === "skills")  {
+        all.forEach((e) => e.sArray.forEach((i) => {
+          if (i.sName === name)  {
+            i.opacity = 0.2;
+          }
+        }));
+      }
+    }
+  },
   reset ()  {
-    this.stage1 = [];
-    this.stage2 = [];
-    this.stage3 = [];
-    this.stage4 = [];
+    this.stage1 = this.stage2 = this.stage3 = this.stage4 = this.banished = [];
     all.forEach((e) => e.wArray.forEach((i) => {
       i.opacity = 1;
     }));
@@ -94,6 +124,11 @@ export const store = observable({
 
 
 function App() {
+
+  document.oncontextmenu = cmenu;
+  function cmenu () {
+    return false;
+  }
 
   const charactersList = store.heroesFilters.map((i, idx) => {
     return (
@@ -139,10 +174,11 @@ function App() {
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.wName}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
         style={{backgroundImage: `url('/img/weapons/${e.wImg}.webp')`, backgroundSize: "cover", height:"65px"}}
-        onClick={() => store.add(e.wName, e.wImg, "weapons")}>
+        onClick={() => store.add(e.wName, e.wImg, "weapons")}
+        onContextMenu={() => store.banish(e.wName, e.wImg, "weapons")}>
         </Button>
         </Tooltip>
-    </div>
+      </div>
     )
   }))
 
@@ -152,10 +188,11 @@ function App() {
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.sName}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
         style={{backgroundImage: `url('/img/skills/${e.sName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-        onClick={() => store.add(e.sName, e.sName.replaceAll(' ', ''), "skills")}>
+        onClick={() => store.add(e.sName, e.sName.replaceAll(' ', ''), "skills")}
+        onContextMenu={() => store.banish(e.sName, e.sName.replaceAll(' ', ''), "skills")}>
         </Button>
         </Tooltip>
-    </div>
+      </div>
     )
   }))
 
@@ -211,13 +248,26 @@ function App() {
     )
   })
 
+  const banish = store.banished.map((i, idx) => {
+    return  (
+      <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
+        <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
+        <Button variant="text" size="medium" className='allImgs'
+        style={{backgroundImage: `url('/img/${i.arr}/${i.img}.webp')`, backgroundSize: "cover", height:"65px"}}
+        onClick={() => store.delete(i.name, 5, i.arr)}>
+        </Button>
+        </Tooltip>
+      </div>
+    )
+  })
+
   return (
     <>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>{charactersList}</div>
         <div className='center'>
-          {(store.filter === "All" && store.stage1.length < 1 && store.stage1.length < 1 && store.stage1.length < 1 && store.stage4.length < 1) && 
+          {(store.filter === "All" && store.stage1.length < 1 && store.stage2.length < 1 && store.stage3.length < 1 && store.stage4.length < 1) && 
           <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
           {(store.filter !== "All") && <div className="items">{wList}</div>}
           {(store.filter !== "All") && <div className="items">{sList}</div>}
@@ -231,7 +281,9 @@ function App() {
           <div className='stages'>{stage3}</div>
           <div className='title'>Stage 4</div>
           <div className='stages'>{stage4}</div>
-          {(store.stage1.length > 0 || store.stage1.length > 0 || store.stage1.length > 0 || store.stage4.length > 0) && 
+          <div className='title'>Banished ({store.banished.length} / 10)</div>
+          <div className='stages'>{banish}</div>
+          {(store.stage1.length > 0 || store.stage2.length > 0 || store.stage3.length > 0 || store.stage4.length > 0 || store.banished.length > 0) && 
           <div>
             <Button style={{marginTop: "10px"}} color="error" onClick={() => store.reset()} variant='contained'>RESET BUILD</Button>
           </div>}
