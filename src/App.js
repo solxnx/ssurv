@@ -35,21 +35,21 @@ export const store = observable({
       }
     }));
   },
-  add (name, img, arr) {
+  add (name, arr) {
     if (arr === "weapons")  {
       all.forEach((e) => e.wArray.forEach((i) => {
         if (i.wName === name && i.opacity !== 0.2)  {
           if (this.stage1.length < this.runeSeven) {
-            this.stage1.push({name: name, img: img, arr: arr});
+            this.stage1.push({name: name, arr: arr});
             i.opacity = 0.2;
           } else if (this.stage2.length < this.runeSeven)  {
-            this.stage2.push({name: name, img: img, arr: arr});
+            this.stage2.push({name: name, arr: arr});
             i.opacity = 0.2;
           } else if (this.stage3.length < this.runeSeven)  {
-            this.stage3.push({name: name, img: img, arr: arr});
+            this.stage3.push({name: name, arr: arr});
             i.opacity = 0.2;
           } else if (this.stage4.length < this.runeSeven)  {
-            this.stage4.push({name: name, img: img, arr: arr});
+            this.stage4.push({name: name, arr: arr});
             i.opacity = 0.2;
           }
         }
@@ -57,16 +57,16 @@ export const store = observable({
     } else if (arr === "skills") {
       if (this.banished.filter((e) => e.name === name).length < 1 && this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
         if (this.stage1.length < this.runeSeven) {
-          this.stage1.push({name: name, img: img, arr: arr});
+          this.stage1.push({name: name, arr: arr});
           this.sOpacity(name);
         } else if (this.stage2.length < this.runeSeven)  {
-          this.stage2.push({name: name, img: img, arr: arr});
+          this.stage2.push({name: name, arr: arr});
           this.sOpacity(name);
         } else if (this.stage3.length < this.runeSeven)  {
-          this.stage3.push({name: name, img: img, arr: arr});
+          this.stage3.push({name: name, arr: arr});
           this.sOpacity(name);
         } else if (this.stage4.length < this.runeSeven)  {
-          this.stage4.push({name: name, img: img, arr: arr});
+          this.stage4.push({name: name, arr: arr});
           this.sOpacity(name);
         }
       }
@@ -98,12 +98,12 @@ export const store = observable({
       }));
     }
   },
-  banish (name, img, arr) {
+  banish (name, arr) {
     if (this.banished.length < 10 && 
       this.banished.filter((e) => e.name === name).length < 1 && 
       this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && 
       this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
-      this.banished.push({name: name, img: img, arr: arr});
+      this.banished.push({name: name, arr: arr});
       if (arr === "weapons")  {
         all.forEach((e) => e.wArray.forEach((i) => {
           if (i.wName === name)  {
@@ -183,9 +183,9 @@ function App() {
       <div key={ind} style={{marginRight: "5px", marginBottom: "5px", opacity: e.opacity}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.wName}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
-        style={{backgroundImage: `url('/img/weapons/${e.wImg}.webp')`, backgroundSize: "cover", height:"65px"}}
-        onClick={() => store.add(e.wName, e.wImg, "weapons")}
-        onContextMenu={() => store.banish(e.wName, e.wImg, "weapons")}>
+        style={{backgroundImage: `url('/img/weapons/${e.wName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
+        onClick={() => store.add(e.wName, "weapons")}
+        onContextMenu={() => store.banish(e.wName, "weapons")}>
         </Button>
         </Tooltip>
       </div>
@@ -198,8 +198,8 @@ function App() {
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.sName}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
         style={{backgroundImage: `url('/img/skills/${e.sName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-        onClick={() => store.add(e.sName, e.sName.replaceAll(' ', ''), "skills")}
-        onContextMenu={() => store.banish(e.sName, e.sName.replaceAll(' ', ''), "skills")}>
+        onClick={() => store.add(e.sName, "skills")}
+        onContextMenu={() => store.banish(e.sName, "skills")}>
         </Button>
         </Tooltip>
       </div>
@@ -211,7 +211,7 @@ function App() {
       <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
-        style={{backgroundImage: `url('/img/${i.arr}/${i.img}.webp')`, backgroundSize: "cover", height:"65px"}}
+        style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
         onClick={() => store.delete(i.name, 1, i.arr)}>
         </Button>
         </Tooltip>
@@ -224,7 +224,7 @@ function App() {
       <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
-        style={{backgroundImage: `url('/img/${i.arr}/${i.img}.webp')`, backgroundSize: "cover", height:"65px"}}
+        style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
         onClick={() => store.delete(i.name, 2, i.arr)}>
         </Button>
         </Tooltip>
@@ -237,7 +237,7 @@ function App() {
       <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
-        style={{backgroundImage: `url('/img/${i.arr}/${i.img}.webp')`, backgroundSize: "cover", height:"65px"}}
+        style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
         onClick={() => store.delete(i.name, 3, i.arr)}>
         </Button>
         </Tooltip>
@@ -250,7 +250,7 @@ function App() {
       <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
-        style={{backgroundImage: `url('/img/${i.arr}/${i.img}.webp')`, backgroundSize: "cover", height:"65px"}}
+        style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
         onClick={() => store.delete(i.name, 4, i.arr)}>
         </Button>
         </Tooltip>
@@ -263,7 +263,7 @@ function App() {
       <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
         <Button variant="text" size="medium" className='allImgs'
-        style={{backgroundImage: `url('/img/${i.arr}/${i.img}.webp')`, backgroundSize: "cover", height:"65px"}}
+        style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
         onClick={() => store.delete(i.name, 5, i.arr)}>
         </Button>
         </Tooltip>
