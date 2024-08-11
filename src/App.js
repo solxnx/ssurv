@@ -12,11 +12,21 @@ export const store = observable({
   stage3: [],
   stage4: [],
   banished: [],
+  runeSeven: 6,
+  check: false,
   filter: 'All',
   heroesFilters: ["barbarian", "pyromancer", "houndmaster", "spellblade", "arcaneweaver", "sentinel", "paladin", "chaoswalker",
   "beastmaster", "assassin", "elementalist", "legionnaire", "necromancer", "deathknight", "monkeyking", "engineer", "myrmidon"],
   changeFilter (value)  {
     this.filter = value;
+  },
+  changeCheck () {
+    this.check = !this.check;
+    if (this.runeSeven === 6) {
+      this.runeSeven = 7;
+    } else  {
+      this.runeSeven = 6;
+    }
   },
   sOpacity (name) {
     all.forEach((e) => e.sArray.forEach((i) => {
@@ -29,16 +39,16 @@ export const store = observable({
     if (arr === "weapons")  {
       all.forEach((e) => e.wArray.forEach((i) => {
         if (i.wName === name && i.opacity !== 0.2)  {
-          if (this.stage1.length < 6) {
+          if (this.stage1.length < this.runeSeven) {
             this.stage1.push({name: name, img: img, arr: arr});
             i.opacity = 0.2;
-          } else if (this.stage2.length < 6)  {
+          } else if (this.stage2.length < this.runeSeven)  {
             this.stage2.push({name: name, img: img, arr: arr});
             i.opacity = 0.2;
-          } else if (this.stage3.length < 6)  {
+          } else if (this.stage3.length < this.runeSeven)  {
             this.stage3.push({name: name, img: img, arr: arr});
             i.opacity = 0.2;
-          } else if (this.stage4.length < 6)  {
+          } else if (this.stage4.length < this.runeSeven)  {
             this.stage4.push({name: name, img: img, arr: arr});
             i.opacity = 0.2;
           }
@@ -46,16 +56,16 @@ export const store = observable({
       }));
     } else if (arr === "skills") {
       if (this.banished.filter((e) => e.name === name).length < 1 && this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
-        if (this.stage1.length < 6) {
+        if (this.stage1.length < this.runeSeven) {
           this.stage1.push({name: name, img: img, arr: arr});
           this.sOpacity(name);
-        } else if (this.stage2.length < 6)  {
+        } else if (this.stage2.length < this.runeSeven)  {
           this.stage2.push({name: name, img: img, arr: arr});
           this.sOpacity(name);
-        } else if (this.stage3.length < 6)  {
+        } else if (this.stage3.length < this.runeSeven)  {
           this.stage3.push({name: name, img: img, arr: arr});
           this.sOpacity(name);
-        } else if (this.stage4.length < 6)  {
+        } else if (this.stage4.length < this.runeSeven)  {
           this.stage4.push({name: name, img: img, arr: arr});
           this.sOpacity(name);
         }
@@ -265,21 +275,32 @@ function App() {
     <>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral Build Planner by Solxnx</div>
       <div className="parent">
-        <div className='left'>{charactersList}</div>
+        <div className='left'>
+          <div className='cList'>{charactersList}</div>
+          {(store.filter !== "All") && 
+          <div className='rList'>
+            <Tooltip placement="top" title={<span className="tooltipInfo">Improved Repetory</span>} followCursor>
+            <label className='runeLabel'>
+              <input type="checkbox" checked={store.check} onChange={() => store.changeCheck()} />
+              <img src={`/img/runes/extraSkill.png`} alt="no" />
+            </label>
+            </Tooltip>
+          </div>}
+        </div>
         <div className='center'>
           {(store.filter === "All" && store.stage1.length < 1 && store.stage2.length < 1 && store.stage3.length < 1 && store.stage4.length < 1) && 
           <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
-          {(store.filter !== "All") && <div className="items">{wList}</div>}
+          {(store.filter !== "All") && <div style={{marginBottom: "15px"}} className="items">{wList}</div>}
           {(store.filter !== "All") && <div className="items">{sList}</div>}
         </div>
         <div className='right'>
-          <div className='title'>Stage 1</div>
+          <div className='title'>Stage 1 ({store.stage1.length} / {store.runeSeven})</div>
           <div className='stages'>{stage1}</div>
-          <div className='title'>Stage 2</div>
+          <div className='title'>Stage 2 ({store.stage2.length} / {store.runeSeven})</div>
           <div className='stages'>{stage2}</div>
-          <div className='title'>Stage 3</div>
+          <div className='title'>Stage 3 ({store.stage3.length} / {store.runeSeven})</div>
           <div className='stages'>{stage3}</div>
-          <div className='title'>Stage 4</div>
+          <div className='title'>Stage 4 ({store.stage4.length} / {store.runeSeven})</div>
           <div className='stages'>{stage4}</div>
           <div className='title'>Banished ({store.banished.length} / 10)</div>
           <div className='stages'>{banish}</div>
