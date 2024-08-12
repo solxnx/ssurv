@@ -7,6 +7,7 @@ import { all } from "./heroes";
 
 
 export const store = observable({
+  pool: [],
   stage1: [],
   stage2: [],
   stage3: [],
@@ -30,59 +31,56 @@ export const store = observable({
   },
   sOpacity (name) {
     all.forEach((e) => e.sArray.forEach((i) => {
-      if (i.sName === name && i.opacity !== 0.2)  {
+      if (i.sName === name)  {
+        i.opacity = 0.2;
+      }
+    }));
+  },
+  wOpacity (name) {
+    all.forEach((e) => e.wArray.forEach((i) => {
+      if (i.wName === name)  {
         i.opacity = 0.2;
       }
     }));
   },
   add (name, arr) {
-    if (arr === "weapons")  {
-      all.forEach((e) => e.wArray.forEach((i) => {
-        if (i.wName === name && i.opacity !== 0.2)  {
-          if (this.stage1.length < this.runeSeven) {
-            this.stage1.push({name: name, arr: arr});
-            i.opacity = 0.2;
-          } else if (this.stage2.length < this.runeSeven)  {
-            this.stage2.push({name: name, arr: arr});
-            i.opacity = 0.2;
-          } else if (this.stage3.length < this.runeSeven)  {
-            this.stage3.push({name: name, arr: arr});
-            i.opacity = 0.2;
-          } else if (this.stage4.length < this.runeSeven)  {
-            this.stage4.push({name: name, arr: arr});
-            i.opacity = 0.2;
-          }
-        }
-      }));
-    } else if (arr === "skills") {
-      if (this.banished.filter((e) => e.name === name).length < 1 && this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
-        if (this.stage1.length < this.runeSeven) {
-          this.stage1.push({name: name, arr: arr});
-          this.sOpacity(name);
-        } else if (this.stage2.length < this.runeSeven)  {
-          this.stage2.push({name: name, arr: arr});
-          this.sOpacity(name);
-        } else if (this.stage3.length < this.runeSeven)  {
-          this.stage3.push({name: name, arr: arr});
-          this.sOpacity(name);
-        } else if (this.stage4.length < this.runeSeven)  {
-          this.stage4.push({name: name, arr: arr});
-          this.sOpacity(name);
-        }
+    if (this.pool.filter((e) => e.name === name).length < 1) {
+      if (this.stage1.length < this.runeSeven) {
+        this.stage1.push({name: name, arr: arr});
+        this.pool.push({name: name});
+      } else if (this.stage2.length < this.runeSeven)  {
+        this.stage2.push({name: name, arr: arr});
+        this.pool.push({name: name});
+      } else if (this.stage3.length < this.runeSeven)  {
+        this.stage3.push({name: name, arr: arr});
+        this.pool.push({name: name});
+      } else if (this.stage4.length < this.runeSeven)  {
+        this.stage4.push({name: name, arr: arr});
+        this.pool.push({name: name});
+      }
+      if (arr === "weapons")  {
+        this.wOpacity(name);
+      } else if (arr === "skills") {
+        this.sOpacity(name);
       }
     }
   },
   delete (name, num, arr)  {
     if (num === 1)  {
       this.stage1 = this.stage1.filter((e) => e.name !== name);
+      this.pool = this.pool.filter((e) => e.name !== name);
     } else if (num === 2) {
       this.stage2 = this.stage2.filter((e) => e.name !== name);
+      this.pool = this.pool.filter((e) => e.name !== name);
     } else if (num === 3) {
       this.stage3 = this.stage3.filter((e) => e.name !== name);
+      this.pool = this.pool.filter((e) => e.name !== name);
     } else if (num === 4) {
       this.stage4 = this.stage4.filter((e) => e.name !== name);
+      this.pool = this.pool.filter((e) => e.name !== name);
     } else if (num === 5) {
       this.banished = this.banished.filter((e) => e.name !== name);
+      this.pool = this.pool.filter((e) => e.name !== name);
     }
     if (arr === "weapons")  {
       all.forEach((e) => e.wArray.forEach((i) => {
@@ -99,28 +97,18 @@ export const store = observable({
     }
   },
   banish (name, arr) {
-    if (this.banished.length < 10 && 
-      this.banished.filter((e) => e.name === name).length < 1 && 
-      this.stage1.filter(e => e.name === name).length < 1 && this.stage2.filter(e => e.name === name).length < 1 && 
-      this.stage3.filter(e => e.name === name).length < 1 && this.stage4.filter(e => e.name === name).length < 1)  {
+    if (this.banished.length < 10 && this.pool.filter(e => e.name === name).length < 1)  {
       this.banished.push({name: name, arr: arr});
+      this.pool.push({name: name});
       if (arr === "weapons")  {
-        all.forEach((e) => e.wArray.forEach((i) => {
-          if (i.wName === name)  {
-            i.opacity = 0.2;
-          }
-        }));
+        this.wOpacity(name);
       } else if (arr === "skills")  {
-        all.forEach((e) => e.sArray.forEach((i) => {
-          if (i.sName === name)  {
-            i.opacity = 0.2;
-          }
-        }));
+        this.sOpacity(name);
       }
     }
   },
   reset ()  {
-    this.stage1 = this.stage2 = this.stage3 = this.stage4 = this.banished = [];
+    this.pool = this.stage1 = this.stage2 = this.stage3 = this.stage4 = this.banished = [];
     all.forEach((e) => e.wArray.forEach((i) => {
       i.opacity = 1;
     }));
@@ -288,8 +276,7 @@ function App() {
           </div>}
         </div>
         <div className='center'>
-          {(store.filter === "All" && store.stage1.length < 1 && store.stage2.length < 1 && store.stage3.length < 1 && store.stage4.length < 1) && 
-          <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
+          {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
           {(store.filter !== "All") && <div style={{marginBottom: "15px"}} className="items">{wList}</div>}
           {(store.filter !== "All") && <div className="items">{sList}</div>}
         </div>
@@ -304,7 +291,7 @@ function App() {
           <div className='stages'>{stage4}</div>
           <div className='title'>Banished ({store.banished.length} / 10)</div>
           <div className='stages'>{banish}</div>
-          {(store.stage1.length > 0 || store.stage2.length > 0 || store.stage3.length > 0 || store.stage4.length > 0 || store.banished.length > 0) && 
+          {(store.pool.length > 0) && 
           <div>
             <Button style={{marginTop: "10px"}} color="error" onClick={() => store.reset()} variant='contained'>RESET BUILD</Button>
           </div>}
