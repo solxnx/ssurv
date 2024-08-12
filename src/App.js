@@ -29,39 +29,39 @@ export const store = observable({
       this.runeSeven = 6;
     }
   },
-  sOpacity (name) {
-    all.forEach((e) => e.sArray.forEach((i) => {
-      if (i.sName === name)  {
-        i.opacity = 0.2;
-      }
-    }));
-  },
-  wOpacity (name) {
-    all.forEach((e) => e.wArray.forEach((i) => {
-      if (i.wName === name)  {
-        i.opacity = 0.2;
-      }
-    }));
+  allOpacity (name, arr) {
+    if (arr === "weapons")  {
+      all.forEach((e) => e.wArray.forEach((i) => {
+        if (i.wName === name)  {
+          i.opacity = 0.2;
+        }
+      }));
+    } else if (arr === "skills") {
+      all.forEach((e) => e.sArray.forEach((i) => {
+        if (i.sName === name)  {
+          i.opacity = 0.2;
+        }
+      }));
+    }
   },
   add (name, arr) {
     if (this.pool.filter((e) => e.name === name).length < 1) {
       if (this.stage1.length < this.runeSeven) {
         this.stage1.push({name: name, arr: arr});
         this.pool.push({name: name});
+        this.allOpacity(name, arr);
       } else if (this.stage2.length < this.runeSeven)  {
         this.stage2.push({name: name, arr: arr});
         this.pool.push({name: name});
+        this.allOpacity(name, arr);
       } else if (this.stage3.length < this.runeSeven)  {
         this.stage3.push({name: name, arr: arr});
         this.pool.push({name: name});
+        this.allOpacity(name, arr);
       } else if (this.stage4.length < this.runeSeven)  {
         this.stage4.push({name: name, arr: arr});
         this.pool.push({name: name});
-      }
-      if (arr === "weapons")  {
-        this.wOpacity(name);
-      } else if (arr === "skills") {
-        this.sOpacity(name);
+        this.allOpacity(name, arr);
       }
     }
   },
@@ -100,11 +100,7 @@ export const store = observable({
     if (this.banished.length < 10 && this.pool.filter(e => e.name === name).length < 1)  {
       this.banished.push({name: name, arr: arr});
       this.pool.push({name: name});
-      if (arr === "weapons")  {
-        this.wOpacity(name);
-      } else if (arr === "skills")  {
-        this.sOpacity(name);
-      }
+      this.allOpacity(name, arr);
     }
   },
   reset ()  {
