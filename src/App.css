@@ -63,8 +63,7 @@ label > input + img {
   justify-content: center;
 }
 .rList  {
-  margin-top: 10px;
-  zoom: 80%;
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -92,8 +91,13 @@ label > input + img {
   outline: 5px groove greenyellow;
 }
 .runeLabel > input:checked + img{
-  outline: 4px solid lime;
-  border-radius: 20%;
+  outline: 2px solid lime;
+  border-radius: 35%;
+}
+.runeLabel > input + img{
+  outline: 2px solid red;
+  border-radius: 35%;
+  margin: 5px;
 }
 .buffDiv  {
   display: flex;

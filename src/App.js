@@ -10,6 +10,7 @@ export const store = observable({
   pool: [],
   runeSeven: 6,
   extra: false,
+  minus: false,
   buffs: true,
   filter: 'All',
   changeFilter (value)  {
@@ -18,12 +19,24 @@ export const store = observable({
   showBuffs ()  {
     this.buffs = !this.buffs;
   },
-  changeCheck () {
-    this.extra = !this.extra;
-    if (this.runeSeven === 6) {
-      this.runeSeven = 7;
-    } else  {
-      this.runeSeven = 6;
+  changeNum (val) {
+    if (val === "extra")  {
+      if (!this.extra) {
+        this.extra = !this.extra;
+        this.runeSeven += 1;
+      } else {
+        this.extra = !this.extra;
+        this.runeSeven -= 1;
+      }
+    }
+    if (val === "minus") {
+      if (!this.minus) {
+        this.minus = !this.minus;
+        this.runeSeven -= 3;
+      } else {
+        this.minus = !this.minus;
+        this.runeSeven += 3;
+      }
     }
   },
   allOpacity (name, arr) {
@@ -270,10 +283,16 @@ function App() {
           {(store.filter !== "All") && 
           <div className='rList'>
             <Tooltip placement="top" title={<span className="tooltipInfo">Improved Repetory</span>} followCursor>
-            <label className='runeLabel'>
-              <input type="checkbox" checked={store.extra} onChange={() => store.changeCheck()} />
-              <img src={`/img/runes/extraSkill.png`} alt="no" />
-            </label>
+              <label className='runeLabel'>
+                <input type="checkbox" checked={store.extra} onChange={() => store.changeNum("extra")} />
+                <img src={`/img/runes/extraSkill.png`} alt="no" />
+              </label>
+            </Tooltip>
+            <Tooltip placement="top" title={<span className="tooltipInfo">Focused Mind</span>} followCursor>
+              <label className='runeLabel'>
+                <input type="checkbox" checked={store.minus} onChange={() => store.changeNum("minus")} />
+                <img src={`/img/runes/minusSkill.png`} alt="no" />
+              </label>
             </Tooltip>
           </div>}
         </div>
