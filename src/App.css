@@ -12,7 +12,7 @@ body {
 .parent {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-content: center;
   align-items: flex-start;
 }
@@ -35,23 +35,20 @@ body {
 .tooltipInfo  {
   font-size: 12pt;
 }
-
 label > input {
   visibility: hidden;
-  position: absolute;
 }
-label > input + img {
+label {
   cursor: pointer;
-  border: 5px solid transparent;
 }
 .heroes > input:checked + img{
-  outline: 18px groove greenyellow;
+  outline: 16px groove greenyellow;
 }
 .left, .center, .right  {
-  margin: 5px;
+  margin: 3px;
 }
 .left {
-  width: 16%;
+  width: 17%;
   display: flex;
   flex-direction: column;
 }
@@ -63,7 +60,6 @@ label > input + img {
   justify-content: center;
 }
 .rList  {
-  margin-top: 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -90,14 +86,15 @@ label > input + img {
 .allImgs:hover  {
   outline: 5px groove greenyellow;
 }
-.runeLabel > input:checked + img{
-  outline: 2px solid lime;
-  border-radius: 35%;
-}
 .runeLabel > input + img{
   outline: 2px solid red;
   border-radius: 35%;
-  margin: 5px;
+  margin-top: 5px;
+  padding: 2px;
+}
+.runeLabel > input:checked + img{
+  outline: 2px solid lime;
+  border-radius: 35%;
 }
 .buffDiv  {
   display: flex;
@@ -107,11 +104,20 @@ label > input + img {
   margin-top: 5px;
   zoom: 45%;
 }
-
 .stack  {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   font-size: 14pt;
   font-family: sans-serif;
+}
+.buffsLabel > input + span, .traitsLabel > input + span {
+  outline-offset: 5px;
+  border-radius: 10px;
+  outline: 2px solid red;
+}
+.buffsLabel > input:checked + span, .traitsLabel > input:checked + span {
+  outline-offset: 5px;
+  border-radius: 10px;
+  outline: 2px solid greenyellow;
 }
