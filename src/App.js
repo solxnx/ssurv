@@ -11,6 +11,7 @@ export const store = observable({
   runeSeven: 6,
   extra: false,
   minus: false,
+  debuffs: true,
   buffs: true,
   traits: false,
   filter: 'All',
@@ -18,6 +19,9 @@ export const store = observable({
     this.filter = value;
   },
   showIcons (val)  {
+    if (val === "debuffs")  {
+      this.debuffs = !this.debuffs;
+    }
     if (val === "buffs")  {
       this.buffs = !this.buffs;
     }
@@ -37,36 +41,32 @@ export const store = observable({
   },
   allOpacity (name, arr, action) {
     if (arr === "weapons")  {
-      all.forEach((e) => e.wArray.forEach((i) => {
-        if (i.wName === name && action === "add")  {
-          i.opacity = 0.2;
-        } else if (i.wName === name && action === "delete") {
-          i.opacity = 1;
-        }
-      }));
+      if (action === "add") {
+        all.map((a) => a.wArray.filter((b) => b.wName === name).map((c) => c.opacity = 0.2))
+      } else if (action === "delete") {
+        all.map((a) => a.wArray.filter((b) => b.wName === name).map((c) => c.opacity = 1))
+      }
     } else if (arr === "skills") {
-      all.forEach((e) => e.sArray.forEach((i) => {
-        if (i.sName === name && action === "add")  {
-          i.opacity = 0.2;
-        } else if (i.sName === name && action === "delete") {
-          i.opacity = 1;
-        }
-      }));
+      if (action === "add") {
+        all.map((a) => a.sArray.filter((b) => b.sName === name).map((c) => c.opacity = 0.2))
+      } else if (action === "delete") {
+        all.map((a) => a.sArray.filter((b) => b.sName === name).map((c) => c.opacity = 1))
+      }
     }
   },
-  add (name, arr, buffs, traits) {
+  add (name, arr, buffs, traits, debuffs) {
     if (this.pool.filter((e) => e.name === name).length < 1) {
       if (this.pool.filter((e) => e.stage === 1).length < this.runeSeven) {
-        this.pool.push({name: name, arr: arr, stage: 1, buffs: buffs, traits: traits});
+        this.pool.push({name: name, arr: arr, stage: 1, buffs: buffs, traits: traits, debuffs: debuffs});
         this.allOpacity(name, arr, "add");
       } else if (this.pool.filter((e) => e.stage === 2).length < this.runeSeven)  {
-        this.pool.push({name: name, arr: arr, stage: 2, buffs: buffs, traits: traits});
+        this.pool.push({name: name, arr: arr, stage: 2, buffs: buffs, traits: traits, debuffs: debuffs});
         this.allOpacity(name, arr, "add");
       } else if (this.pool.filter((e) => e.stage === 3).length < this.runeSeven)  {
-        this.pool.push({name: name, arr: arr, stage: 3, buffs: buffs, traits: traits});
+        this.pool.push({name: name, arr: arr, stage: 3, buffs: buffs, traits: traits, debuffs: debuffs});
         this.allOpacity(name, arr, "add");
       } else if (this.pool.filter((e) => e.stage === 4).length < this.runeSeven)  {
-        this.pool.push({name: name, arr: arr, stage: 4, buffs: buffs, traits: traits});
+        this.pool.push({name: name, arr: arr, stage: 4, buffs: buffs, traits: traits, debuffs: debuffs});
         this.allOpacity(name, arr, "add");
       }
     }
@@ -75,9 +75,9 @@ export const store = observable({
     this.pool = this.pool.filter((e) => e.name !== name);
     this.allOpacity(name, arr, "delete");
   },
-  banish (name, arr, buffs, traits) {
+  banish (name, arr, buffs, traits, debuffs) {
     if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.filter(e => e.name === name).length < 1)  {
-      this.pool.push({name: name, arr: arr, stage: 5, buffs: buffs, traits: traits});
+      this.pool.push({name: name, arr: arr, stage: 5, buffs: buffs, traits: traits, debuffs: debuffs});
       this.allOpacity(name, arr, "add");
     }
   },
@@ -118,24 +118,26 @@ function App() {
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.wName}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/weapons/${e.wName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-          onClick={() => store.add(e.wName, "weapons", e.buffs, e.traits)}
-          onContextMenu={() => store.banish(e.wName, "weapons", e.buffs, e.traits)}>
+          onClick={() => store.add(e.wName, "weapons", e.buffs, e.traits, e.debuffs)}
+          onContextMenu={() => store.banish(e.wName, "weapons", e.buffs, e.traits, e.debuffs)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && e.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {e.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}
+        </div>}
         {(store.buffs && e.buffs.length > 0) &&
         <div className='buffDiv'>
           {e.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
         {(store.traits && e.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {e.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -148,24 +150,26 @@ function App() {
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.sName}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/skills/${e.sName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-          onClick={() => store.add(e.sName, "skills", e.buffs, e.traits)}
-          onContextMenu={() => store.banish(e.sName, "skills", e.buffs, e.traits)}>
+          onClick={() => store.add(e.sName, "skills", e.buffs, e.traits, e.debuffs)}
+          onContextMenu={() => store.banish(e.sName, "skills", e.buffs, e.traits, e.debuffs)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && e.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {e.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}
+        </div>}
         {(store.buffs && e.buffs.length > 0) &&
         <div className='buffDiv'>
           {e.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
         {(store.traits && e.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {e.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -181,20 +185,22 @@ function App() {
           onClick={() => store.delete(i.name, i.arr)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && i.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {i.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}          
+        </div>}
         {(store.buffs && i.buffs.length > 0) &&
         <div className='buffDiv'>
           {i.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}          
         </div>}
         {(store.traits && i.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {i.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -210,20 +216,22 @@ function App() {
           onClick={() => store.delete(i.name, i.arr)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && i.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {i.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}          
+        </div>}
         {(store.buffs && i.buffs.length > 0) &&
         <div className='buffDiv'>
           {i.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}          
         </div>}
         {(store.traits && i.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {i.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -239,20 +247,22 @@ function App() {
           onClick={() => store.delete(i.name, i.arr)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && i.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {i.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}          
+        </div>}
         {(store.buffs && i.buffs.length > 0) &&
         <div className='buffDiv'>
           {i.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}          
         </div>}
         {(store.traits && i.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {i.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -268,20 +278,22 @@ function App() {
           onClick={() => store.delete(i.name, i.arr)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && i.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {i.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}          
+        </div>}
         {(store.buffs && i.buffs.length > 0) &&
         <div className='buffDiv'>
           {i.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}          
         </div>}
         {(store.traits && i.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {i.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -297,20 +309,22 @@ function App() {
           onClick={() => store.delete(i.name, i.arr)}>
           </Button>
         </Tooltip>
+        {(store.debuffs && i.debuffs.length > 0) &&
+        <div className='buffDiv'>
+          {i.debuffs.map((b, index) => {
+            return <img key={index} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+          })}          
+        </div>}
         {(store.buffs && i.buffs.length > 0) &&
         <div className='buffDiv'>
           {i.buffs.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
           })}          
         </div>}
         {(store.traits && i.traits.length > 0) &&
         <div className='buffDiv' style={{marginTop: "-3px"}}>
           {i.traits.map((b, index) => {
-            return (
-              <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            )
+            return <img key={index} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
           })}
         </div>}
       </div>
@@ -340,9 +354,13 @@ function App() {
           </div>}
         </div>
         <div className='center'>
-          {(store.filter === "All") && <div style={{fontSize: "35px", fontFamily: "sans-serif", textAlign: "center"}}>Choose your character</div>}
+          {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
           {(store.filter !== "All") && 
             <div className='stack'>
+              <label className='debuffsLabel'>
+                <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.debuffs} onChange={() => store.showIcons("debuffs")} />
+                <span>Debuffs</span>
+              </label>
               <label className='buffsLabel'>
                 <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.buffs} onChange={() => store.showIcons("buffs")} />
                 <span>Stackable Buffs</span>
