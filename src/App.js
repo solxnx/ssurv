@@ -403,19 +403,19 @@ function App() {
           {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
           {(store.filter !== "All") && 
             <div className='stack'>
-              <label className='debuffsLabel'>
+              <label className='iconsLabel'>
                 <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.debuffs} onChange={() => store.showIcons("debuffs")} />
                 <span>Debuffs</span>
               </label>
-              <label className='buffsLabel'>
+              <label className='iconsLabel'>
                 <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.buffs} onChange={() => store.showIcons("buffs")} />
                 <span>Stackable Buffs</span>
               </label>
-              <label className='traitsLabel'>
+              <label className='iconsLabel'>
                 <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.traits} onChange={() => store.showIcons("traits")} />
                 <span>Traits</span>
               </label>
-              <label className='traitsLabel'>
+              <label className='iconsLabel'>
                 <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.types} onChange={() => store.showIcons("types")} />
                 <span>Skill Types</span>
               </label>

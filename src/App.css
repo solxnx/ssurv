@@ -109,12 +109,12 @@ label {
   margin-bottom: 20px;
   font-size: 14pt;
 }
-.buffsLabel > input + span, .traitsLabel > input + span, .debuffsLabel > input + span {
+.iconsLabel > input + span  {
   outline-offset: 5px;
   border-radius: 10px;
   outline: 2px solid red;
 }
-.buffsLabel > input:checked + span, .traitsLabel > input:checked + span, .debuffsLabel > input:checked + span {
+.iconsLabel > input:checked + span  {
   outline-offset: 5px;
   border-radius: 10px;
   outline: 2px solid greenyellow;
