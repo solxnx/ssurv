@@ -21,7 +21,7 @@ body {
   display: flex;
   justify-content: center;
   font-size: 16pt;
-  margin: 3px;
+  margin-bottom: 10px;
 }
 
 .items  {
@@ -106,7 +106,7 @@ label {
 .stack  {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   font-size: 14pt;
 }
 .buffsLabel > input + span, .traitsLabel > input + span, .debuffsLabel > input + span {

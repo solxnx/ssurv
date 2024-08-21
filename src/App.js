@@ -14,6 +14,7 @@ export const store = observable({
   debuffs: true,
   buffs: true,
   traits: false,
+  types: false,
   filter: 'All',
   changeFilter (value)  {
     this.filter = value;
@@ -27,6 +28,9 @@ export const store = observable({
     }
     if (val === "traits") {
       this.traits = !this.traits;
+    }
+    if (val === "types") {
+      this.types = !this.types;
     }
   },
   changeNum (val) {
@@ -54,19 +58,19 @@ export const store = observable({
       }
     }
   },
-  add (name, arr, buffs, traits, debuffs) {
+  add (name, arr, buffs, traits, debuffs, types) {
     if (this.pool.filter((e) => e.name === name).length < 1) {
       if (this.pool.filter((e) => e.stage === 1).length < this.runeSeven) {
-        this.pool.push({name: name, arr: arr, stage: 1, buffs: buffs, traits: traits, debuffs: debuffs});
+        this.pool.push({name: name, arr: arr, stage: 1, buffs: buffs, traits: traits, debuffs: debuffs, types: types});
         this.allOpacity(name, arr, "add");
       } else if (this.pool.filter((e) => e.stage === 2).length < this.runeSeven)  {
-        this.pool.push({name: name, arr: arr, stage: 2, buffs: buffs, traits: traits, debuffs: debuffs});
+        this.pool.push({name: name, arr: arr, stage: 2, buffs: buffs, traits: traits, debuffs: debuffs, types: types});
         this.allOpacity(name, arr, "add");
       } else if (this.pool.filter((e) => e.stage === 3).length < this.runeSeven)  {
-        this.pool.push({name: name, arr: arr, stage: 3, buffs: buffs, traits: traits, debuffs: debuffs});
+        this.pool.push({name: name, arr: arr, stage: 3, buffs: buffs, traits: traits, debuffs: debuffs, types: types});
         this.allOpacity(name, arr, "add");
       } else if (this.pool.filter((e) => e.stage === 4).length < this.runeSeven)  {
-        this.pool.push({name: name, arr: arr, stage: 4, buffs: buffs, traits: traits, debuffs: debuffs});
+        this.pool.push({name: name, arr: arr, stage: 4, buffs: buffs, traits: traits, debuffs: debuffs, types: types});
         this.allOpacity(name, arr, "add");
       }
     }
@@ -75,9 +79,9 @@ export const store = observable({
     this.pool = this.pool.filter((e) => e.name !== name);
     this.allOpacity(name, arr, "delete");
   },
-  banish (name, arr, buffs, traits, debuffs) {
+  banish (name, arr, buffs, traits, debuffs, types) {
     if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.filter(e => e.name === name).length < 1)  {
-      this.pool.push({name: name, arr: arr, stage: 5, buffs: buffs, traits: traits, debuffs: debuffs});
+      this.pool.push({name: name, arr: arr, stage: 5, buffs: buffs, traits: traits, debuffs: debuffs, types: types});
       this.allOpacity(name, arr, "add");
     }
   },
@@ -116,10 +120,16 @@ function App() {
     return (
       <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "5px", opacity: e.opacity}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.wName}</span>} followCursor>
-          <Button variant="text" size="medium" className='allImgs'
+          <Button variant="text" size="medium" className='allImgs' 
           style={{backgroundImage: `url('/img/weapons/${e.wName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-          onClick={() => store.add(e.wName, "weapons", e.buffs, e.traits, e.debuffs)}
-          onContextMenu={() => store.banish(e.wName, "weapons", e.buffs, e.traits, e.debuffs)}>
+          onClick={() => store.add(e.wName, "weapons", e.buffs, e.traits, e.debuffs, e.types)}
+          onContextMenu={() => store.banish(e.wName, "weapons", e.buffs, e.traits, e.debuffs, e.types)}>
+          {(store.types && e.types.length > 0) &&
+          <div style={{position: "absolute", right: "-15%", top: "-15%"}}>
+            {e.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && e.debuffs.length > 0) &&
@@ -146,12 +156,18 @@ function App() {
 
   const sList = all.filter ((a) => a.hero === store.filter).map((i) => i.sArray.map((e, idx) => {
     return (
-      <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "5px", opacity: e.opacity}}>
+      <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "15px", opacity: e.opacity}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{e.sName}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/skills/${e.sName.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-          onClick={() => store.add(e.sName, "skills", e.buffs, e.traits, e.debuffs)}
-          onContextMenu={() => store.banish(e.sName, "skills", e.buffs, e.traits, e.debuffs)}>
+          onClick={() => store.add(e.sName, "skills", e.buffs, e.traits, e.debuffs, e.types)}
+          onContextMenu={() => store.banish(e.sName, "skills", e.buffs, e.traits, e.debuffs, e.types)}>
+          {(store.types && e.types.length > 0) &&
+          <div style={{position: "absolute", right: "-15%", top: "-15%"}}>
+            {e.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && e.debuffs.length > 0) &&
@@ -178,11 +194,17 @@ function App() {
 
   const stage1 = store.pool.filter((e) => e.stage === 1).map((i, idx) => {
     return  (
-      <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
+      <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
           onClick={() => store.delete(i.name, i.arr)}>
+          {(store.types && i.types.length > 0) &&
+          <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+            {i.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && i.debuffs.length > 0) &&
@@ -209,11 +231,17 @@ function App() {
 
   const stage2 = store.pool.filter((e) => e.stage === 2).map((i, idx) => {
     return  (
-      <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
+      <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
           onClick={() => store.delete(i.name, i.arr)}>
+          {(store.types && i.types.length > 0) &&
+          <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+            {i.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && i.debuffs.length > 0) &&
@@ -240,11 +268,17 @@ function App() {
 
   const stage3 = store.pool.filter((e) => e.stage === 3).map((i, idx) => {
     return  (
-      <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
+      <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
           onClick={() => store.delete(i.name, i.arr)}>
+          {(store.types && i.types.length > 0) &&
+          <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+            {i.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && i.debuffs.length > 0) &&
@@ -271,11 +305,17 @@ function App() {
 
   const stage4 = store.pool.filter((e) => e.stage === 4).map((i, idx) => {
     return  (
-      <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
+      <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
           onClick={() => store.delete(i.name, i.arr)}>
+          {(store.types && i.types.length > 0) &&
+          <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+            {i.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && i.debuffs.length > 0) &&
@@ -302,11 +342,17 @@ function App() {
 
   const banish = store.pool.filter((e) => e.stage === 5).map((i, idx) => {
     return  (
-      <div key={idx} style={{marginRight: "5px", marginBottom: "5px"}}>
+      <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
           <Button variant="text" size="medium" className='allImgs'
           style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
           onClick={() => store.delete(i.name, i.arr)}>
+          {(store.types && i.types.length > 0) &&
+          <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+            {i.types.map((b, index) => {
+              return <img key={index} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+            })}
+          </div>}
           </Button>
         </Tooltip>
         {(store.debuffs && i.debuffs.length > 0) &&
@@ -368,6 +414,10 @@ function App() {
               <label className='traitsLabel'>
                 <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.traits} onChange={() => store.showIcons("traits")} />
                 <span>Traits</span>
+              </label>
+              <label className='traitsLabel'>
+                <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.types} onChange={() => store.showIcons("types")} />
+                <span>Skill Types</span>
               </label>
             </div>}
           {(store.filter !== "All") && <div style={{marginBottom: "10px"}} className="items">{wList}</div>}
