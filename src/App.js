@@ -105,7 +105,7 @@ function App() {
 
   const charactersList = all.map((i, idx) => {
     return (
-      <div key={idx} style={{marginBottom: "12px"}}>
+      <div key={idx} style={{margin: "10px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.hero.charAt(0).toUpperCase() + i.hero.slice(1)}</span>} followCursor>
           <label className="heroes">
             <input type='radio' name='filter' value={i.hero} onChange={(e) => store.changeFilter(e.target.value)} />
