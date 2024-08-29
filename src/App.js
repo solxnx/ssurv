@@ -18,14 +18,17 @@ export const store = observable({
   traits: false,
   types: false,
   filter: 'All',
-  changeFilter (value)  {
-    this.filter = value;
+  changeFilter (val)  {
+    this.filter = val;
   },
   showIcons (val)  {
-    if (val === "debuffs") this.debuffs = !this.debuffs;
-    if (val === "buffs") this.buffs = !this.buffs;
-    if (val === "traits") this.traits = !this.traits;
-    if (val === "types") this.types = !this.types;
+    switch(val) {
+      case "debuffs": this.debuffs = !this.debuffs; break;
+      case "buffs": this.buffs = !this.buffs; break;
+      case "traits": this.traits = !this.traits; break;
+      case "types": this.types = !this.types; break;
+      default: break;
+    }
   },
   changeNum (val) {
     if (val === "extra")  {
@@ -38,26 +41,20 @@ export const store = observable({
     }
   },
   allOpacity (name, action) {
-    if (action === "add") {
-      allSkills.get(name).opacity = 0.2;
-    } else if (action === "delete") {
-      allSkills.get(name).opacity = 1;
+    switch (action) {
+      case "add": allSkills.get(name).opacity = 0.2; break;
+      case "delete": allSkills.get(name).opacity = 1; break;
+      default: break;
     }
   },
   add (name, arr) {
     if (this.pool.filter((e) => e.name === name.name).length < 1) {
-      if (this.pool.filter((e) => e.stage === 1).length < this.runeSeven) {
-        this.pool.push({...name, arr: arr, stage: 1});
-        this.allOpacity(name.name, "add");
-      } else if (this.pool.filter((e) => e.stage === 2).length < this.runeSeven)  {
-        this.pool.push({...name, arr: arr, stage: 2});
-        this.allOpacity(name.name, "add");
-      } else if (this.pool.filter((e) => e.stage === 3).length < this.runeSeven)  {
-        this.pool.push({...name, arr: arr, stage: 3});
-        this.allOpacity(name.name, "add");
-      } else if (this.pool.filter((e) => e.stage === 4).length < this.runeSeven)  {
-        this.pool.push({...name, arr: arr, stage: 4});
-        this.allOpacity(name.name, "add");
+      for (let i = 1; i <= 4; i++)  {
+        if (this.pool.filter((e) => e.stage === i).length < this.runeSeven) {
+          this.pool.push({...name, arr: arr, stage: i});
+          this.allOpacity(name.name, "add");
+          break;
+        }
       }
     }
   },
