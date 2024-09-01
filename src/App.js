@@ -7,10 +7,9 @@ import { allSkills } from './allSkills';
 import { allHeroes } from './allHeroes';
 
 /* START MobX BLOCK */
-export const store = observable({
-  allSkills: allSkills,
+const store = observable({
   pool: [],
-  runeSeven: 6,
+  limit: 6,
   extra: false,
   minus: false,
   debuffs: true,
@@ -30,29 +29,22 @@ export const store = observable({
       default: break;
     }
   },
-  changeNum (val) {
+  runes (val) {
     if (val === "extra")  {
       this.extra = !this.extra;
-      this.extra ? this.runeSeven += 1 : this.runeSeven -= 1;
+      this.extra ? this.limit += 1 : this.limit -= 1;
     }
     if (val === "minus") {
       this.minus = !this.minus;
-      this.minus ? this.runeSeven -= 3 : this.runeSeven += 3;
-    }
-  },
-  allOpacity (name, action) {
-    switch (action) {
-      case "add": allSkills.get(name).opacity = 0.2; break;
-      case "delete": allSkills.get(name).opacity = 1; break;
-      default: break;
+      this.minus ? this.limit -= 3 : this.limit += 3;
     }
   },
   add (name, arr) {
     if (this.pool.filter((e) => e.name === name.name).length < 1) {
       for (let i = 1; i <= 4; i++)  {
-        if (this.pool.filter((e) => e.stage === i).length < this.runeSeven) {
+        if (this.pool.filter((e) => e.stage === i).length < this.limit) {
           this.pool.push({...name, arr: arr, stage: i});
-          this.allOpacity(name.name, "add");
+          allSkills.get(name.name).opacity = 0.2;
           break;
         }
       }
@@ -60,12 +52,12 @@ export const store = observable({
   },
   delete (name)  {
     this.pool = this.pool.filter((e) => e.name !== name);
-    this.allOpacity(name, "delete");
+    allSkills.get(name).opacity = 1;
   },
   banish (name, arr) {
     if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.filter(e => e.name === name.name).length < 1)  {
       this.pool.push({...name, arr: arr, stage: 5});
-      this.allOpacity(name.name, "add");
+      allSkills.get(name.name).opacity = 0.2;
     }
   },
   reset ()  {
@@ -187,13 +179,13 @@ function App() {
           <div className='rList'>
             <Tooltip placement="top" title={<span className="tooltipInfo">Improved Repetory</span>} followCursor>
               <label className='runeLabel'>
-                <input type="checkbox" checked={store.extra} onChange={() => store.changeNum("extra")} />
+                <input type="checkbox" checked={store.extra} onChange={() => store.runes("extra")} />
                 <img src={`/img/runes/extraSkill.png`} alt="no" />
               </label>
             </Tooltip>
             <Tooltip placement="top" title={<span className="tooltipInfo">Focused Mind</span>} followCursor>
               <label className='runeLabel'>
-                <input type="checkbox" checked={store.minus} onChange={() => store.changeNum("minus")} />
+                <input type="checkbox" checked={store.minus} onChange={() => store.runes("minus")} />
                 <img src={`/img/runes/minusSkill.png`} alt="no" />
               </label>
             </Tooltip>
@@ -242,13 +234,13 @@ function App() {
             </div>}
         </div>
         <div className='right'>
-          <div className='title'>Stage 1 ({store.pool.filter((e) => e.stage === 1).length} / {store.runeSeven})</div>
+          <div className='title'>Stage 1 ({store.pool.filter((e) => e.stage === 1).length} / {store.limit})</div>
           <div className='stages'><Stage num={1} /></div>
-          <div className='title'>Stage 2 ({store.pool.filter((e) => e.stage === 2).length} / {store.runeSeven})</div>
+          <div className='title'>Stage 2 ({store.pool.filter((e) => e.stage === 2).length} / {store.limit})</div>
           <div className='stages'><Stage num={2} /></div>
-          <div className='title'>Stage 3 ({store.pool.filter((e) => e.stage === 3).length} / {store.runeSeven})</div>
+          <div className='title'>Stage 3 ({store.pool.filter((e) => e.stage === 3).length} / {store.limit})</div>
           <div className='stages'><Stage num={3} /></div>
-          <div className='title'>Stage 4 ({store.pool.filter((e) => e.stage === 4).length} / {store.runeSeven})</div>
+          <div className='title'>Stage 4 ({store.pool.filter((e) => e.stage === 4).length} / {store.limit})</div>
           <div className='stages'><Stage num={4} /></div>
           <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>
           <div className='stages'><Stage num={5} /></div>
