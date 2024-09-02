@@ -10,6 +10,8 @@ import { allHeroes } from './allHeroes';
 const store = observable({
   pool: [],
   limit: 6,
+  generalistCount: [0, 0, 0, 0],
+  generalistRune: false,
   extra: false,
   minus: false,
   debuffs: true,
@@ -38,6 +40,23 @@ const store = observable({
       this.minus = !this.minus;
       this.minus ? this.limit -= 3 : this.limit += 3;
     }
+    if (val === "generalist") {
+      this.generalistRune = !this.generalistRune;
+      if (this.generalistRune)  {
+        this.generalist(1, 4);
+      }
+    }
+  },
+  generalist (stage, stageEnd)  {
+    if (stage !== 5 && this.generalistRune) {
+      for (let i = stage; i <= stageEnd; i++) {
+        let typesPool = [];
+        this.pool.forEach((e) =>  {
+          if (e.stage === i) typesPool = [...new Set(typesPool.concat(e.allTypes))];
+        })
+        this.generalistCount[i-1] = typesPool.length*1.5;
+      }
+    }
   },
   add (name, arr) {
     if (this.pool.filter((e) => e.name === name.name).length < 1) {
@@ -45,14 +64,16 @@ const store = observable({
         if (this.pool.filter((e) => e.stage === i).length < this.limit) {
           this.pool.push({...name, arr: arr, stage: i});
           allSkills.get(name.name).opacity = 0.2;
+          this.generalist(i, i);
           break;
         }
       }
     }
   },
-  delete (name)  {
+  delete (name, stage)  {
     this.pool = this.pool.filter((e) => e.name !== name);
     allSkills.get(name).opacity = 1;
+    this.generalist(stage, stage);
   },
   banish (name, arr) {
     if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.filter(e => e.name === name.name).length < 1)  {
@@ -62,6 +83,7 @@ const store = observable({
   },
   reset ()  {
     this.pool = [];
+    this.generalistCount = [0, 0, 0, 0]
     allSkills.forEach((e) => e.opacity = 1);
   },
 
@@ -110,42 +132,51 @@ const store = observable({
 
   function Stage ({num}) {
     return (
-      store.pool.filter((e) => e.stage === num).map((i, idx) => {
-        return  (
-          <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
-            <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
-              <Button variant="text" size="medium" className='allImgs'
-              style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-              onClick={() => store.delete(i.name)}>
-              {(store.types && i.types.length > 0) &&
-              <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
-                {i.types.map((b, ix) => {
-                  return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
-                })}
-              </div>}
-              </Button>
-            </Tooltip>
-            {(store.debuffs && i.debuffs.length > 0) &&
-            <div className='buffDiv'>
-              {i.debuffs.map((b, ix) => {
-                return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-              })}          
-            </div>}
-            {(store.buffs && i.buffs.length > 0) &&
-            <div className='buffDiv'>
-              {i.buffs.map((b, ix) => {
-                return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-              })}          
-            </div>}
-            {(store.traits && i.traits.length > 0) &&
-            <div className='buffDiv' style={{marginTop: "-3px"}}>
-              {i.traits.map((b, ix) => {
-                return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-              })}
-            </div>}
-          </div>
-        )
-      })
+      <>
+        {num !== 5 
+          ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
+          : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
+        {(store.generalistRune && num !== 5) &&
+        <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px", color: "yellow"}}>+ {store.generalistCount[num-1]}% dmg</div>}
+        <div className='stages'>
+          {store.pool.filter((e) => e.stage === num).map((i, idx) => {
+            return  (
+              <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
+                <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
+                  <Button variant="text" size="medium" className='allImgs'
+                  style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
+                  onClick={() => store.delete(i.name, num)}>
+                  {(store.types && i.types.length > 0) &&
+                  <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+                    {i.types.map((b, ix) => {
+                      return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+                    })}
+                  </div>}
+                  </Button>
+                </Tooltip>
+                {(store.debuffs && i.debuffs.length > 0) &&
+                <div className='buffDiv'>
+                  {i.debuffs.map((b, ix) => {
+                    return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+                  })}          
+                </div>}
+                {(store.buffs && i.buffs.length > 0) &&
+                <div className='buffDiv'>
+                  {i.buffs.map((b, ix) => {
+                    return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+                  })}          
+                </div>}
+                {(store.traits && i.traits.length > 0) &&
+                <div className='buffDiv' style={{marginTop: "-3px"}}>
+                  {i.traits.map((b, ix) => {
+                    return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+                  })}
+                </div>}
+              </div>
+            )
+          })}
+        </div>
+      </>
     )
   }
 /* END COMPONENTS BLOCK */
@@ -180,13 +211,19 @@ function App() {
             <Tooltip placement="top" title={<span className="tooltipInfo">Improved Repetory</span>} followCursor>
               <label className='runeLabel'>
                 <input type="checkbox" checked={store.extra} onChange={() => store.runes("extra")} />
-                <img src={`/img/runes/extraSkill.png`} alt="no" />
+                <img src={`/img/runes/ImprovedRepetory.png`} alt="no" />
               </label>
             </Tooltip>
             <Tooltip placement="top" title={<span className="tooltipInfo">Focused Mind</span>} followCursor>
               <label className='runeLabel'>
                 <input type="checkbox" checked={store.minus} onChange={() => store.runes("minus")} />
-                <img src={`/img/runes/minusSkill.png`} alt="no" />
+                <img src={`/img/runes/FocusedMind.png`} alt="no" />
+              </label>
+            </Tooltip>
+            <Tooltip placement="top" title={<span className="tooltipInfo">Generalist</span>} followCursor>
+              <label className='runeLabel'>
+                <input type="checkbox" checked={store.generalistRune} onChange={() => store.runes("generalist")} />
+                <img src={`/img/runes/Generalist.png`} alt="no" />
               </label>
             </Tooltip>
           </div>}
@@ -234,16 +271,11 @@ function App() {
             </div>}
         </div>
         <div className='right'>
-          <div className='title'>Stage 1 ({store.pool.filter((e) => e.stage === 1).length} / {store.limit})</div>
-          <div className='stages'><Stage num={1} /></div>
-          <div className='title'>Stage 2 ({store.pool.filter((e) => e.stage === 2).length} / {store.limit})</div>
-          <div className='stages'><Stage num={2} /></div>
-          <div className='title'>Stage 3 ({store.pool.filter((e) => e.stage === 3).length} / {store.limit})</div>
-          <div className='stages'><Stage num={3} /></div>
-          <div className='title'>Stage 4 ({store.pool.filter((e) => e.stage === 4).length} / {store.limit})</div>
-          <div className='stages'><Stage num={4} /></div>
-          <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>
-          <div className='stages'><Stage num={5} /></div>
+          <Stage num={1} />
+          <Stage num={2} />
+          <Stage num={3} />
+          <Stage num={4} />
+          <Stage num={5} />
           {(store.pool.length > 0) && 
           <div>
             <Button style={{marginTop: "10px"}} color="error" onClick={() => store.reset()} variant='contained'>RESET BUILD</Button>
