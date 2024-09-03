@@ -42,9 +42,7 @@ const store = observable({
     }
     if (val === "generalist") {
       this.generalistRune = !this.generalistRune;
-      if (this.generalistRune)  {
-        this.generalist(1, 4);
-      }
+      if (this.generalistRune) this.generalist(1, 4);
     }
   },
   generalist (stage, stageEnd)  {
@@ -83,7 +81,7 @@ const store = observable({
   },
   reset ()  {
     this.pool = [];
-    this.generalistCount = [0, 0, 0, 0]
+    this.generalistCount = [0, 0, 0, 0];
     allSkills.forEach((e) => e.opacity = 1);
   },
 
@@ -91,94 +89,101 @@ const store = observable({
 /* END MobX BLOCK */ 
 
 /* START COMPONENTS BLOCK */
-  function AllButton ({name, arr}) {
-    const getSkill = allSkills.get(name);
-    return  (
-      <>
-        <Tooltip placement="top" title={<span className="tooltipInfo">{getSkill.name}</span>} followCursor>
-          <Button variant="text" size="medium" className='allImgs'
-          style={{backgroundImage: `url('/img/${arr}/${getSkill.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-          onClick={() => store.add(getSkill, arr)}
-          onContextMenu={() => store.banish(getSkill, arr)}>
-          {(store.types && getSkill.types.length > 0) &&
-          <div style={{position: "absolute", right: "-15%", top: "-15%"}}>
-            {getSkill.types.map((b, ix) => {
-              return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+function Skills ({arr}) {
+  let arrType;
+  if (arr === "weapons") arrType = allHeroes.get(store.filter).wArray;
+  if (arr === "skills") arrType = allHeroes.get(store.filter).sArray;
+  return  (
+    arrType.map((e, idx) => {
+      const getSkill = allSkills.get(e);
+      return (
+        <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "15px", opacity: allSkills.get(e).opacity}}>
+          <Tooltip placement="top" title={<span className="tooltipInfo">{getSkill.name}</span>} followCursor>
+            <Button variant="text" size="medium" className='allImgs'
+            style={{backgroundImage: `url('/img/${arr}/${getSkill.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
+            onClick={() => store.add(getSkill, arr)}
+            onContextMenu={() => store.banish(getSkill, arr)}>
+            {(store.types && getSkill.types.length > 0) &&
+            <div style={{position: "absolute", right: "-15%", top: "-15%"}}>
+              {getSkill.types.map((b, ix) => {
+                return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
+              })}
+            </div>}
+            </Button>
+          </Tooltip>
+          {(store.debuffs && getSkill.debuffs.length > 0) &&
+          <div className='buffDiv'>
+            {getSkill.debuffs.map((b, ix) => {
+              return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
             })}
           </div>}
-          </Button>
-        </Tooltip>
-        {(store.debuffs && getSkill.debuffs.length > 0) &&
-        <div className='buffDiv'>
-          {getSkill.debuffs.map((b, ix) => {
-            return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-          })}
-        </div>}
-        {(store.buffs && getSkill.buffs.length > 0) &&
-        <div className='buffDiv'>
-          {getSkill.buffs.map((b, ix) => {
-            return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-          })}
-        </div>}
-        {(store.traits && getSkill.traits.length > 0) &&
-        <div className='buffDiv' style={{marginTop: "-3px"}}>
-          {getSkill.traits.map((b, ix) => {
-            return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-          })}
-        </div>}
-      </>
-    )
-  }
+          {(store.buffs && getSkill.buffs.length > 0) &&
+          <div className='buffDiv'>
+            {getSkill.buffs.map((b, ix) => {
+              return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+            })}
+          </div>}
+          {(store.traits && getSkill.traits.length > 0) &&
+          <div className='buffDiv' style={{marginTop: "-3px"}}>
+            {getSkill.traits.map((b, ix) => {
+              return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+            })}
+          </div>}
+        </div>
+      )
+    })
+  )
+}
 
-  function Stage ({num}) {
-    return (
-      <>
-        {num !== 5 
-          ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
-          : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
-        {(store.generalistRune && num !== 5) &&
-        <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px", color: "yellow"}}>+ {store.generalistCount[num-1]}% dmg</div>}
-        <div className='stages'>
-          {store.pool.filter((e) => e.stage === num).map((i, idx) => {
-            return  (
-              <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
-                <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
-                  <Button variant="text" size="medium" className='allImgs'
-                  style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-                  onClick={() => store.delete(i.name, num)}>
-                  {(store.types && i.types.length > 0) &&
-                  <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
-                    {i.types.map((b, ix) => {
-                      return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
-                    })}
-                  </div>}
-                  </Button>
-                </Tooltip>
-                {(store.debuffs && i.debuffs.length > 0) &&
-                <div className='buffDiv'>
-                  {i.debuffs.map((b, ix) => {
-                    return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-                  })}          
-                </div>}
-                {(store.buffs && i.buffs.length > 0) &&
-                <div className='buffDiv'>
-                  {i.buffs.map((b, ix) => {
-                    return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-                  })}          
-                </div>}
-                {(store.traits && i.traits.length > 0) &&
-                <div className='buffDiv' style={{marginTop: "-3px"}}>
-                  {i.traits.map((b, ix) => {
-                    return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+function Stage ({num}) {
+  return (
+    <>
+      {num !== 5 
+        ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
+        : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
+      {(store.generalistRune && num !== 5) &&
+      <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px", color: "yellow"}}>+ {store.generalistCount[num-1]}% dmg</div>}
+      <div className='stages'>
+        {store.pool.filter((e) => e.stage === num).map((i, idx) => {
+          return  (
+            <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
+              <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
+                <Button variant="text" size="medium" className='allImgs'
+                style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
+                onClick={() => store.delete(i.name, num)}>
+                {(store.types && i.types.length > 0) &&
+                <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
+                  {i.types.map((b, ix) => {
+                    return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
                   })}
                 </div>}
-              </div>
-            )
-          })}
-        </div>
-      </>
-    )
-  }
+                </Button>
+              </Tooltip>
+              {(store.debuffs && i.debuffs.length > 0) &&
+              <div className='buffDiv'>
+                {i.debuffs.map((b, ix) => {
+                  return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+                })}          
+              </div>}
+              {(store.buffs && i.buffs.length > 0) &&
+              <div className='buffDiv'>
+                {i.buffs.map((b, ix) => {
+                  return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+                })}          
+              </div>}
+              {(store.traits && i.traits.length > 0) &&
+              <div className='buffDiv' style={{marginTop: "-3px"}}>
+                {i.traits.map((b, ix) => {
+                  return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+                })}
+              </div>}
+            </div>
+          )
+        })}
+      </div>
+    </>
+  )
+}
 /* END COMPONENTS BLOCK */
 
 function App() {
@@ -249,26 +254,8 @@ function App() {
               </label>
             </div>}
           {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
-          {(store.filter !== "All") && 
-            <div style={{marginBottom: "10px"}} className="items">
-              {allHeroes.get(store.filter).wArray.map((e, idx) => {
-                return (
-                  <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "5px", opacity: allSkills.get(e).opacity}}>
-                    <AllButton name={e} arr={"weapons"} />
-                  </div>
-                )
-              })}
-            </div>}
-          {(store.filter !== "All") &&
-            <div className="items">
-              {allHeroes.get(store.filter).sArray.map((e, idx) => {
-                return (
-                  <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "15px", opacity: allSkills.get(e).opacity}}>
-                    <AllButton name={e} arr={"skills"} />
-                  </div>
-                )
-              })}
-            </div>}
+          {(store.filter !== "All") && <div style={{marginBottom: "10px"}} className="items"><Skills arr={"weapons"} /></div>}
+          {(store.filter !== "All") && <div className="items"><Skills arr={"skills"} /></div>}
         </div>
         <div className='right'>
           <Stage num={1} />
