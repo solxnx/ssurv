@@ -287,7 +287,7 @@ export const allHeroes = new Map ([
     ['demonhunter', {
         wArray: [
             'Uncontrolled Arrows', 'Madness Shot',
-            'Quick Blast', 'Ammo Overload', 
+            'Quick blast', 'Ammo Overload', 
             'Hellspawn Grenade', 'Dreadful Grenade',
             'Shadow Spiral', 'Cursed Rune'
         ],

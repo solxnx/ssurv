@@ -156,7 +156,7 @@ export const allSkills = new Map ([
 
     ['Uncontrolled Arrows', {name: 'Uncontrolled Arrows', traits: ['Chaotic'], debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Frontal', 'Magical', 'Physical']}],
     ['Madness Shot', {name: 'Madness Shot', debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Frontal', 'Magical', 'Physical']}],
-    ['Quick Blast', {name: 'Quick Blast', buffs: ['Ammunition'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
+    ['Quick blast', {name: 'Quick blast', buffs: ['Ammunition'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
     ['Ammo Overload', {name: 'Ammo Overload', types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
     ['Hellspawn Grenade', {name: 'Hellspawn Grenade', traits: ['Impactful'], debuffs: ['Bleed'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Chain', 'Physical']}],
     ['Dreadful Grenade', {name: 'Dreadful Grenade', debuffs: ['Weakness'], types: ['Bomb'], allTypes: ['Bomb', 'Lasting', 'Frontal', 'Physical']}],
