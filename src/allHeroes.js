@@ -284,4 +284,21 @@ export const allHeroes = new Map ([
             'Sugar Rush', 'Summon Helper Elves'
         ],
     }],
+    ['demonhunter', {
+        wArray: [
+            'Uncontrolled Arrows', 'Madness Shot',
+            'Quick Blast', 'Ammo Overload', 
+            'Hellspawn Grenade', 'Dreadful Grenade',
+            'Shadow Spiral', 'Cursed Rune'
+        ],
+        sArray: [
+            'Chaotic Surge', 'Demonic Breath', 'Twin Impact', 'Bladed Chakram', 'Bloodlust', 
+            'Bomb Barrage', 'Camors Arrow', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 
+            'Death Claw', 'Death Vortex', 'Egg Shooter', 'Explosive Shot', 'Explosive Trap', 
+            'Frag Shot', 'Frenzied Bunnies', 'Heartbreak Orbs', 'Mine Field', 'Napalm Blast', 
+            'Rapid Barrage', 'Shadow Bolt', 'Shadow orb', 'Shadow Spikes', 'Shrapnel Bomb', 
+            'Shrapnel Shot', 'Spread Shot', 'Storm Of Arrows', 'Suction Bomb', 'Summon Ballista', 
+            'Summon Chaos Golem', 'Surprise Gift', 'Void', 'Weakening Shot'
+        ],
+    }],
 ]);

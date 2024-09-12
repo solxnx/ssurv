@@ -98,19 +98,19 @@ function Skills ({arr}) {
             </div>}
             </Button>
           </Tooltip>
-          {(store.icons['debuffs'] && getSkill.debuffs.length > 0) &&
+          {(store.icons['debuffs'] && getSkill.hasOwnProperty('debuffs')) &&
           <div className='buffDiv'>
             {getSkill.debuffs.map((b, ix) => {
               return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
             })}
           </div>}
-          {(store.icons['buffs'] && getSkill.buffs.length > 0) &&
+          {(store.icons['buffs'] && getSkill.hasOwnProperty('buffs')) &&
           <div className='buffDiv'>
             {getSkill.buffs.map((b, ix) => {
               return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
             })}
           </div>}
-          {(store.icons['traits'] && getSkill.traits.length > 0) &&
+          {(store.icons['traits'] && getSkill.hasOwnProperty('traits')) &&
           <div className='buffDiv' style={{marginTop: "-3px"}}>
             {getSkill.traits.map((b, ix) => {
               return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
@@ -146,19 +146,19 @@ function Stage ({num}) {
                 </div>}
                 </Button>
               </Tooltip>
-              {(store.icons['debuffs'] && i.debuffs.length > 0) &&
+              {(store.icons['debuffs'] && i.hasOwnProperty('debuffs')) &&
               <div className='buffDiv'>
                 {i.debuffs.map((b, ix) => {
                   return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
                 })}          
               </div>}
-              {(store.icons['buffs'] && i.buffs.length > 0) &&
+              {(store.icons['buffs'] && i.hasOwnProperty('buffs')) &&
               <div className='buffDiv'>
                 {i.buffs.map((b, ix) => {
                   return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
                 })}          
               </div>}
-              {(store.icons['traits'] && i.traits.length > 0) &&
+              {(store.icons['traits'] && i.hasOwnProperty('traits')) &&
               <div className='buffDiv' style={{marginTop: "-3px"}}>
                 {i.traits.map((b, ix) => {
                   return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
@@ -194,6 +194,7 @@ function App() {
 
   return (
     <>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>Alpha Test - EA Update 13g</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
