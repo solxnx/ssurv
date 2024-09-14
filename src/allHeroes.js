@@ -1,5 +1,6 @@
 export const allHeroes = new Map ([
     ['barbarian', {
+        weapons: ['Barbaric Cleavers', 'Skullbreaker', 'Tempest Battle Axes', 'Bloodgods Legacy'],
         wArray: [
             'Whirlwind', 'Throw Axe', 
             'Shockwave', 'Demolish', 
@@ -17,6 +18,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['pyromancer', {
+        weapons: ['Pyromancers Firestarter', 'Stormcaller', 'Shard of Chaos', 'Damnatus Spire of Shadows'],
         wArray: [
             'Fire Slash', 'Fire Walk', 
             'Lightning Field', 'Overcharged Blast', 
@@ -33,6 +35,7 @@ export const allHeroes = new Map ([
         ],
     }], 
     ['houndmaster', {
+        weapons: ['Rusted Blaster', 'Riflemens Vengeance', 'Toxin Cannon', 'Dragonfire Scattergun'],
         wArray: [
             'Mortar Shot', 'Bombardment',
             'Buckshot', 'Power Blast',
@@ -50,6 +53,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['spellblade', {
+        weapons: ['Silver Spellblade', 'Arcane Scimitar', 'Icelords Blade', 'Scorching Edge'],
         wArray: [
             'Arcane Slash',  'Arcane Overload', 
             'Slash', 'Uppercut',
@@ -67,6 +71,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['arcaneweaver', {
+        weapons: ['Arcane Staff', 'Ignis Greatstaff of Despair', 'Benedictio Staff of Dawn', 'Glacies Rod of Etenal Ice'],
         wArray: [
             'Arcane Missiles', 'Arcane Explosion',
             'Fiery Missiles', 'Fire Pillar',
@@ -84,6 +89,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['sentinel', {
+        weapons: ['Huntress Bow', 'Siege Recurve Bow', 'Miserys End', 'Noxious Longbow'],
         wArray: [
             'Shoot', 'Rain Of Arrows', 
             'Explosive Arrows', 'Cluster Bomb', 
@@ -101,6 +107,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['paladin', {
+        weapons: ['Sacred Warhammer', 'Harbinger of Justice', 'Arcane Scepter of Light', 'Dawnbreakers Mace'],
         wArray: [
             'Blades Of Light', 'Holy Fire', 
             'Heroic Strike', 'Hammer Of Justice',
@@ -117,6 +124,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['chaoswalker', {
+        weapons: ['Skull of Draxiz', 'Artifact of Corruption', 'Flamewalkers Spire', 'Azramiels Blessing'],
         wArray: [
             'Chaotic Missile', 'Unchained Chaos', 
             'Infected Shot', 'Corrosion', 
@@ -133,6 +141,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['beastmaster', {
+        weapons: ['Wild Cleaver', 'Natures Fury', 'Bonecrusher', 'Widows Embrace'],
         wArray: [
             'Venomous Strike', 'Cobra Totem',
             'Wild Strike', 'Summon Swamp Boar',
@@ -150,6 +159,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['assassin', {
+        weapons: ['Worn Daggers', 'Curved Daggers', 'Grenadiers Mark', 'Edge of Doom'],
         wArray: [
             'Sinister Strike', 'Eviscerate', 
             'Twin Daggers', 'Backstab', 
@@ -167,6 +177,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['elementalist', {
+        weapons: ['Scepter of Thunder', 'Scepter of Frost', 'Scepter of Flame', 'Scepter of Nature'],
         wArray: [
             'Lightning Beam', 'Call Lightning',
             'Severe Cold', 'Freezing Blow',
@@ -184,6 +195,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['legionnaire', {
+        weapons: ['Light Spear', 'Jupiters Reach', 'Fang of Vipernus', 'Vulcans Impaler'],
         wArray: [
             'Thrust', 'Shield Bash', 
             'Jupiters Spear', 'Summon Infantry', 
@@ -201,6 +213,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['necromancer', {
+        weapons: ['Wooden Scythe', 'Guardian of Souls', 'Noxious Reaper', 'Grimtalons Scourge'],
         wArray: [
             'Summon Skeletal Warrior', 'Shadow Nova', 
             'Spectral Guardian', 'Soul Release',
@@ -218,6 +231,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['deathknight', {
+        weapons: ['Unholy Claymore', 'Greatsword of Corruption', 'Last Sentence', 'Wintersorrow'],
         wArray: [
             'Obliterate', 'Ray Of Doom',
             'Festering Strike', 'Lethal Blade', 
@@ -235,6 +249,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['monkeyking', {
+        weapons: ['Immortals Staff', 'Cloudseeker', 'Tricksters Boomstick', 'Might of the Mountains'],
         wArray: [
             'Massive Slam', 'Spinning Staff', 
             'Tempestuous Slash', 'Nimbus Lightning',
@@ -251,6 +266,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['engineer', {
+        weapons: ['Ammo Devourer', 'EZ Robot Launcher XT1', 'Volt Cannon', 'Bomb Launcher QT22'],
         wArray: [
             'Burst Of Lead', 'Guided Missiles',
             'EZ Sentry', 'EZ Mechanical Spider', 
@@ -268,6 +284,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['myrmidon', {
+        weapons: ['Song of the Sirens', 'Chant of the Claws', 'Hymn of the Depths', 'Wail of the Reefs'],
         wArray: [
             'Glacial Trident', 'Frozen Shard',
             'Tidal Thrust', 'Incisive Strike', 

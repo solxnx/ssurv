@@ -11,7 +11,8 @@ const store = observable({
   pool: [],
   limit: 6,
   generalistCount: [0, 0, 0, 0],
-  runes: {extra: false, minus: false, generalist: false},
+  synchronyCount: [0, 0, 0, 0],
+  runes: {extra: false, minus: false, generalist: false, synchrony: false},
   icons: {debuffs: true, buffs: true, traits: false, types: false},
   filter: 'All',
   changeFilter (val)  {
@@ -22,14 +23,12 @@ const store = observable({
   },
   runeSwitch (val) {
     this.runes[val] = !this.runes[val];
-    if (val === 'extra')  {
-      this.runes['extra'] ? this.limit += 1 : this.limit -= 1;
-    }
-    if (val === 'minus') {
-      this.runes['minus'] ? this.limit -= 3 : this.limit += 3;
-    }
-    if (val === 'generalist') {
-      if (this.runes['generalist']) this.generalist(1, 4);
+    switch (val) {
+      case 'extra': this.runes['extra'] ? this.limit += 1 : this.limit -= 1; break;
+      case 'minus': this.runes['minus'] ? this.limit -= 3 : this.limit += 3; break;
+      case 'generalist': if (this.runes['generalist']) this.generalist(1, 4); break;
+      case 'synchrony': if (this.runes['synchrony']) this.synchrony(1, 4); break;
+      default: break;
     }
   },
   generalist (stage, stageEnd)  {
@@ -43,13 +42,31 @@ const store = observable({
       }
     }
   },
+  synchrony (stage, stageEnd)  {
+    if (stage !== 5 && this.runes['synchrony'])  {
+      for (let i = stage; i <= stageEnd; i++) {
+        this.synchronyCount[i-1] = 0;
+        let result = {};
+        this.pool.forEach((e) => {
+          if (e.stage === i) {
+            e.allTypes.forEach((a) => result[a] = result[a] + 1 || 1);
+          }
+        });
+        for (let val in result) {
+          if (result[val] >= 2) this.synchronyCount[i-1] += (result[val]-1)*0.7;
+        }
+        if (this.synchronyCount[i-1] > 20) this.synchronyCount[i-1] = 20;
+      }
+    }
+  },
   add (name, arr) {
-    if (this.pool.filter((e) => e.name === name.name).length < 1) {
+    if (this.pool.every((e) => e.name !== name.name)) {
       for (let i = 1; i <= 4; i++)  {
         if (this.pool.filter((e) => e.stage === i).length < this.limit) {
           this.pool.push({...name, arr: arr, stage: i});
           allSkills.get(name.name).opacity = 0.2;
-          this.generalist(i, i);
+          if (this.runes['generalist']) this.generalist(i, i);
+          if (this.runes['synchrony']) this.synchrony(i, i);
           break;
         }
       }
@@ -58,17 +75,18 @@ const store = observable({
   delete (name, stage)  {
     this.pool = this.pool.filter((e) => e.name !== name);
     allSkills.get(name).opacity = 1;
-    this.generalist(stage, stage);
+    if (this.runes['generalist']) this.generalist(stage, stage);
+    if (this.runes['synchrony']) this.synchrony(stage, stage);
   },
   banish (name, arr) {
-    if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.filter(e => e.name === name.name).length < 1)  {
+    if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.every(e => e.name !== name.name))  {
       this.pool.push({...name, arr: arr, stage: 5});
       allSkills.get(name.name).opacity = 0.2;
     }
   },
   reset ()  {
     this.pool = [];
-    this.generalistCount = [0, 0, 0, 0];
+    this.generalistCount = this.synchronyCount = [0, 0, 0, 0];
     allSkills.forEach((e) => e.opacity = 1);
   },
 
@@ -90,7 +108,7 @@ function Skills ({arr}) {
             style={{backgroundImage: `url('/img/${arr}/${getSkill.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
             onClick={() => store.add(getSkill, arr)}
             onContextMenu={() => store.banish(getSkill, arr)}>
-            {(store.icons['types'] && getSkill.types.length > 0) &&
+            {store.icons['types'] &&
             <div style={{position: "absolute", right: "-15%", top: "-15%"}}>
               {getSkill.types.map((b, ix) => {
                 return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
@@ -128,8 +146,10 @@ function Stage ({num}) {
       {num !== 5 
         ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
         : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
-      {(store.runes['generalist'] && num !== 5) &&
-      <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px", color: "yellow"}}>+ {store.generalistCount[num-1]}% dmg</div>}
+      <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px"}}>
+        {(store.runes['generalist'] && num !== 5) && <div style={{color: "yellow", marginRight: "10px"}}>+ {store.generalistCount[num-1]}% dmg</div>}
+        {(store.runes['synchrony'] && num !== 5) && <div style={{color: "aqua"}}>+ {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
+      </div>
       <div className='stages'>
         {store.pool.filter((e) => e.stage === num).map((i, idx) => {
           return  (
@@ -138,7 +158,7 @@ function Stage ({num}) {
                 <Button variant="text" size="medium" className='allImgs'
                 style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
                 onClick={() => store.delete(i.name, num)}>
-                {(store.icons['types'] && i.types.length > 0) &&
+                {store.icons['types'] &&
                 <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
                   {i.types.map((b, ix) => {
                     return <img key={ix} width="25px" height="25px" src={`img/types/${b}.png`} title={b} alt="no" />
@@ -217,6 +237,12 @@ function App() {
               <label className='runeLabel'>
                 <input type="checkbox" checked={store.runes['generalist']} onChange={() => store.runeSwitch("generalist")} />
                 <img src={`/img/runes/Generalist.png`} alt="no" />
+              </label>
+            </Tooltip>
+            <Tooltip placement="top" title={<span className="tooltipInfo">Synchrony</span>} followCursor>
+              <label className='runeLabel'>
+                <input type="checkbox" checked={store.runes['synchrony']} onChange={() => store.runeSwitch("synchrony")} />
+                <img src={`/img/runes/Synchrony.png`} alt="no" />
               </label>
             </Tooltip>
           </div>}
