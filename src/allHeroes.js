@@ -302,6 +302,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['demonhunter', {
+        weapons: ['Bloodbane Crossbow', 'Hellfire Cannon', 'Demonic Launcher', 'Bonereaper'],
         wArray: [
             'Uncontrolled Arrows', 'Madness Shot',
             'Quick blast', 'Ammo Overload', 

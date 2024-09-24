@@ -59,11 +59,11 @@ const store = observable({
       }
     }
   },
-  add (name, arr) {
+  add (name) {
     if (this.pool.every((e) => e.name !== name.name)) {
       for (let i = 1; i <= 4; i++)  {
         if (this.pool.filter((e) => e.stage === i).length < this.limit) {
-          this.pool.push({...name, arr: arr, stage: i});
+          this.pool.push({...name, stage: i});
           allSkills.get(name.name).opacity = 0.2;
           if (this.runes['generalist']) this.generalist(i, i);
           if (this.runes['synchrony']) this.synchrony(i, i);
@@ -78,9 +78,9 @@ const store = observable({
     if (this.runes['generalist']) this.generalist(stage, stage);
     if (this.runes['synchrony']) this.synchrony(stage, stage);
   },
-  banish (name, arr) {
+  banish (name) {
     if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.every(e => e.name !== name.name))  {
-      this.pool.push({...name, arr: arr, stage: 5});
+      this.pool.push({...name, stage: 5});
       allSkills.get(name.name).opacity = 0.2;
     }
   },
@@ -105,9 +105,9 @@ function Skills ({arr}) {
         <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "15px", opacity: allSkills.get(e).opacity}}>
           <Tooltip placement="top" title={<span className="tooltipInfo">{getSkill.name}</span>} followCursor>
             <Button variant="text" size="medium" className='allImgs'
-            style={{backgroundImage: `url('/img/${arr}/${getSkill.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
-            onClick={() => store.add(getSkill, arr)}
-            onContextMenu={() => store.banish(getSkill, arr)}>
+            style={{backgroundImage: `url('/img/skills/${getSkill.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
+            onClick={() => store.add(getSkill)}
+            onContextMenu={() => store.banish(getSkill)}>
             {store.icons['types'] &&
             <div style={{position: "absolute", right: "-15%", top: "-15%"}}>
               {getSkill.types.map((b, ix) => {
@@ -156,7 +156,7 @@ function Stage ({num}) {
             <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
               <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
                 <Button variant="text" size="medium" className='allImgs'
-                style={{backgroundImage: `url('/img/${i.arr}/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
+                style={{backgroundImage: `url('/img/skills/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
                 onClick={() => store.delete(i.name, num)}>
                 {store.icons['types'] &&
                 <div style={{position: "absolute", right: "-8%", top: "-15%"}}>
@@ -214,7 +214,7 @@ function App() {
 
   return (
     <>
-    <div style={{position: 'absolute', fontSize: '10pt'}}>Alpha Test - EA Update 13g</div>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 13</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
