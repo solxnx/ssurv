@@ -12,7 +12,7 @@ const store = observable({
   limit: 6,
   generalistCount: [0, 0, 0, 0],
   synchronyCount: [0, 0, 0, 0],
-  runes: {extra: false, minus: false, generalist: false, synchrony: false},
+  runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false},
   icons: {debuffs: true, buffs: true, traits: false, types: false},
   filter: 'All',
   changeFilter (val)  {
@@ -24,15 +24,15 @@ const store = observable({
   runeSwitch (val) {
     this.runes[val] = !this.runes[val];
     switch (val) {
-      case 'extra': this.runes['extra'] ? this.limit += 1 : this.limit -= 1; break;
-      case 'minus': this.runes['minus'] ? this.limit -= 3 : this.limit += 3; break;
-      case 'generalist': if (this.runes['generalist']) this.generalist(1, 4); break;
-      case 'synchrony': if (this.runes['synchrony']) this.synchrony(1, 4); break;
+      case 'ImprovedRepetory': this.runes['ImprovedRepetory'] ? this.limit += 1 : this.limit -= 1; break;
+      case 'FocusedMind': this.runes['FocusedMind'] ? this.limit -= 3 : this.limit += 3; break;
+      case 'Generalist': if (this.runes['Generalist']) this.generalist(1, 4); break;
+      case 'Synchrony': if (this.runes['Synchrony']) this.synchrony(1, 4); break;
       default: break;
     }
   },
   generalist (stage, stageEnd)  {
-    if (stage !== 5 && this.runes['generalist']) {
+    if (stage !== 5 && this.runes['Generalist']) {
       for (let i = stage; i <= stageEnd; i++) {
         let typesPool = [];
         this.pool.forEach((e) =>  {
@@ -43,7 +43,7 @@ const store = observable({
     }
   },
   synchrony (stage, stageEnd)  {
-    if (stage !== 5 && this.runes['synchrony'])  {
+    if (stage !== 5 && this.runes['Synchrony'])  {
       for (let i = stage; i <= stageEnd; i++) {
         this.synchronyCount[i-1] = 0;
         let result = {};
@@ -65,8 +65,8 @@ const store = observable({
         if (this.pool.filter((e) => e.stage === i).length < this.limit) {
           this.pool.push({...name, stage: i});
           allSkills.get(name.name).opacity = 0.2;
-          if (this.runes['generalist']) this.generalist(i, i);
-          if (this.runes['synchrony']) this.synchrony(i, i);
+          if (this.runes['Generalist']) this.generalist(i, i);
+          if (this.runes['Synchrony']) this.synchrony(i, i);
           break;
         }
       }
@@ -75,8 +75,8 @@ const store = observable({
   delete (name, stage)  {
     this.pool = this.pool.filter((e) => e.name !== name);
     allSkills.get(name).opacity = 1;
-    if (this.runes['generalist']) this.generalist(stage, stage);
-    if (this.runes['synchrony']) this.synchrony(stage, stage);
+    if (this.runes['Generalist']) this.generalist(stage, stage);
+    if (this.runes['Synchrony']) this.synchrony(stage, stage);
   },
   banish (name) {
     if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.every(e => e.name !== name.name))  {
@@ -95,11 +95,8 @@ const store = observable({
 
 /* START COMPONENTS BLOCK */
 function Skills ({arr}) {
-  let arrType;
-  if (arr === "weapons") arrType = allHeroes.get(store.filter).wArray;
-  if (arr === "skills") arrType = allHeroes.get(store.filter).sArray;
   return  (
-    arrType.map((e, idx) => {
+    arr.map((e, idx) => {
       const getSkill = allSkills.get(e);
       return (
         <div key={idx} style={{textAlign: "center", marginRight: "10px", marginBottom: "15px", opacity: allSkills.get(e).opacity}}>
@@ -147,8 +144,8 @@ function Stage ({num}) {
         ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
         : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
       <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px"}}>
-        {(store.runes['generalist'] && num !== 5) && <div style={{color: "yellow", marginRight: "10px"}}>+ {store.generalistCount[num-1]}% dmg</div>}
-        {(store.runes['synchrony'] && num !== 5) && <div style={{color: "aqua"}}>+ {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
+        {(store.runes['Generalist'] && num !== 5) && <div style={{color: "yellow", marginRight: "10px"}}>+ {store.generalistCount[num-1]}% dmg</div>}
+        {(store.runes['Synchrony'] && num !== 5) && <div style={{color: "aqua"}}>+ {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
       </div>
       <div className='stages'>
         {store.pool.filter((e) => e.stage === num).map((i, idx) => {
@@ -191,6 +188,17 @@ function Stage ({num}) {
     </>
   )
 }
+
+function Rune ({name, check})  {
+  return (
+    <Tooltip placement="top" title={<span className="tooltipInfo">{name}</span>} followCursor>
+      <label className='runeLabel'>
+        <input type="checkbox" checked={check} onChange={() => store.runeSwitch(name.replaceAll(' ', ''))} />
+        <img src={`/img/runes/${name.replaceAll(' ', '')}.png`} alt="no" />
+      </label>
+    </Tooltip>
+  )
+}
 /* END COMPONENTS BLOCK */
 
 function App() {
@@ -221,55 +229,37 @@ function App() {
           <div className='cList'>{charactersList}</div>
           {(store.filter !== "All") && 
           <div className='rList'>
-            <Tooltip placement="top" title={<span className="tooltipInfo">Improved Repetory</span>} followCursor>
-              <label className='runeLabel'>
-                <input type="checkbox" checked={store.runes['extra']} onChange={() => store.runeSwitch("extra")} />
-                <img src={`/img/runes/ImprovedRepetory.png`} alt="no" />
-              </label>
-            </Tooltip>
-            <Tooltip placement="top" title={<span className="tooltipInfo">Focused Mind</span>} followCursor>
-              <label className='runeLabel'>
-                <input type="checkbox" checked={store.runes['minus']} onChange={() => store.runeSwitch("minus")} />
-                <img src={`/img/runes/FocusedMind.png`} alt="no" />
-              </label>
-            </Tooltip>
-            <Tooltip placement="top" title={<span className="tooltipInfo">Generalist</span>} followCursor>
-              <label className='runeLabel'>
-                <input type="checkbox" checked={store.runes['generalist']} onChange={() => store.runeSwitch("generalist")} />
-                <img src={`/img/runes/Generalist.png`} alt="no" />
-              </label>
-            </Tooltip>
-            <Tooltip placement="top" title={<span className="tooltipInfo">Synchrony</span>} followCursor>
-              <label className='runeLabel'>
-                <input type="checkbox" checked={store.runes['synchrony']} onChange={() => store.runeSwitch("synchrony")} />
-                <img src={`/img/runes/Synchrony.png`} alt="no" />
-              </label>
-            </Tooltip>
+            <Rune name={'Improved Repetory'} check={store.runes['ImprovedRepetory']} />
+            <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />
+            <Rune name={'Generalist'} check={store.runes['Generalist']} />
+            <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
           </div>}
         </div>
         <div className='center'>
           {(store.filter !== "All") && 
-            <div className='stack'>
-              <label className='iconsLabel'>
-                <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['debuffs']} onChange={() => store.showIcons("debuffs")} />
-                <span>Debuffs</span>
-              </label>
-              <label className='iconsLabel'>
-                <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['buffs']} onChange={() => store.showIcons("buffs")} />
-                <span>Stackable Buffs</span>
-              </label>
-              <label className='iconsLabel'>
-                <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['traits']} onChange={() => store.showIcons("traits")} />
-                <span>Traits</span>
-              </label>
-              <label className='iconsLabel'>
-                <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['types']} onChange={() => store.showIcons("types")} />
-                <span>Skill Types</span>
-              </label>
-            </div>}
+            <>
+              <div className='stack'>
+                <label className='iconsLabel'>
+                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['debuffs']} onChange={() => store.showIcons("debuffs")} />
+                  <span>Debuffs</span>
+                </label>
+                <label className='iconsLabel'>
+                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['buffs']} onChange={() => store.showIcons("buffs")} />
+                  <span>Stackable Buffs</span>
+                </label>
+                <label className='iconsLabel'>
+                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['traits']} onChange={() => store.showIcons("traits")} />
+                  <span>Traits</span>
+                </label>
+                <label className='iconsLabel'>
+                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['types']} onChange={() => store.showIcons("types")} />
+                  <span>Skill Types</span>
+                </label>
+              </div>
+              <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>
+              <div className="items"><Skills arr={allHeroes.get(store.filter).sArray} /></div>
+            </>}
           {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
-          {(store.filter !== "All") && <div style={{marginBottom: "10px"}} className="items"><Skills arr={"weapons"} /></div>}
-          {(store.filter !== "All") && <div className="items"><Skills arr={"skills"} /></div>}
         </div>
         <div className='right'>
           <Stage num={1} />
