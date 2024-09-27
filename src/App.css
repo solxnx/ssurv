@@ -95,7 +95,7 @@ label {
 }
 .runeLabel > input:checked + img{
   outline: 2px solid lime;
-  border-radius: 35%;
+  border-radius: 25%;
 }
 .buffDiv  {
   display: flex;
@@ -122,4 +122,15 @@ label {
   outline-offset: 5px;
   border-radius: 10px;
   outline: 2px solid greenyellow;
+}
+.masteryBlock {
+  border-radius: 10px;
+  outline: 2px solid yellow;
+  background: rgb(30, 30, 30);
+  color: white;
+  text-align: center;
+  height: 35px;
+  width: 120px;
+  font-size: 14pt;
+  margin-left: 10px;
 }

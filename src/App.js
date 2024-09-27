@@ -12,9 +12,14 @@ const store = observable({
   limit: 6,
   generalistCount: [0, 0, 0, 0],
   synchronyCount: [0, 0, 0, 0],
-  runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false},
+  runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false},
   icons: {debuffs: true, buffs: true, traits: false, types: false},
   filter: 'All',
+  mastery: ['None', 'Arcane', 'Blast', 'Bomb', 'Chaos', 'Earth', 'Electric', 'Fire', 'Holy', 'Ice', 'Nature', 'Projectile', 'Shadow', 'Slam', 'Swing', 'Thrust'],
+  masteryFilter: 'None',
+  changeMasteryFilter (val)  {
+    this.masteryFilter = val;
+  },
   changeFilter (val)  {
     this.filter = val;
   },
@@ -60,14 +65,16 @@ const store = observable({
     }
   },
   add (name) {
-    if (this.pool.every((e) => e.name !== name.name)) {
+    if (this.pool.every((e) => e.name !== name.name) || this.runes['SingularFocus']) {
       for (let i = 1; i <= 4; i++)  {
         if (this.pool.filter((e) => e.stage === i).length < this.limit) {
-          this.pool.push({...name, stage: i});
-          allSkills.get(name.name).opacity = 0.2;
-          if (this.runes['Generalist']) this.generalist(i, i);
-          if (this.runes['Synchrony']) this.synchrony(i, i);
-          break;
+          if (!this.runes["SingularFocus"] || this.pool.filter((e) => e.name === name.name && e.stage !== i).length < 1) {
+            this.pool.push({...name, stage: i});
+            allSkills.get(name.name).opacity = 0.2;
+            if (this.runes['Generalist']) this.generalist(i, i);
+            if (this.runes['Synchrony']) this.synchrony(i, i);
+            break;
+          } 
         }
       }
     }
@@ -95,6 +102,12 @@ const store = observable({
 
 /* START COMPONENTS BLOCK */
 function Skills ({arr}) {
+  if (arr === "mastery") {
+    arr = [];
+    for (let [, value] of allSkills) {
+      if (value.types.includes(store.masteryFilter)) arr.push(value.name);
+    }
+  }
   return  (
     arr.map((e, idx) => {
       const getSkill = allSkills.get(e);
@@ -220,6 +233,10 @@ function App() {
     );
   });
 
+  const masteryList = store.mastery.map((i, idx) => {
+    return <option key={idx} value={i}>{i}</option>
+  })
+
   return (
     <>
     <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 13</div>
@@ -228,12 +245,20 @@ function App() {
         <div className='left'>
           <div className='cList'>{charactersList}</div>
           {(store.filter !== "All") && 
-          <div className='rList'>
-            <Rune name={'Improved Repetory'} check={store.runes['ImprovedRepetory']} />
-            <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />
-            <Rune name={'Generalist'} check={store.runes['Generalist']} />
-            <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
-          </div>}
+          <>
+            <div className='rList'>
+              <Rune name={'Improved Repetory'} check={store.runes['ImprovedRepetory']} />
+              <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />
+              <Rune name={'Generalist'} check={store.runes['Generalist']} />
+              <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
+              <Rune name={'Singular Focus'} check={store.runes['SingularFocus']} />
+            </div>
+            <div style={{textAlign: "center", marginTop: "15px"}}>
+              <div style={{fontSize: "15pt", marginBottom: "10px"}}>Skill Mastery
+                <select className="masteryBlock" name="mastery" onChange={(e) => store.changeMasteryFilter(e.target.value)}>{masteryList}</select>
+              </div>
+            </div>
+          </>}
         </div>
         <div className='center'>
           {(store.filter !== "All") && 
@@ -258,6 +283,7 @@ function App() {
               </div>
               <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>
               <div className="items"><Skills arr={allHeroes.get(store.filter).sArray} /></div>
+              {(store.masteryFilter !== "None") && <div className="items"><Skills arr={"mastery"} /></div>}
             </>}
           {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
         </div>
