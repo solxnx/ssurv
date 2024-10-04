@@ -3,12 +3,10 @@ body {
   color: white;
   font-family: sans-serif;
 }
-
 .mainTitle  {
   font-size: 25pt;
   margin: 1%;
 }
-
 .parent {
   display: flex;
   flex-direction: row;
@@ -16,22 +14,15 @@ body {
   align-content: center;
   align-items: flex-start;
 }
-
 .title  {
   display: flex;
   justify-content: center;
   font-size: 16pt;
   margin-bottom: 5px;
 }
-
 .items  {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
   margin-bottom: 10px;
 }
-
 .tooltipInfo  {
   font-size: 12pt;
 }
@@ -47,42 +38,28 @@ label {
 }
 .left, .center, .right  {
   margin: 3px;
-}
-.left {
-  width: 17%;
   display: flex;
   flex-direction: column;
+}
+.rList, .cList, .stages, .items  {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .cList  {
   zoom: 25%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
-.rList  {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+.left {
+  width: 17%;
 }
 .center {
   width: 51%;
-  display: flex;
-  flex-direction: column;
 }
 .right  {
   width: 30%;
   zoom: 90%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-.stages {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 .allImgs:hover  {
   outline: 5px groove greenyellow;
@@ -95,7 +72,6 @@ label {
 }
 .runeLabel > input:checked + img{
   outline: 2px solid lime;
-  border-radius: 25%;
 }
 .buffDiv  {
   display: flex;
@@ -117,10 +93,9 @@ label {
   border-radius: 10px;
   outline: 2px solid red;
   margin: 15px;
+  padding: 2px;
 }
 .iconsLabel > input:checked + span  {
-  outline-offset: 5px;
-  border-radius: 10px;
   outline: 2px solid greenyellow;
 }
 .masteryBlock {

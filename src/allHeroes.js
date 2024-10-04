@@ -71,7 +71,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['arcaneweaver', {
-        weapons: ['Arcane Staff', 'Ignis Greatstaff of Despair', 'Benedictio Staff of Dawn', 'Glacies Rod of Etenal Ice'],
+        weapons: ['Arcane Staff', 'Ignis Greatstaff of Despair', 'Benedictio Staff of Dawn', 'Glacies Rod of Eternal Ice'],
         wArray: [
             'Arcane Missiles', 'Arcane Explosion',
             'Fiery Missiles', 'Fire Pillar',

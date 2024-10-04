@@ -212,6 +212,15 @@ function Rune ({name, check})  {
     </Tooltip>
   )
 }
+
+function Icons ({name, check})  {
+  return (
+    <label className='iconsLabel'>
+      <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={check} onChange={() => store.showIcons(name)} />
+      <span>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
+    </label>
+  )
+}
 /* END COMPONENTS BLOCK */
 
 function App() {
@@ -233,10 +242,6 @@ function App() {
     );
   });
 
-  const masteryList = store.mastery.map((i, idx) => {
-    return <option key={idx} value={i}>{i}</option>
-  })
-
   return (
     <>
     <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 13</div>
@@ -255,7 +260,11 @@ function App() {
             </div>
             <div style={{textAlign: "center", marginTop: "15px"}}>
               <div style={{fontSize: "15pt", marginBottom: "10px"}}>Skill Mastery
-                <select className="masteryBlock" name="mastery" onChange={(e) => store.changeMasteryFilter(e.target.value)}>{masteryList}</select>
+                <select className="masteryBlock" name="mastery" onChange={(e) => store.changeMasteryFilter(e.target.value)}>
+                  {store.mastery.map((i, idx) => {
+                    return <option key={idx} value={i}>{i}</option>
+                  })}
+                </select>
               </div>
             </div>
           </>}
@@ -264,22 +273,10 @@ function App() {
           {(store.filter !== "All") && 
             <>
               <div className='stack'>
-                <label className='iconsLabel'>
-                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['debuffs']} onChange={() => store.showIcons("debuffs")} />
-                  <span>Debuffs</span>
-                </label>
-                <label className='iconsLabel'>
-                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['buffs']} onChange={() => store.showIcons("buffs")} />
-                  <span>Stackable Buffs</span>
-                </label>
-                <label className='iconsLabel'>
-                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['traits']} onChange={() => store.showIcons("traits")} />
-                  <span>Traits</span>
-                </label>
-                <label className='iconsLabel'>
-                  <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={store.icons['types']} onChange={() => store.showIcons("types")} />
-                  <span>Skill Types</span>
-                </label>
+                <Icons name={'debuffs'} check={store.icons['debuffs']} />
+                <Icons name={'buffs'} check={store.icons['buffs']} />
+                <Icons name={'traits'} check={store.icons['traits']} />
+                <Icons name={'types'} check={store.icons['types']} />
               </div>
               <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>
               <div className="items"><Skills arr={allHeroes.get(store.filter).sArray} /></div>

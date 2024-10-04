@@ -24,7 +24,7 @@ export const allSkills = new Map ([
     ['Buckshot', {name: 'Buckshot', buffs: ['Ammunition'], traits: ['Brutal'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
     ['Power Blast', {name: 'Power Blast', buffs: ['Ammunition'], traits: ['Devastating'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
     ['Pesticide Burst', {name: 'Pesticide Burst', debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Lasting', 'Frontal', 'Magical']}],
-    ['Threshing Blast', {name: 'Threshing Blast', buffs: ['Ammunition'], debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Frontal', 'Burst', 'Phusical']}],
+    ['Threshing Blast', {name: 'Threshing Blast', buffs: ['Ammunition'], debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Frontal', 'Burst', 'Physical']}],
     ['Bolt Barrage', {name: 'Bolt Barrage', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Burst', 'Physical']}],
     ['Cyclone Shot', {name: 'Cyclone Shot', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Physical']}],
 
