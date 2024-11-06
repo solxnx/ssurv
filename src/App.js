@@ -30,7 +30,7 @@ const store = observable({
     this.runes[val] = !this.runes[val];
     switch (val) {
       case 'ImprovedRepetory': this.runes['ImprovedRepetory'] ? this.limit += 1 : this.limit -= 1; break;
-      case 'FocusedMind': this.runes['FocusedMind'] ? this.limit -= 3 : this.limit += 3; break;
+      case 'FocusedMind': this.runes['FocusedMind'] ? this.limit -= 2 : this.limit += 2; break;
       case 'Generalist': if (this.runes['Generalist']) this.generalist(1, 4); break;
       case 'Synchrony': if (this.runes['Synchrony']) this.synchrony(1, 4); break;
       default: break;
@@ -244,7 +244,7 @@ function App() {
 
   return (
     <>
-    <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 13</div>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 14</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>

@@ -319,4 +319,23 @@ export const allHeroes = new Map ([
             'Summon Chaos Golem', 'Surprise Gift', 'Void', 'Weakening Shot'
         ],
     }],
+    ['theCursedCaptain', {
+        weapons: ['Iron Tide', 'Jaws of the Abyss', 'Admirals Might', 'Wrath of the Old Gods'],
+        wArray: [
+            'Plunder Shot', 'Gunpowder Burst',
+            'Sharktooth', 'Shiver Of Sharks', 
+            'Cannon Barrage', 'Fleet Strike',
+            'Cursed Shot', 'Ghostly Burst'
+        ],
+        sArray: [
+            'Krakens Rum', 'Powder Keg', 'Eldritch Grasp',
+            'Bladed Chakram',  'Bladestorm', 'Bloody Saw', 'Bomb Barrage', 'Camors Arrow',
+            'Chromatic Bolt', 'Double Slash', 'Egg Shooter', 'Explosive Shot', 'Explosive Trap',
+            'Flurry', 'Frag Shot', 'Heartbreak Orbs', 'Heartrending Strike', 'Mine Field',
+            'Napalm Blast', 'On Guard', 'Quick Strike', 'Rapid Barrage', 'Sharp Spear',
+            'Shrapnel Bomb', 'Shrapnel Shot', 'Spear Trap', 'Spread Shot', 'Storm Of Arrows',
+            'Subdue', 'Suction Bomb', 'Sugar Rush', 'Summon Ballista', 'Surprise Gift',
+            'Titans Cleaver', 'Weakening Shot'
+        ],
+    }],
 ]);

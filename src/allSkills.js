@@ -163,6 +163,15 @@ export const allSkills = new Map ([
     ['Shadow Spiral', {name: 'Shadow Spiral', debuffs: ['Doom', 'Disoriented'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Frontal', 'Physical']}],
     ['Cursed Rune', {name: 'Cursed Rune', debuffs: ['Doom', 'Crippled'], types: ['Shadow'], allTypes: ['Shadow', 'Lasting', 'Area', 'Physical']}],
 
+    ['Plunder Shot', {name: 'Plunder Shot', buffs: ['Cursed', 'Ammunition'], types: ['Blast'], allTypes: ['Blast', 'Missile', 'Frontal', 'Physical']}],
+    ['Gunpowder Burst', {name: 'Gunpowder Burst', buffs: ['Cursed'], traits: ['Gunpowder'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
+    ['Sharktooth', {name: 'Sharktooth', buffs: ['Form', 'Cursed'], debuffs: ['Exposed'], types: ['Thrust'], allTypes: ['Thrust', 'Frontal', 'Physical']}],
+    ['Shiver Of Sharks', {name: 'Shiver Of Sharks', buffs: ['Cursed'], traits: ['Devastating'], types: ['Thrust'], allTypes: ['Thrust', 'Area', 'Magical']}],
+    ['Cannon Barrage', {name: 'Cannon Barrage', buffs: ['Cursed'], debuffs: ['Bleed', 'Disoriented'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Frontal', 'Burst', 'Physical']}],
+    ['Fleet Strike', {name: 'Fleet Strike', buffs: ['Cursed'], debuffs: ['Bleed'], traits: ['Impactful'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Burst', 'Magical']}],
+    ['Cursed Shot', {name: 'Cursed Shot', buffs: ['Aptitude', 'Cursed'], debuffs: ['Dazed'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Magical', 'Physical']}],
+    ['Ghostly Burst', {name: 'Ghostly Burst', buffs: ['Aptitude', 'Cursed'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Magical', 'Physical']}],
+
 
     //ALL SKILLS --------------------------------------------------------------------------------------
     ['Piercing Shout', {name: 'Piercing Shout', debuffs: ['Shattered'], types: ['Thrust'], allTypes: ['Thrust', 'Empowering', 'Lasting', 'Area', 'Physical']}],
@@ -305,4 +314,7 @@ export const allSkills = new Map ([
     ['Chaotic Surge', {name: 'Chaotic Surge', debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Empowering', 'Lasting', 'Physical']}],
     ['Demonic Breath', {name: 'Demonic Breath', debuffs: ['Stun', 'Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Area', 'Frontal', 'Physical']}],
     ['Twin Impact', {name: 'Twin Impact', buffs: ['Aptitude'], debuffs: ['Fragility'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Physical']}],
+    ['Krakens Rum', {name: 'Krakens Rum', buffs: ['Cursed'], debuffs: ['Fragility'], types: ['Projectile'], allTypes: ['Projectile', 'Empowering', 'Lasting', 'Physical']}],
+    ['Powder Keg', {name: 'Powder Keg', buffs: ['Cursed'], debuffs: ['Stun', 'Bleed'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Magical']}],
+    ['Eldritch Grasp', {name: 'Eldritch Grasp', buffs: ['Cursed'], types: ['Swing'], allTypes: ['Swing', 'Area', 'Physical']}],
 ]);
