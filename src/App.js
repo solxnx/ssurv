@@ -12,7 +12,7 @@ const store = observable({
   limit: 6,
   generalistCount: [0, 0, 0, 0],
   synchronyCount: [0, 0, 0, 0],
-  runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false},
+  runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false, DevastatingBlow: false},
   icons: {debuffs: true, buffs: true, traits: false, types: false},
   filter: 'All',
   mastery: ['None', 'Arcane', 'Blast', 'Bomb', 'Chaos', 'Earth', 'Electric', 'Fire', 'Holy', 'Ice', 'Nature', 'Projectile', 'Shadow', 'Slam', 'Swing', 'Thrust'],
@@ -31,6 +31,7 @@ const store = observable({
     switch (val) {
       case 'ImprovedRepetory': this.runes['ImprovedRepetory'] ? this.limit += 1 : this.limit -= 1; break;
       case 'FocusedMind': this.runes['FocusedMind'] ? this.limit -= 2 : this.limit += 2; break;
+      case 'DevastatingBlow': this.runes['DevastatingBlow'] ? this.limit -= 3 : this.limit += 3; break;
       case 'Generalist': if (this.runes['Generalist']) this.generalist(1, 4); break;
       case 'Synchrony': if (this.runes['Synchrony']) this.synchrony(1, 4); break;
       default: break;
@@ -156,6 +157,8 @@ function Stage ({num}) {
       {num !== 5 
         ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
         : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
+      {(store.runes['DevastatingBlow'] && num !== 5) && 
+        <div style={{color: "orange", textAlign: "center", fontSize: "14pt"}}>All skills have Devastating</div>}
       <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px"}}>
         {(store.runes['Generalist'] && num !== 5) && <div style={{color: "yellow", marginRight: "10px"}}>+ {store.generalistCount[num-1]}% dmg</div>}
         {(store.runes['Synchrony'] && num !== 5) && <div style={{color: "aqua"}}>+ {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
@@ -216,7 +219,7 @@ function Rune ({name, check})  {
 function Icons ({name, check})  {
   return (
     <label className='iconsLabel'>
-      <input style={{width: "16pt", height: "16pt"}} type="checkbox" checked={check} onChange={() => store.showIcons(name)} />
+      <input type="checkbox" checked={check} onChange={() => store.showIcons(name)} />
       <span>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
     </label>
   )
@@ -257,6 +260,7 @@ function App() {
               <Rune name={'Generalist'} check={store.runes['Generalist']} />
               <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
               <Rune name={'Singular Focus'} check={store.runes['SingularFocus']} />
+              <Rune name={'Devastating Blow'} check={store.runes['DevastatingBlow']} />
             </div>
             <div style={{textAlign: "center", marginTop: "15px"}}>
               <div style={{fontSize: "15pt", marginBottom: "10px"}}>Skill Mastery
