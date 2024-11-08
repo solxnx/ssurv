@@ -9,6 +9,7 @@ import { allHeroes } from './allHeroes';
 /* START MobX BLOCK */
 const store = observable({
   pool: [],
+  mode: "cathedral",
   limit: 6,
   generalistCount: [0, 0, 0, 0],
   synchronyCount: [0, 0, 0, 0],
@@ -22,6 +23,11 @@ const store = observable({
   },
   changeFilter (val)  {
     this.filter = val;
+  },
+  changeMode (val)  {
+    this.reset();
+    if (this.runes['SingularFocus'] === true) this.runes['SingularFocus'] = false;
+    this.mode = val;
   },
   showIcons (val)  {
     this.icons[val] = !this.icons[val];
@@ -67,7 +73,9 @@ const store = observable({
   },
   add (name) {
     if (this.pool.every((e) => e.name !== name.name) || this.runes['SingularFocus']) {
-      for (let i = 1; i <= 4; i++)  {
+      let stageLimit = 1;
+      if (store.mode === "cathedral") stageLimit = 4;
+      for (let i = 1; i <= stageLimit; i++)  {
         if (this.pool.filter((e) => e.stage === i).length < this.limit) {
           if (!this.runes["SingularFocus"] || this.pool.filter((e) => e.name === name.name && e.stage !== i).length < 1) {
             this.pool.push({...name, stage: i});
@@ -87,7 +95,7 @@ const store = observable({
     if (this.runes['Synchrony']) this.synchrony(stage, stage);
   },
   banish (name) {
-    if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.every(e => e.name !== name.name))  {
+    if (this.pool.filter((e) => e.stage === 5).length < 10 && this.pool.every(e => e.name !== name.name) && store.mode === "cathedral")  {
       this.pool.push({...name, stage: 5});
       allSkills.get(name.name).opacity = 0.2;
     }
@@ -154,19 +162,29 @@ function Skills ({arr}) {
 function Stage ({num}) {
   return (
     <>
-      {num !== 5 
-        ? <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
-        : <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
-      {(store.runes['DevastatingBlow'] && num !== 5) && 
-        <div style={{color: "orange", textAlign: "center", fontSize: "14pt"}}>All skills have Devastating</div>}
-      <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px"}}>
-        {(store.runes['Generalist'] && num !== 5) && <div style={{color: "yellow", marginRight: "10px"}}>+ {store.generalistCount[num-1]}% dmg</div>}
-        {(store.runes['Synchrony'] && num !== 5) && <div style={{color: "aqua"}}>+ {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
-      </div>
+      {(num !== 5 && store.mode === "cathedral") && <>
+          <div className='title'>{'Stage ' + num} ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
+          {store.runes['DevastatingBlow'] && <div style={{color: "orange", textAlign: "center", fontSize: "15pt"}}>All skills have Devastating</div>}
+          <div style={{display: "flex", justifyContent: "center", fontSize: "15pt", marginBottom: "5px"}}>
+            {store.runes['Generalist'] && <div style={{color: "yellow", marginRight: "10px"}}>+ {store.generalistCount[num-1]}% dmg</div>}
+            {store.runes['Synchrony'] && <div style={{color: "aqua"}}>+ {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
+          </div>
+        </>}
+      {num === 5 && <div className='title'>Banished ({store.pool.filter((e) => e.stage === 5).length} / 10)</div>}
+      {store.mode === "void" && 
+        <>
+          <div className='title'>Build ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
+          {store.runes['SingularFocus'] && <div style={{color: "pink", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Multipicking!</div>}
+          {store.runes['DevastatingBlow'] && <div style={{color: "orange", textAlign: "center", fontSize: "15pt", margin: "2px"}}>All skills have Devastating</div>}
+          {store.runes['ImprovedRepetory'] && <div style={{color: "red", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Improved Repetory: -15% damage</div>}
+          {store.runes['FocusedMind'] && <div style={{color: "lime", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Focused Mind: +70% damage</div>}
+          {store.runes['Generalist'] && <div style={{color: "yellow", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Generalist: + {store.generalistCount[num-1]}% dmg</div>}
+          {store.runes['Synchrony'] && <div style={{color: "aqua", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Synchrony: + {store.synchronyCount[num-1].toFixed(1)}% dmg</div>}
+        </>}
       <div className='stages'>
         {store.pool.filter((e) => e.stage === num).map((i, idx) => {
           return  (
-            <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "5px"}}>
+            <div key={idx} style={{textAlign: "center", marginRight: "5px", marginBottom: "2px", marginTop: "3px"}}>
               <Tooltip placement="top" title={<span className="tooltipInfo">{i.name}</span>} followCursor>
                 <Button variant="text" size="medium" className='allImgs'
                 style={{backgroundImage: `url('/img/skills/${i.name.replaceAll(' ', '')}.webp')`, backgroundSize: "cover", height:"65px"}}
@@ -248,7 +266,7 @@ function App() {
   return (
     <>
     <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 14</div>
-    <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral Build Planner by Solxnx</div>
+    <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
           <div className='cList'>{charactersList}</div>
@@ -259,7 +277,7 @@ function App() {
               <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />
               <Rune name={'Generalist'} check={store.runes['Generalist']} />
               <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
-              <Rune name={'Singular Focus'} check={store.runes['SingularFocus']} />
+              {store.mode === "void" && <Rune name={'Singular Focus'} check={store.runes['SingularFocus']} />}
               <Rune name={'Devastating Blow'} check={store.runes['DevastatingBlow']} />
             </div>
             <div style={{textAlign: "center", marginTop: "15px"}}>
@@ -289,11 +307,23 @@ function App() {
           {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
         </div>
         <div className='right'>
-          <Stage num={1} />
-          <Stage num={2} />
-          <Stage num={3} />
-          <Stage num={4} />
-          <Stage num={5} />
+        <div className='stack'>
+            <label className='iconsLabel'>
+              <input name='mode' type="radio" value="cathedral" checked={store.mode === "cathedral" ? true : false} onChange={(e) => store.changeMode(e.target.value)} /><span>Unholy Cathedral</span>
+            </label>
+            <label className='iconsLabel'>
+              <input name='mode' type="radio" value="void" checked={store.mode === "void" ? true : false} onChange={(e) => store.changeMode(e.target.value)} /><span>Void Fields</span>
+            </label>
+          </div>
+          {store.mode === "cathedral" 
+          ? <>
+              <Stage num={1} />
+              <Stage num={2} />
+              <Stage num={3} />
+              <Stage num={4} />
+              <Stage num={5} />
+            </>
+          : <><Stage num={1} /></>}
           {(store.pool.length > 0) && 
           <div>
             <Button style={{marginTop: "10px"}} color="error" onClick={() => store.reset()} variant='contained'>RESET BUILD</Button>
