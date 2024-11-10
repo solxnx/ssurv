@@ -176,7 +176,7 @@ export const allSkills = new Map ([
     //ALL SKILLS --------------------------------------------------------------------------------------
     ['Piercing Shout', {name: 'Piercing Shout', debuffs: ['Shattered'], types: ['Thrust'], allTypes: ['Thrust', 'Empowering', 'Lasting', 'Area', 'Physical']}],
     ['Savage Strike', {name: 'Savage Strike', buffs: ['Finesse'], types: ['Swing'], allTypes: ['Swing', 'Frontal', 'Physical']}],
-    ['Scent Of Blood', {name: 'Scent Of Blood' , types: ['Swing'], allTypes: ['Swing', 'Empowering', 'Lasting', 'Area', 'Physical']}],
+    ['Scent Of Blood', {name: 'Scent Of Blood' , types: ['Swing'], allTypes: ['Swing', 'Empowering', 'Lasting', 'Physical']}],
     ['Armor Shatter', {name: 'Armor Shatter', buffs: ['Prowess'], debuffs: ['Shattered'], types: ['Slam'], allTypes: ['Slam', 'Area', 'Burst', 'Physical']}],
     ['Bladestorm', {name: 'Bladestorm', types: ['Swing'], allTypes: ['Swing', 'Lasting', 'Area', 'Physical']}],
     ['Bloody Saw', {name: 'Bloody Saw', buffs: ['Finesse'], debuffs: ['Bleed'], types: ['Swing'], allTypes: ['Swing', 'Lasting', 'Area', 'Physical']}],
