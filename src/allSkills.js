@@ -24,7 +24,7 @@ export const allSkills = new Map ([
     ['Buckshot', {name: 'Buckshot', buffs: ['Ammunition'], traits: ['Brutal'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
     ['Power Blast', {name: 'Power Blast', buffs: ['Ammunition'], traits: ['Devastating'], types: ['Blast'], allTypes: ['Blast', 'Frontal', 'Burst', 'Physical']}],
     ['Pesticide Burst', {name: 'Pesticide Burst', debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Lasting', 'Frontal', 'Magical']}],
-    ['Threshing Blast', {name: 'Threshing Blast', buffs: ['Ammunition'], debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Frontal', 'Burst', 'Physical']}],
+    ['Threshing Blast', {name: 'Threshing Blast', buffs: ['Ammunition'], types: ['Nature'], allTypes: ['Nature', 'Frontal', 'Burst', 'Physical']}],
     ['Bolt Barrage', {name: 'Bolt Barrage', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Burst', 'Physical']}],
     ['Cyclone Shot', {name: 'Cyclone Shot', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Physical']}],
 
@@ -225,7 +225,7 @@ export const allSkills = new Map ([
     ['Magic Missiles', {name: 'Magic Missiles', debuffs: ['Fragility'], types: ['Arcane'], allTypes: ['Arcane', 'Missile', 'Frontal', 'Burst', 'Magical']}],
     ['Meteor', {name: 'Meteor', debuffs: ['Burn', 'Stun'], types: ['Fire'], allTypes: ['Fire', 'Area', 'Magical']}],
     ['Shadow Bolt', {name: 'Shadow Bolt', buffs: ['Aptitude'], debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Magical', 'Physical']}],
-    ['Shadow orb', {name: 'Shadow orb', debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Lasting', 'Frontal', 'Magical']}],
+    ['Shadow orb', {name: 'Shadow orb', debuffs: ['Doom', 'Disoriented'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Lasting', 'Frontal', 'Magical']}],
     ['Shadow Spikes', {name: 'Shadow Spikes', types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Burst', 'Physical']}],
     ['Summon Chaos Golem', {name: 'Summon Chaos Golem', traits: ['Taunt'], debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Summon', 'Magical', 'Physical']}],
     ['Void', {name: 'Void', debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Lasting', 'Area', 'Magical']}],
