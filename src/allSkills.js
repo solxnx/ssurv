@@ -42,7 +42,7 @@ export const allSkills = new Map ([
     ['Fiery Missiles', {name: 'Fiery Missiles', debuffs: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Missile', 'Burst', 'Magical']}],
     ['Fire Pillar', {name: 'Fire Pillar', debuffs: ['Burn', 'Weakness'], types: ['Fire'], allTypes: ['Fire', 'Area', 'Burst', 'Magical']}],
     ['Sacred Orb', {name: 'Sacred Orb', buffs: ['Purity'], debuffs: ['Exposed'], types: ['Holy'], allTypes: ['Holy', 'Missile', 'Frontal', 'Magical']}],
-    ['Celestial Retribution', {name: 'Celestial Retribution', buffs: ['Purity'], debuffs: ['Exposed'], types: ['Holy'], allTypes: ['Holy', 'Area', 'Burst', 'Magical']}],
+    ['Celestial Retribution', {name: 'Celestial Retribution', buffs: ['Purity'], types: ['Holy'], allTypes: ['Holy', 'Area', 'Burst', 'Magical']}],
     ['Frost Beam', {name: 'Frost Beam', buffs: ['IcyVeins'], types: ['Ice'], allTypes: ['Ice', 'Lasting', 'Frontal', 'Magical']}],
     ['Ice Shield', {name: 'Ice Shield', debuffs: ['Slow', 'Fragility'], types: ['Ice'], allTypes: ['Ice', 'Lasting', 'Aura', 'Magical']}],
 
