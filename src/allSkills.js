@@ -74,7 +74,7 @@ export const allSkills = new Map ([
     ['Sanctified Orb', {name: 'Sanctified Orb', buffs: ['Purity'], debuffs: ['Dazed'], types: ['Holy'], allTypes: ['Holy', 'Missile', 'Lasting', 'Frontal', 'Magical']}],
 
     ['Venomous Strike', {name: 'Venomous Strike', buffs: ['Finesse'], debuffs: ['Poison'], types: ['Nature', 'Swing'], allTypes: ['Nature', 'Swing', 'Frontal', 'Physical']}],
-    ['Cobra Totem', {name: 'Cobra Totem', traits: ['Cunning'], debuffs: ['Poison', 'Weakness'], types: ['Nature'], allTypes: ['Nature', 'Static', 'Summon', 'Physical']}],
+    ['Plague Viper', {name: 'Plague Viper', traits: ['Cunning'], debuffs: ['Poison', 'Weakness'], types: ['Nature'], allTypes: ['Nature', 'Summon', 'Magical', 'Physical']}],
     ['Wild Strike', {name: 'Wild Strike', buffs: ['Finesse'], types: ['Nature', 'Swing'], allTypes: ['Nature', 'Swing', 'Frontal', 'Physical']}],
     ['Summon Swamp Boar', {name: 'Summon Swamp Boar', debuffs: ['Fragility'], types: ['Nature', 'Swing'], allTypes: ['Nature', 'Swing', 'Summon', 'Magical', 'Physical']}],
     ['Brutal Slam', {name: 'Brutal Slam', buffs: ['Prowess'], types: ['Slam'], allTypes: ['Slam', 'Area', 'Frontal', 'Physical']}],
@@ -172,6 +172,14 @@ export const allSkills = new Map ([
     ['Cursed Shot', {name: 'Cursed Shot', buffs: ['Aptitude', 'Cursed'], debuffs: ['Dazed'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Magical', 'Physical']}],
     ['Ghostly Burst', {name: 'Ghostly Burst', buffs: ['Aptitude', 'Cursed'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Magical', 'Physical']}],
 
+    ['Vine Whip', {name: 'Vine Whip', buffs: ['Ancestry'], debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Swing', 'Frontal', 'Physical']}],
+    ['Poisonous Thorn', {name: 'Poisonous Thorn', buffs: ['Ancestry'], debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Thrust', 'Frontal', 'Physical']}],
+    ['Arcane Reaping', {name: 'Arcane Reaping', buffs: ['Radiance', 'Ancestry'], debuffs: ['Fragility'], types: ['Arcane'], allTypes: ['Arcane', 'Swing', 'Frontal', 'Magical']}],
+    ['Ancestral Empowerment', {name: 'Ancestral Empowerment', buffs: ['Radiance', 'Ancestry'], types: ['Arcane'], allTypes: ['Arcane', 'Static', 'Summon', 'Magical']}],
+    ['Flaming Spiral', {name: 'Flaming Spiral', buffs: ['Ancestry'], debuffs: ['Weakness', 'Burn'], types: ['Fire'], allTypes: ['Fire', 'Swing', 'Area', 'Magical']}],
+    ['Volcanic Effigy', {name: 'Volcanic Effigy', buffs: ['Ancestry'], debuffs: ['Burn'], traits: ['Fortitude'], types: ['Fire'], allTypes: ['Fire', 'Static', 'Summon', 'Magical']}],
+    ['Earthbreaker', {name: 'Earthbreaker', buffs: ['Ancestry', 'Colossal'], debuffs: ['Brittle'], types: ['Earth'], allTypes: ['Earth', 'Area', 'Frontal', 'Physical']}],
+    ['Quicksand', {name: 'Quicksand', buffs: ['Ancestry'], debuffs: ['Brittle'], traits: ['Fortitude'], types: ['Earth'], allTypes: ['Earth', 'Static', 'Summon', 'Physical']}],
 
     //ALL SKILLS --------------------------------------------------------------------------------------
     ['Piercing Shout', {name: 'Piercing Shout', debuffs: ['Shattered'], types: ['Thrust'], allTypes: ['Thrust', 'Empowering', 'Lasting', 'Area', 'Physical']}],
@@ -317,4 +325,7 @@ export const allSkills = new Map ([
     ['Krakens Rum', {name: 'Krakens Rum', buffs: ['Cursed'], debuffs: ['Fragility'], types: ['Projectile'], allTypes: ['Projectile', 'Empowering', 'Lasting', 'Physical']}],
     ['Powder Keg', {name: 'Powder Keg', buffs: ['Cursed'], debuffs: ['Stun', 'Bleed'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Magical']}],
     ['Eldritch Grasp', {name: 'Eldritch Grasp', buffs: ['Cursed'], types: ['Swing'], allTypes: ['Swing', 'Area', 'Physical']}],
+    ['Bull Charge', {name: 'Bull Charge', buffs: ['Ancestry', 'Purity'], debuffs: ['Dazed'], types: ['Holy'], allTypes: ['Holy', 'Missile', 'Frontal', 'Magical']}],
+    ['Cobra Totem', {name: 'Cobra Totem', buffs:['Ancestry'], traits: ['Fortitude'], debuffs: ['Poison', 'Weakness'], types: ['Nature'], allTypes: ['Nature', 'Static', 'Summon', 'Physical']}],
+    ['Stone Spiral', {name: 'Stone Spiral', buffs: ['Ancestry', 'Colossal'], traits: ['Fortitude'], types: ['Earth'], allTypes: ['Earth', 'Static', 'Summon', 'Physical']}],
 ]);

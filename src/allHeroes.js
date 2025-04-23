@@ -143,7 +143,7 @@ export const allHeroes = new Map ([
     ['beastmaster', {
         weapons: ['Wild Cleaver', 'Natures Fury', 'Bonecrusher', 'Widows Embrace'],
         wArray: [
-            'Venomous Strike', 'Cobra Totem',
+            'Venomous Strike', 'Plague Viper',
             'Wild Strike', 'Summon Swamp Boar',
             'Brutal Slam', 'Summon Cave Bear', 
             'Spider Cocoon', 'Summon Spider Queen'
@@ -336,6 +336,24 @@ export const allHeroes = new Map ([
             'Shrapnel Bomb', 'Shrapnel Shot', 'Spear Trap', 'Spread Shot', 'Storm Of Arrows',
             'Subdue', 'Suction Bomb', 'Sugar Rush', 'Summon Ballista', 'Surprise Gift',
             'Titans Cleaver', 'Weakening Shot'
+        ],
+    }],
+    ['shaman', {
+        weapons: ['Spinevine Whip', 'Starweavers Tail', 'Maldrakars Flamelash', 'Tharuuns Lasher'],
+        wArray: [
+            'Vine Whip', 'Poisonous Thorn',
+            'Arcane Reaping', 'Ancestral Empowerment', 
+            'Flaming Spiral', 'Volcanic Effigy',
+            'Earthbreaker', 'Quicksand'
+        ],
+        sArray: [
+            'Bull Charge', 'Cobra Totem', 'Stone Spiral',
+            'Acid Rain', 'Arcane Beam', 'Arcane Disc', 'Arcane Power', 'Arcane Sparks',
+            'Chromatic Bolt', 'Combustion', 'Earth bolt', 'Earthquake', 'Earth Shield',
+            'Fire bolt', 'Flamethrower', 'Flame Wave', 'Holy Beam', 'Light Beam',
+            'Living Weapons', 'Magic Missiles', 'Meteor', 'Might', 'Pestilence',
+            'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Rolling Boulder', 'Shockwave Totem',
+            'Smite'
         ],
     }],
 ]);
