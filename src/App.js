@@ -265,7 +265,7 @@ function App() {
 
   return (
     <>
-    <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 14</div>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 16</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
