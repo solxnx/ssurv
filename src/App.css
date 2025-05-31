@@ -41,7 +41,7 @@ label {
   display: flex;
   flex-direction: column;
 }
-.rList, .cList, .stages, .items  {
+.rList, .cList, .tList, .stages, .items  {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -49,6 +49,9 @@ label {
 }
 .cList  {
   zoom: 25%;
+}
+.tList {
+  zoom: 10%;
 }
 .left {
   width: 17%;

@@ -5,6 +5,8 @@ import { observable } from 'mobx';
 import { Button, Tooltip } from "@mui/material";
 import { allSkills } from './allSkills';
 import { allHeroes } from './allHeroes';
+import { titans } from './titanHunt';
+import { titanSkills } from './titanHunt';
 
 /* START MobX BLOCK */
 const store = observable({
@@ -16,6 +18,7 @@ const store = observable({
   runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false, DevastatingBlow: false},
   icons: {debuffs: true, buffs: true, traits: false, types: false},
   filter: 'All',
+  titanFilter: 'All',
   mastery: ['None', 'Arcane', 'Blast', 'Bomb', 'Chaos', 'Earth', 'Electric', 'Fire', 'Holy', 'Ice', 'Nature', 'Projectile', 'Shadow', 'Slam', 'Swing', 'Thrust'],
   masteryFilter: 'None',
   changeMasteryFilter (val)  {
@@ -23,6 +26,9 @@ const store = observable({
   },
   changeFilter (val)  {
     this.filter = val;
+  },
+  changeTitanFilter (val) {
+    this.titanFilter = val;
   },
   changeMode (val)  {
     this.reset();
@@ -159,6 +165,36 @@ function Skills ({arr}) {
   )
 }
 
+function TitanSkills ({arr}) {
+  return (
+    arr.map((i, idx) => {
+      const getTitanSkill = titanSkills.get(i);
+      return (
+        <div key={idx} style={{textAlign: "center", marginRight: "30px", marginBottom: "15px"}}>
+            <Tooltip placement="top" title={<span className="tooltipInfo">{i}<br />{getTitanSkill.condition && "Condition: " + getTitanSkill.condition}</span>} followCursor>
+              <img style={{borderRadius: "60px", outline: getTitanSkill.condition && "2px solid red"}} width="80px" height="80px" src={`/img/titanSkills/${i.replaceAll(' ', '')}.webp`} alt="no"/>
+            </Tooltip>
+            <div>
+            {getTitanSkill.debuffs && 
+              getTitanSkill.debuffs.map((b, ix) => {
+                return <img key={ix} width="30px" height="30px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+              })}
+            {getTitanSkill.traits && 
+              getTitanSkill.traits.map((b, ix) => {
+                return <img key={ix} width="30px" height="30px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+              })}
+            {getTitanSkill.buffs && 
+              getTitanSkill.buffs.map((b, ix) => {
+                return <img key={ix} width="30px" height="30px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+              })}
+            {getTitanSkill.text}
+          </div>
+        </div>
+      )
+    })
+  )
+}
+
 function Stage ({num}) {
   return (
     <>
@@ -263,6 +299,19 @@ function App() {
     );
   });
 
+  const titansList = Array.from(titans.keys()).map((i, idx) => {
+    return (
+      <div key={idx} style={{margin: "10px"}}>
+        <Tooltip placement="top" title={<span className="tooltipInfo">{i}</span>} followCursor>
+          <label className="heroes">
+            <input type='radio' name='titanFilter' value={i} onChange={(e) => store.changeTitanFilter(e.target.value)} />
+            <img className='allImgs' src={`/img/titans/${i}.webp`} alt="no"/>
+          </label>
+        </Tooltip>
+      </div>
+    );
+  });
+
   return (
     <>
     <div style={{position: 'absolute', fontSize: '10pt'}}>EA Update 16</div>
@@ -290,6 +339,8 @@ function App() {
               </div>
             </div>
           </>}
+          <div align="center" className='title' style={{marginTop: "20px"}}>Titans</div>
+          <div className='tList'>{titansList}</div>
         </div>
         <div className='center'>
           {(store.filter !== "All") && 
@@ -304,7 +355,8 @@ function App() {
               <div className="items"><Skills arr={allHeroes.get(store.filter).sArray} /></div>
               {(store.masteryFilter !== "None") && <div className="items"><Skills arr={"mastery"} /></div>}
             </>}
-          {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center"}}>Choose your character</div>}
+          {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center", marginBottom: "50px"}}>Choose your character</div>}
+          {(store.titanFilter !== "All") &&  <div className="items"><TitanSkills arr={titans.get(store.titanFilter).skills} /></div>}
         </div>
         <div className='right'>
         <div className='stack'>
