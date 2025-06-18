@@ -9,7 +9,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Piercing Shout', 'Savage Strike', 'Scent Of Blood', 'Armor Shatter', 'Bladestorm', 
-            'Bloody Saw', 'Body Slam', 'Chain Lightning', 'Chromatic Bolt', 'Double Slash', 
+            'Bloody Saw', 'Body Slam', 'Chain Lightning', 'Chromatic Bolt', 'Chromatic Slash', 'Double Slash', 
             'Earth bolt', 'Earthquake', 'Earth Shield', 'Flurry', 'Ground Break', 
             'Heartrending Strike', 'Lightning bolt', 'Lightning Surge', 'On Guard', 'Power Conductor', 
             'Quick Strike', 'Resonant Slam', 'Rolling Boulder', 'Seismic Shock', 'Sharp Spear', 
@@ -28,7 +28,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Conflagrate', 'Fire Wall', 'Meteor Shower', 'Arcane Beam', 'Arcane Disc', 
             'Arcane Power', 'Arcane Sparks', 'Bloodlust', 'Chain Lightning', 'Chaos Bolt',
-            'Chaotic Explosion', 'Chromatic Bolt', 'Combustion', 'Death Claw', 'Death Vortex',
+            'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Death Claw', 'Death Vortex',
             'Fire bolt', 'Flamethrower', 'Flame Wave', 'Frenzied Bunnies', 'Lightning bolt', 
             'Lightning Surge', 'Magic Missiles', 'Meteor', 'Power Conductor', 'Shadow Bolt',
             'Shadow orb', 'Shadow Spikes', 'Summon Chaos Golem', 'Thunder strike', 'Void'
@@ -44,7 +44,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Bear Trap', 'Shrapnel Mine', 'Weakening Grenade', 'Acid Rain', 'Bladed Chakram',
-            'Bomb Barrage', 'Camors Arrow', 'Chromatic Bolt', 'Combustion', 'Egg Shooter',
+            'Bomb Barrage', 'Camors Arrow', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Egg Shooter',
             'Explosive Shot', 'Explosive Trap', 'Fire bolt', 'Flamethrower', 'Flame Wave',
             'Frag Shot', 'Heartbreak Orbs', 'Meteor', 'Mine Field', 'Napalm Blast',
             'Pestilence', 'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Rapid Barrage',
@@ -63,7 +63,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Arcane Assault', 'Arcane Blade', 'Arcane Rift', 'Arcane Beam', 'Arcane Disc', 
             'Arcane Power', 'Arcane Sparks', 'Avalanche', 'Bladestorm', 'Blizzard',
-            'Bloody Saw', 'Chromatic Bolt', 'Combustion', 'Double Slash', 'Fire bolt', 
+            'Bloody Saw', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Double Slash', 'Fire bolt', 
             'Flamethrower', 'Flame Wave', 'Flurry', 'Frost Bolt', 'Frost Totem', 
             'Glacier', 'Heartrending Strike', 'Ice Vortex', 'Magic Missiles', 'Meteor', 
             'On Guard', 'Quick Strike', 'Sharp Spear', 'Spear Trap', 'Subdue', 
@@ -81,7 +81,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Arcane Conjuration', 'Arcane Orb', 'Arcane shield', 'Arcane Beam', 'Arcane Disc', 
             'Arcane Power', 'Arcane Sparks', 'Avalanche', 'Blizzard', 'Bloodlust', 
-            'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Combustion', 'Death Claw', 
+            'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Death Claw', 
             'Fire bolt', 'Flamethrower', 'Flame Wave', 'Frenzied Bunnies', 'Frost Bolt',
             'Frost Totem', 'Glacier', 'Holy Beam', 'Ice Vortex', 'Light Beam', 
             'Living Weapons', 'Magic Missiles', 'Meteor', 'Might', 'Smite', 
@@ -98,7 +98,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Ricochet Shot', 'Sniper Shot', 'Split Shot', 'Acid Rain', 'Avalanche',
-            'Bladed Chakram', 'Blizzard', 'Bomb Barrage', 'Camors Arrow', 'Chromatic Bolt', 
+            'Bladed Chakram', 'Blizzard', 'Bomb Barrage', 'Camors Arrow', 'Chromatic Bolt', 'Chromatic Slash', 
             'Death Vortex', 'Egg Shooter', 'Explosive Trap', 'Frag Shot', 'Frost Bolt', 
             'Frost Totem', 'Glacier', 'Heartbreak Orbs', 'Ice Vortex', 'Mine Field', 
             'Pestilence', 'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Shadow Bolt', 
@@ -117,7 +117,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Beacon Of Light', 'Penance', 'Templars Verdict', 'Arcane Beam', 'Arcane Disc',
             'Arcane Power', 'Arcane Sparks', 'Armor Shatter', 'Bladestorm', 'Bloody Saw',
-            'Body Slam', 'Chain Lightning', 'Chromatic Bolt', 'Double Slash', 'Ground Break', 
+            'Body Slam', 'Chain Lightning', 'Chromatic Bolt', 'Chromatic Slash', 'Double Slash', 'Ground Break', 
             'Heartrending Strike', 'Holy Beam', 'Light Beam', 'Lightning bolt', 'Lightning Surge', 
             'Living Weapons', 'Magic Missiles', 'Might', 'Power Conductor', 'Resonant Slam',
             'Seismic Shock', 'Smite', 'Subdue', 'Thunder strike', 'Titans Cleaver'
@@ -133,7 +133,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Chaos Totem', 'Chaos Wave', 'Manifestations Of Chaos', 'Acid Rain', 'Bloodlust', 
-            'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Combustion', 'Death Claw', 
+            'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Death Claw', 
             'Death Vortex', 'Fire bolt', 'Flamethrower', 'Flame Wave', 'Frenzied Bunnies', 
             'Holy Beam', 'Light Beam', 'Living Weapons', 'Meteor', 'Might', 
             'Pestilence', 'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Shadow Bolt', 
@@ -150,7 +150,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Bestial Wrath', 'Summon Battle Moose', 'Summon War Tiger', 'Acid Rain', 'Armor Shatter',
-            'Bladestorm', 'Bloody Saw', 'Body Slam', 'Bomb Barrage', 'Chromatic Bolt', 
+            'Bladestorm', 'Bloody Saw', 'Body Slam', 'Bomb Barrage', 'Chromatic Bolt', 'Chromatic Slash', 
             'Combustion', 'Double Slash', 'Explosive Trap', 'Fire bolt', 'Flamethrower', 
             'Flame Wave', 'Ground Break', 'Heartrending Strike', 'Meteor', 'Mine Field', 
             'Pestilence', 'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Resonant Slam',
@@ -168,7 +168,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Rupture', 'Shadow Step', 'Smoke Bomb', 'Summon Assassin Enclave', 'Acid Rain', 
-            'Bladestorm', 'Bloody Saw', 'Bomb Barrage', 'Chromatic Bolt', 'Death Vortex', 
+            'Bladestorm', 'Bloody Saw', 'Bomb Barrage', 'Chromatic Bolt', 'Chromatic Slash', 'Death Vortex', 
             'Double Slash', 'Explosive Trap', 'Flurry', 'Heartrending Strike', 'Mine Field', 
             'On Guard', 'Pestilence', 'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 
             'Quick Strike', 'Shadow Bolt', 'Shadow orb', 'Shadow Spikes', 'Sharp Spear',
@@ -186,7 +186,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Frozen Warhammer', 'Lava Shield', 'Tornado', 'Acid Rain', 'Avalanche',
-            'Blizzard', 'Chain Lightning', 'Chromatic Bolt', 'Combustion', 'Earth bolt', 
+            'Blizzard', 'Chain Lightning', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Earth bolt', 
             'Earthquake', 'Earth Shield', 'Fire bolt', 'Flamethrower', 'Flame Wave', 
             'Frost Bolt', 'Frost Totem', 'Glacier', 'Ice Vortex', 'Lightning bolt',
             'Lightning Surge', 'Meteor', 'Pestilence', 'Poison Bolt', 'Poison Cloud',
@@ -204,7 +204,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Intimidating Shout', 'Shield Wall', 'Storm Of Spears', 'Acid Rain', 'Bloodlust',
-            'Chain Lightning', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Combustion', 
+            'Chain Lightning', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 
             'Death Claw', 'Fire bolt', 'Flamethrower', 'Flame Wave', 'Flurry', 
             'Frenzied Bunnies', 'Lightning bolt', 'Lightning Surge', 'Meteor', 'On Guard', 
             'Pestilence', 'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Power Conductor', 
@@ -223,7 +223,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Summon Putrid Hounds', 'Summon Skeletal Archer', 'Summon Skeletal Mage', 'Acid Rain', 'Arcane Beam', 
             'Arcane Disc', 'Arcane Power', 'Arcane Sparks', 'Avalanche', 'Blizzard',
-            'Bloodlust', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Death Claw',
+            'Bloodlust', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 'Death Claw',
             'Death Vortex', 'Frenzied Bunnies', 'Frost Bolt', 'Frost Totem', 'Glacier',
             'Ice Vortex', 'Magic Missiles', 'Pestilence', 'Poison Bolt', 'Poison Cloud', 
             'Poison Puddle', 'Shadow Bolt', 'Shadow orb', 'Shadow Spikes', 'Summon Chaos Golem',
@@ -241,7 +241,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Contagion', 'Path Of Decay', 'Shadow Grasp', 'Acid Rain', 'Armor Shatter', 
             'Avalanche', 'Bladestorm', 'Blizzard', 'Bloody Saw', 'Body Slam',
-            'Chromatic Bolt', 'Death Vortex', 'Double Slash', 'Frost Bolt', 'Frost Totem', 
+            'Chromatic Bolt', 'Chromatic Slash', 'Death Vortex', 'Double Slash', 'Frost Bolt', 'Frost Totem', 
             'Glacier', 'Ground Break', 'Heartrending Strike', 'Ice Vortex', 'Pestilence', 
             'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Resonant Slam', 'Seismic Shock', 
             'Shadow Bolt', 'Shadow orb', 'Shadow Spikes', 'Subdue', 'Summon Helper Elves', 
@@ -258,7 +258,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Electric Strike', 'Expansive Throw', 'Whirling Defense', 'Armor Shatter', 'Body Slam',
-            'Bomb Barrage', 'Chain Lightning', 'Chromatic Bolt', 'Earth bolt', 'Earthquake',
+            'Bomb Barrage', 'Chain Lightning', 'Chromatic Bolt', 'Chromatic Slash', 'Earth bolt', 'Earthquake',
             'Earth Shield', 'Explosive Trap', 'Ground Break', 'Holy Beam', 'Light Beam',
             'Lightning bolt', 'Lightning Surge', 'Living Weapons', 'Might', 'Mine Field',
             'Power Conductor', 'Resonant Slam', 'Rolling Boulder', 'Seismic Shock', 'Shockwave Totem', 
@@ -275,7 +275,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Ammo Box', 'Heavy Artillery', 'Portable Nuke', 'Bladed Chakram', 'Bomb Barrage', 
-            'Camors Arrow', 'Chain Lightning', 'Chromatic Bolt', 'Earth bolt', 'Earthquake',
+            'Camors Arrow', 'Chain Lightning', 'Chromatic Bolt', 'Chromatic Slash', 'Earth bolt', 'Earthquake',
             'Earth Shield', 'Egg Shooter', 'Explosive Shot', 'Explosive Trap', 'Frag Shot',
             'Heartbreak Orbs', 'Lightning bolt', 'Lightning Surge', 'Mine Field', 'Napalm Blast',
             'Power Conductor', 'Rapid Barrage', 'Rolling Boulder', 'Shockwave Totem', 'Shrapnel Bomb', 
@@ -293,7 +293,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Jawstorm', 'Precision Wave', 'Sea Current', 'Arcane Beam', 'Arcane Disc',
-            'Arcane Power', 'Arcane Sparks', 'Avalanche', 'Blizzard', 'Chromatic Bolt',
+            'Arcane Power', 'Arcane Sparks', 'Avalanche', 'Blizzard', 'Chromatic Bolt', 'Chromatic Slash',
             'Earth bolt', 'Earthquake', 'Earth Shield', 'Flurry', 'Frost Bolt',
             'Frost Totem', 'Glacier', 'Holy Beam', 'Ice Vortex', 'Light Beam',
             'Living Weapons', 'Magic Missiles', 'Might', 'On Guard', 'Quick Strike',
@@ -311,7 +311,7 @@ export const allHeroes = new Map ([
         ],
         sArray: [
             'Chaotic Surge', 'Demonic Breath', 'Twin Impact', 'Bladed Chakram', 'Bloodlust', 
-            'Bomb Barrage', 'Camors Arrow', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 
+            'Bomb Barrage', 'Camors Arrow', 'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 
             'Death Claw', 'Death Vortex', 'Egg Shooter', 'Explosive Shot', 'Explosive Trap', 
             'Frag Shot', 'Frenzied Bunnies', 'Heartbreak Orbs', 'Mine Field', 'Napalm Blast', 
             'Rapid Barrage', 'Shadow Bolt', 'Shadow orb', 'Shadow Spikes', 'Shrapnel Bomb', 
@@ -330,7 +330,7 @@ export const allHeroes = new Map ([
         sArray: [
             'Krakens Rum', 'Powder Keg', 'Eldritch Grasp',
             'Bladed Chakram',  'Bladestorm', 'Bloody Saw', 'Bomb Barrage', 'Camors Arrow',
-            'Chromatic Bolt', 'Double Slash', 'Egg Shooter', 'Explosive Shot', 'Explosive Trap',
+            'Chromatic Bolt', 'Chromatic Slash', 'Double Slash', 'Egg Shooter', 'Explosive Shot', 'Explosive Trap',
             'Flurry', 'Frag Shot', 'Heartbreak Orbs', 'Heartrending Strike', 'Mine Field',
             'Napalm Blast', 'On Guard', 'Quick Strike', 'Rapid Barrage', 'Sharp Spear',
             'Shrapnel Bomb', 'Shrapnel Shot', 'Spear Trap', 'Spread Shot', 'Storm Of Arrows',
@@ -349,11 +349,47 @@ export const allHeroes = new Map ([
         sArray: [
             'Bull Charge', 'Cobra Totem', 'Stone Spiral',
             'Acid Rain', 'Arcane Beam', 'Arcane Disc', 'Arcane Power', 'Arcane Sparks',
-            'Chromatic Bolt', 'Combustion', 'Earth bolt', 'Earthquake', 'Earth Shield',
+            'Chromatic Bolt', 'Chromatic Slash', 'Combustion', 'Earth bolt', 'Earthquake', 'Earth Shield',
             'Fire bolt', 'Flamethrower', 'Flame Wave', 'Holy Beam', 'Light Beam',
             'Living Weapons', 'Magic Missiles', 'Meteor', 'Might', 'Pestilence',
             'Poison Bolt', 'Poison Cloud', 'Poison Puddle', 'Rolling Boulder', 'Shockwave Totem',
             'Smite'
+        ],
+    }],
+    ['machinist', {
+        weapons: ['Soulcore MK-V', 'M249 HSG .50', 'Coremelter GTX Ti', 'Electrotaser RX'],
+        wArray: [
+            'Resonating Crystals', 'Crystal Shard',
+            'Unstable Reactor', 'Shrapnel Spiral',
+            'Blazing Ray', 'Ember Discharge',
+            'Lightning Shield', 'Lightning Coil',
+        ],
+        sArray: [
+            'Flame Syphon', 'High Voltage', 'Ice Resonance',
+            'Arcane Beam', 'Arcane Disc', 'Arcane Power', 'Arcane Sparks', 'Avalanche',
+            'Blizzard', 'Chain Lightning', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion',
+            'Explosive Shot', 'Fire bolt', 'Flamethrower', 'Flame Wave', 'Frost Bolt',
+            'Frost Totem', 'Glacier', 'Ice Vortex', 'Lightning bolt', 'Lightning Surge',
+            'Magic Missiles', 'Meteor', 'Napalm Blast', 'Power Conductor', 'Rapid Barrage',
+            'Shrapnel Shot', 'Summon Helper Elves', 'Thunder strike', 'Weakening Shot',
+        ],
+    }],
+    ['samurai', {
+        weapons: ['Veilpiercer', 'Shadowfang', 'Executioners Burden', 'Last Ember'],
+        wArray: [
+            'Slice And Dice', 'Ravenous Cut',
+            'Shadow Slice', 'Nightfang',
+            'Echoing Rupture', 'Blade Impale',
+            'Molten Fang', 'Ignition Spiral'
+        ],
+        sArray: [
+            'Last Stand', 'Ruthlessness', 'Scorching Katana',
+            'Armor Shatter', 'Bladestorm', 'Bloodlust', 'Bloody Saw', 'Body Slam',
+            'Chaos Bolt', 'Chaotic Explosion', 'Chromatic Bolt', 'Chromatic Slash', 'Combustion',
+            'Death Claw', 'Death Vortex', 'Double Slash', 'Fire bolt', 'Flamethrower',
+            'Flame Wave', 'Frenzied Bunnies', 'Ground Break', 'Heartrending Strike', 'Meteor',
+            'Resonant Slam', 'Seismic Shock', 'Shadow Bolt', 'Shadow orb', 'Shadow Spikes',
+            'Subdue', 'Summon Chaos Golem', 'Titans Cleaver', 'Void',
         ],
     }],
 ]);

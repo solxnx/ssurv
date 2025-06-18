@@ -181,6 +181,24 @@ export const allSkills = new Map ([
     ['Earthbreaker', {name: 'Earthbreaker', buffs: ['Ancestry', 'Colossal'], debuffs: ['Brittle'], types: ['Earth'], allTypes: ['Earth', 'Area', 'Frontal', 'Physical']}],
     ['Quicksand', {name: 'Quicksand', buffs: ['Ancestry'], debuffs: ['Brittle'], traits: ['Fortitude'], types: ['Earth'], allTypes: ['Earth', 'Static', 'Summon', 'Physical']}],
 
+    ['Resonating Crystals', {name: 'Resonating Crystals', buffs: ['Radiance'], types: ['Arcane'], allTypes: ['Arcane', 'Lasting', 'Aura', 'Magical']}],
+    ['Crystal Shard', {name: 'Crystal Shard', buffs: ['Radiance'], debuffs: ['Brittle'], traits: ['Piercing'], types: ['Arcane'], allTypes: ['Arcane', 'Missile', 'Aura', 'Magical']}],
+    ['Unstable Reactor', {name: 'Unstable Reactor', buffs: ['Ammunition'], traits: ['Brutal'], types: ['Blast'], allTypes: ['Blast', 'Lasting', 'Aura', 'Magical']}],
+    ['Shrapnel Spiral', {name: 'Shrapnel Spiral', buffs: ['Ammunition'], debuffs: ['Shattered'], types: ['Blast'], allTypes: ['Blast', 'Missile', 'Burst', 'Physical']}],
+    ['Blazing Ray', {name: 'Blazing Ray', debuffs: ['Burn', 'Shattered'], types: ['Fire'], allTypes: ['Fire', 'Lasting', 'Frontal', 'Magical']}],
+    ['Ember Discharge', {name: 'Ember Discharge', types: ['Fire'], allTypes: ['Fire', 'Frontal', 'Burst', 'Magical']}],
+    ['Lightning Shield', {name: 'Lightning Shield', buffs: ['Electrified'], debuffs: ['Dazed'], types: ['Electric'], allTypes: ['Electric', 'Lasting', 'Aura', 'Magical']}],
+    ['Lightning Coil', {name: 'Lightning Coil', buffs: ['Electrified'], traits: ['Cunning'], types: ['Electric'], allTypes: ['Electric', 'Static', 'Summon', 'Physical']}],
+
+    ['Slice And Dice', {name: 'Slice And Dice', buffs: ['Finesse'], debuffs: ['Condemned'], types: ['Swing'], allTypes: ['Swing', 'Frontal', 'Physical']}],
+    ['Ravenous Cut', {name: 'Ravenous Cut', buffs: ['Finesse'], debuffs: ['Condemned'], types: ['Swing'], allTypes: ['Swing', 'Missile', 'Frontal', 'Physical']}],
+    ['Shadow Slice', {name: 'Shadow Slice', debuffs: ['Doom', 'Condemned'], types: ['Shadow'], allTypes: ['Shadow', 'Frontal', 'Physical']}],
+    ['Nightfang', {name: 'Nightfang', debuffs: ['Condemned'], types: ['Shadow'], allTypes: ['Shadow', 'Thrust', 'Frontal', 'Physical']}],
+    ['Echoing Rupture', {name: 'Echoing Rupture', buffs: ['Prowess'], debuffs: ['Disoriented', 'Condemned'], types: ['Slam'], allTypes: ['Slam', 'Missile', 'Frontal', 'Physical']}],
+    ['Blade Impale', {name: 'Blade Impale', buffs: ['Resilience'], debuffs: ['Condemned', 'Stun'], types: ['Slam'], allTypes: ['Slam', 'Area', 'Physical']}],
+    ['Molten Fang', {name: 'Molten Fang', buffs: ['Haste'], debuffs: ['Condemned', 'Burn'], types: ['Fire'], allTypes: ['Fire', 'Frontal', 'Magical', 'Physical']}],
+    ['Ignition Spiral', {name: 'Ignition Spiral', debuffs: ['Condemned'], types: ['Fire'], allTypes: ['Fire', 'Area', 'Magical', 'Physical']}],
+
     //ALL SKILLS --------------------------------------------------------------------------------------
     ['Piercing Shout', {name: 'Piercing Shout', debuffs: ['Shattered'], types: ['Thrust'], allTypes: ['Thrust', 'Empowering', 'Lasting', 'Area', 'Physical']}],
     ['Savage Strike', {name: 'Savage Strike', buffs: ['Finesse'], types: ['Swing'], allTypes: ['Swing', 'Frontal', 'Physical']}],
@@ -328,4 +346,11 @@ export const allSkills = new Map ([
     ['Bull Charge', {name: 'Bull Charge', buffs: ['Ancestry', 'Purity'], debuffs: ['Dazed'], types: ['Holy'], allTypes: ['Holy', 'Missile', 'Frontal', 'Magical']}],
     ['Cobra Totem', {name: 'Cobra Totem', buffs:['Ancestry'], traits: ['Fortitude'], debuffs: ['Poison', 'Weakness'], types: ['Nature'], allTypes: ['Nature', 'Static', 'Summon', 'Physical']}],
     ['Stone Spiral', {name: 'Stone Spiral', buffs: ['Ancestry', 'Colossal'], traits: ['Fortitude'], types: ['Earth'], allTypes: ['Earth', 'Static', 'Summon', 'Physical']}],
+    ['Chromatic Slash', {name: 'Chromatic Slash', types: []}],
+    ['Flame Syphon', {name: 'Flame Syphon', debuffs: ['Burn', 'Weakness'], types: ['Fire'], allTypes: ['Fire', 'Lasting', 'Frontal', 'Physical']}],
+    ['High Voltage', {name: 'High Voltage', buffs: ['Electrified'], debuffs: ['Dazed'], traits: ['Devastating'], types: ['Electric'], allTypes: ['Electric', 'Lasting', 'Frontal', 'Physical']}],
+    ['Ice Resonance', {name: 'Ice Resonance', buffs: ['IcyVeins'], debuffs: ['Slow'], types: ['Ice'], allTypes: ['Ice', 'Lasting', 'Frontal', 'Magical']}],
+    ['Last Stand', {name: 'Last Stand', buffs: ['Finesse'], debuffs: ['Condemned', 'Fragility'], types: ['Swing'], allTypes: ['Swing', 'Lasting', 'Aura', 'Magical']}],
+    ['Ruthlessness', {name: 'Ruthlessness', types: ['Shadow'], allTypes: ['Shadow', 'Empowering', 'Lasting', 'Area', 'Physical']}],
+    ['Scorching Katana', {name: 'Scorching Katana', debuffs: ['Burn', 'Condemned'], types: ['Fire'], allTypes: ['Fire', 'Missile', 'Magical', 'Physical']}],
 ]);
