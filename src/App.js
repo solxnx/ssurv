@@ -288,7 +288,7 @@ function App() {
 
   const charactersList = Array.from(allHeroes.keys()).map((i, idx) => {
     return (
-      <div key={idx} style={{margin: "10px"}}>
+      <div key={idx} style={{margin: "8px"}}>
         <Tooltip placement="top" title={<span className="tooltipInfo">{i.charAt(0).toUpperCase() + i.slice(1)}</span>} followCursor>
           <label className="heroes">
             <input type='radio' name='filter' value={i} onChange={(e) => store.changeFilter(e.target.value)} />
@@ -319,44 +319,48 @@ function App() {
       <div className="parent">
         <div className='left'>
           <div className='cList'>{charactersList}</div>
-          {(store.filter !== "All") && 
-          <>
-            <div className='rList'>
-              <Rune name={'Improved Repetory'} check={store.runes['ImprovedRepetory']} />
-              <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />
-              <Rune name={'Generalist'} check={store.runes['Generalist']} />
-              <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
-              {store.mode === "void" && <Rune name={'Singular Focus'} check={store.runes['SingularFocus']} />}
-              <Rune name={'Devastating Blow'} check={store.runes['DevastatingBlow']} />
+          <div style={{display: "flex", marginTop: "10px"}}>
+            <div style={{display: "flex", flexDirection: "column", width: "20%"}}>
+              {(store.filter !== "All") && 
+              <>
+                <div className='rList'>
+                  <Rune name={'Improved Repetory'} check={store.runes['ImprovedRepetory']} />
+                  <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />
+                  <Rune name={'Generalist'} check={store.runes['Generalist']} />
+                  <Rune name={'Synchrony'} check={store.runes['Synchrony']} />
+                  {store.mode === "void" && <Rune name={'Singular Focus'} check={store.runes['SingularFocus']} />}
+                  <Rune name={'Devastating Blow'} check={store.runes['DevastatingBlow']} />
+                </div>
+                <div style={{textAlign: "center", marginTop: "15px"}}>
+                  <div style={{fontSize: "15pt", marginBottom: "10px"}}>Skill Mastery
+                    <select className="masteryBlock" name="mastery" onChange={(e) => store.changeMasteryFilter(e.target.value)}>
+                      {store.mastery.map((i, idx) => {
+                        return <option key={idx} value={i}>{i}</option>
+                      })}
+                    </select>
+                  </div>
+                </div>
+              </>}
+              <div align="center" className='title' style={{marginTop: "20px"}}>Titans</div>
+              <div className='tList'>{titansList}</div>
             </div>
-            <div style={{textAlign: "center", marginTop: "15px"}}>
-              <div style={{fontSize: "15pt", marginBottom: "10px"}}>Skill Mastery
-                <select className="masteryBlock" name="mastery" onChange={(e) => store.changeMasteryFilter(e.target.value)}>
-                  {store.mastery.map((i, idx) => {
-                    return <option key={idx} value={i}>{i}</option>
-                  })}
-                </select>
-              </div>
+            <div className='center'>
+              {(store.filter !== "All") && 
+                <>
+                  <div className='stack'>
+                    <Icons name={'debuffs'} check={store.icons['debuffs']} />
+                    <Icons name={'buffs'} check={store.icons['buffs']} />
+                    <Icons name={'traits'} check={store.icons['traits']} />
+                    <Icons name={'types'} check={store.icons['types']} />
+                  </div>
+                  <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>
+                  <div className="items"><Skills arr={allHeroes.get(store.filter).sArray} /></div>
+                  {(store.masteryFilter !== "None") && <div className="items"><Skills arr={"mastery"} /></div>}
+                </>}
+              {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center", marginBottom: "50px"}}>Choose your character</div>}
+              {(store.titanFilter !== "All") &&  <div className="items"><TitanSkills arr={titans.get(store.titanFilter).skills} /></div>}
             </div>
-          </>}
-          <div align="center" className='title' style={{marginTop: "20px"}}>Titans</div>
-          <div className='tList'>{titansList}</div>
-        </div>
-        <div className='center'>
-          {(store.filter !== "All") && 
-            <>
-              <div className='stack'>
-                <Icons name={'debuffs'} check={store.icons['debuffs']} />
-                <Icons name={'buffs'} check={store.icons['buffs']} />
-                <Icons name={'traits'} check={store.icons['traits']} />
-                <Icons name={'types'} check={store.icons['types']} />
-              </div>
-              <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>
-              <div className="items"><Skills arr={allHeroes.get(store.filter).sArray} /></div>
-              {(store.masteryFilter !== "None") && <div className="items"><Skills arr={"mastery"} /></div>}
-            </>}
-          {(store.filter === "All") && <div style={{fontSize: "35px", textAlign: "center", marginBottom: "50px"}}>Choose your character</div>}
-          {(store.titanFilter !== "All") &&  <div className="items"><TitanSkills arr={titans.get(store.titanFilter).skills} /></div>}
+          </div>
         </div>
         <div className='right'>
         <div className='stack'>

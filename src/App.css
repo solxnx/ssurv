@@ -4,8 +4,8 @@ body {
   font-family: sans-serif;
 }
 .mainTitle  {
-  font-size: 25pt;
-  margin: 1%;
+  font-size: 23pt;
+  margin: 10pt;
 }
 .parent {
   display: flex;
@@ -48,16 +48,16 @@ label {
   justify-content: center;
 }
 .cList  {
-  zoom: 25%;
+  zoom: 23%;
 }
 .tList {
   zoom: 10%;
 }
 .left {
-  width: 17%;
+  width: 80%;
 }
 .center {
-  width: 51%;
+  width: 80%;
 }
 .right  {
   width: 30%;
