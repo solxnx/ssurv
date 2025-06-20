@@ -7,6 +7,7 @@ import { allSkills } from './allSkills';
 import { allHeroes } from './allHeroes';
 import { titans } from './titanHunt';
 import { titanSkills } from './titanHunt';
+import { allAP } from './allAP';
 
 /* START MobX BLOCK */
 const store = observable({
@@ -280,6 +281,42 @@ function Icons ({name, check})  {
 }
 /* END COMPONENTS BLOCK */
 
+
+function WeaponList ({hero})  {
+  return (
+    allHeroes.get(hero).weapons.map((i, idx) => {
+      const getWeapon = allAP.get(i);
+      return (
+        <div key={idx} style={{display: 'flex', alignItems: 'center'}}>
+          <div><img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.name.replaceAll(' ', '')}.webp`} alt='' /></div>
+          <div><img src={'/img/arrow.png'} alt='' /></div>
+          <div style={{display: "flex", alignItems: "center"}}>
+            <img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.power.replaceAll(' ', '')}.webp`} alt='' />
+            {(store.icons['debuffs'] && getWeapon.hasOwnProperty('debuffs')) &&
+              <div className='buffDiv'>
+                {getWeapon.debuffs.map((b, ix) => {
+                  return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+                })}          
+              </div>}
+            {(store.icons['buffs'] && getWeapon.hasOwnProperty('buffs')) &&
+              <div className='buffDiv'>
+                {getWeapon.buffs.map((b, ix) => {
+                  return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+                })}          
+              </div>}
+            {(store.icons['traits'] && getWeapon.hasOwnProperty('traits')) &&
+              <div className='buffDiv' style={{marginTop: "-3px"}}>
+                {getWeapon.traits.map((b, ix) => {
+                  return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+                })}
+              </div>}
+          </div>
+        </div>
+      )
+    })
+  )
+}
+
 function App() {
 
   document.oncontextmenu = () => {
@@ -314,7 +351,7 @@ function App() {
 
   return (
     <>
-    <div style={{position: 'absolute', fontSize: '10pt'}}>EA 1.0</div>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>Version 1.0</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
@@ -323,6 +360,7 @@ function App() {
             <div style={{display: "flex", flexDirection: "column", width: "20%"}}>
               {(store.filter !== "All") && 
               <>
+                <div style={{display: "flex", flexDirection: "column", alignItems: 'center'}}><WeaponList hero={store.filter} /></div>
                 <div className='rList'>
                   <Rune name={'Improved Repetory'} check={store.runes['ImprovedRepetory']} />
                   <Rune name={'Focused Mind'} check={store.runes['FocusedMind']} />

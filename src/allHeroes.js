@@ -357,7 +357,7 @@ export const allHeroes = new Map ([
         ],
     }],
     ['machinist', {
-        weapons: ['Soulcore MK-V', 'M249 HSG .50', 'Coremelter GTX Ti', 'Electrotaser RX'],
+        weapons: ['Soulcore MKV', 'M249 HSG 50', 'Coremelter GTX Ti', 'Electrotaser RX'],
         wArray: [
             'Resonating Crystals', 'Crystal Shard',
             'Unstable Reactor', 'Shrapnel Spiral',
