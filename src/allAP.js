@@ -74,10 +74,10 @@ export const allAP = new Map ([
     ['Tricksters Boomstick', {name: 'Tricksters Boomstick', power: 'Kings Illusion Bomb', type: 'Bomb', debuffs: ['Disoriented'], traits: ['Cunning']}],
     ['Might of the Mountains', {name: 'Might of the Mountains', power: 'Kings Illusion Earth', type: 'Earth', debuffs: ['Brittle'], traits: ['Cunning']}],
     
-    ['Ammo Devourer', {name: 'Ammo Devourer', power: 'Plasma Sentry Projectile', type: 'Projectile'}],
-    ['EZ Robot Launcher XT1', {name: 'EZ Robot Launcher XT1', power: 'Plasma Sentry Blast', type: 'Blast'}],
-    ['Volt Cannon', {name: 'Volt Cannon', power: 'Plasma Sentry Electric', type: 'Electric'}],
-    ['Bomb Launcher QT22', {name: 'Bomb Launcher QT22', power: 'Plasma Sentry Bomb', type: 'Bomb'}],
+    ['Ammo Devourer', {name: 'Ammo Devourer', power: 'Plasma Sentry Projectile', type: 'Projectile', debuffs: ['Fragility'], traits: ['Cunning']}],
+    ['EZ Robot Launcher XT1', {name: 'EZ Robot Launcher XT1', power: 'Plasma Sentry Blast', type: 'Blast', debuffs: ['Shattered'], traits: ['Cunning']}],
+    ['Volt Cannon', {name: 'Volt Cannon', power: 'Plasma Sentry Electric', type: 'Electric', debuffs: ['Dazed'], traits: ['Cunning']}],
+    ['Bomb Launcher QT22', {name: 'Bomb Launcher QT22', power: 'Plasma Sentry Bomb', type: 'Bomb', debuffs: ['Disoriented'], traits: ['Cunning']}],
     
     ['Song of the Sirens', {name: 'Song of the Sirens', power: 'Loyal Servants Ice', type: 'Ice', debuffs: ['Slow'], traits: ['Cunning']}],
     ['Chant of the Claws', {name: 'Chant of the Claws', power: 'Loyal Servants Thrust', type: 'Thrust', debuffs: ['Bleed'], traits: ['Cunning']}],
