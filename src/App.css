@@ -112,3 +112,8 @@ label {
   font-size: 14pt;
   margin-left: 10px;
 }
+.weapons:hover {
+  outline: 2px solid greenyellow;
+  cursor: pointer;
+  border-radius: 20px;
+}

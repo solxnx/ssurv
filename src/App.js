@@ -19,6 +19,7 @@ const store = observable({
   runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false, DevastatingBlow: false},
   icons: {debuffs: true, buffs: true, traits: false, types: false},
   filter: 'All',
+  weaponFilter: '',
   titanFilter: 'All',
   mastery: ['None', 'Arcane', 'Blast', 'Bomb', 'Chaos', 'Earth', 'Electric', 'Fire', 'Holy', 'Ice', 'Nature', 'Projectile', 'Shadow', 'Slam', 'Swing', 'Thrust'],
   masteryFilter: 'None',
@@ -27,6 +28,18 @@ const store = observable({
   },
   changeFilter (val)  {
     this.filter = val;
+    if (this.weaponFilter !== '') {
+      document.getElementById(store.weaponFilter.replaceAll(' ', '')).style.removeProperty("outline");
+      this.weaponFilter = '';
+    }
+  },
+  changeWeapon (val, idW)  {
+    if (this.weaponFilter !== val && this.mode === 'void') {
+      document.getElementById(idW).style.outline = "2px solid greenyellow";
+      document.getElementById(idW).style.borderRadius = "20px";
+      if (this.weaponFilter !== '') document.getElementById(store.weaponFilter.replaceAll(' ', '')).style.removeProperty("outline");
+      this.weaponFilter = val;
+    } 
   },
   changeTitanFilter (val) {
     this.titanFilter = val;
@@ -35,6 +48,10 @@ const store = observable({
     this.reset();
     if (this.runes['SingularFocus'] === true) this.runes['SingularFocus'] = false;
     this.mode = val;
+    if (this.weaponFilter !== '') {
+      document.getElementById(store.weaponFilter.replaceAll(' ', '')).style.removeProperty("outline");
+      this.weaponFilter = '';
+    }
   },
   showIcons (val)  {
     this.icons[val] = !this.icons[val];
@@ -196,7 +213,7 @@ function TitanSkills ({arr}) {
   )
 }
 
-function Stage ({num}) {
+function Stage ({num, weapon}) {
   return (
     <>
       {(num !== 5 && store.mode === "cathedral") && <>
@@ -211,6 +228,33 @@ function Stage ({num}) {
       {store.mode === "void" && 
         <>
           <div className='title'>Build ({store.pool.filter((e) => e.stage === num).length} / {store.limit})</div>
+          {store.filter !== "All" && <img width="70px" height="70px" style={{margin: "5px"}} src={`/img/heroes/${store.filter}.webp`} alt="no"/>}
+          {weapon !== '' &&
+          <div style={{display: 'flex', alignItems: 'center', margin: "10px"}}>
+            <img style={{zoom: '30%'}} src={`/img/weapons/${store.filter}/${allAP.get(weapon).name.replaceAll(' ', '')}.webp`} alt='' />
+            <img src={'/img/arrow.png'} alt='' />
+            <div style={{display: "flex", alignItems: "center"}}>
+              <img style={{zoom: '30%'}} src={`/img/weapons/${store.filter}/${allAP.get(weapon).power.replaceAll(' ', '')}.webp`} alt='' />
+              {(store.icons['debuffs'] && allAP.get(weapon).hasOwnProperty('debuffs')) &&
+                <div className='buffDiv'>
+                  {allAP.get(weapon).debuffs.map((b, ix) => {
+                    return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+                  })}          
+                </div>}
+              {(store.icons['buffs'] && allAP.get(weapon).hasOwnProperty('buffs')) &&
+                <div className='buffDiv'>
+                  {allAP.get(weapon).buffs.map((b, ix) => {
+                    return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+                  })}          
+                </div>}
+              {(store.icons['traits'] && allAP.get(weapon).hasOwnProperty('traits')) &&
+                <div className='buffDiv' style={{marginTop: "-3px"}}>
+                  {allAP.get(weapon).traits.map((b, ix) => {
+                    return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+                  })}
+                </div>}
+            </div>
+          </div>}
           {store.runes['SingularFocus'] && <div style={{color: "pink", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Multipicking!</div>}
           {store.runes['DevastatingBlow'] && <div style={{color: "orange", textAlign: "center", fontSize: "15pt", margin: "2px"}}>All skills have Devastating</div>}
           {store.runes['ImprovedRepetory'] && <div style={{color: "red", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Improved Repetory: -15% damage</div>}
@@ -279,17 +323,15 @@ function Icons ({name, check})  {
     </label>
   )
 }
-/* END COMPONENTS BLOCK */
-
 
 function WeaponList ({hero})  {
   return (
     allHeroes.get(hero).weapons.map((i, idx) => {
       const getWeapon = allAP.get(i);
       return (
-        <div key={idx} style={{display: 'flex', alignItems: 'center'}}>
-          <div><img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.name.replaceAll(' ', '')}.webp`} alt='' /></div>
-          <div><img src={'/img/arrow.png'} alt='' /></div>
+        <div key={idx} id={getWeapon.name.replaceAll(' ', '')} className='weapons' style={{display: 'flex', alignItems: 'center', marginBottom: "3px"}} onClick={(e) => store.changeWeapon(i, e.currentTarget.id)}>
+          <img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.name.replaceAll(' ', '')}.webp`} alt='' />
+          <img src={'/img/arrow.png'} alt='' />
           <div style={{display: "flex", alignItems: "center"}}>
             <img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.power.replaceAll(' ', '')}.webp`} alt='' />
             {(store.icons['debuffs'] && getWeapon.hasOwnProperty('debuffs')) &&
@@ -316,6 +358,8 @@ function WeaponList ({hero})  {
     })
   )
 }
+
+/* END COMPONENTS BLOCK */
 
 function App() {
 
@@ -352,7 +396,7 @@ function App() {
   return (
     <>
     <div style={{position: 'absolute', fontSize: '10pt'}}>Version 1.0</div>
-    <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields Build Planner by Solxnx</div>
+    <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields / Titan Hunt Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
           <div className='cList'>{charactersList}</div>
@@ -406,7 +450,7 @@ function App() {
               <input name='mode' type="radio" value="cathedral" checked={store.mode === "cathedral" ? true : false} onChange={(e) => store.changeMode(e.target.value)} /><span>Unholy Cathedral</span>
             </label>
             <label className='iconsLabel'>
-              <input name='mode' type="radio" value="void" checked={store.mode === "void" ? true : false} onChange={(e) => store.changeMode(e.target.value)} /><span>Void Fields</span>
+              <input name='mode' type="radio" value="void" checked={store.mode === "void" ? true : false} onChange={(e) => store.changeMode(e.target.value)} /><span>Void Fields / Titan Hunt</span>
             </label>
           </div>
           {store.mode === "cathedral" 
@@ -417,7 +461,7 @@ function App() {
               <Stage num={4} />
               <Stage num={5} />
             </>
-          : <><Stage num={1} /></>}
+          : <><Stage num={1} weapon={store.weaponFilter} /></>}
           {(store.pool.length > 0) && 
           <div>
             <Button style={{marginTop: "10px"}} color="error" onClick={() => store.reset()} variant='contained'>RESET BUILD</Button>
