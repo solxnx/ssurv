@@ -9,8 +9,6 @@ body {
 }
 .parent {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   align-content: center;
   align-items: flex-start;
 }
@@ -43,7 +41,6 @@ label {
 }
 .rList, .cList, .tList, .stages, .items  {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -78,8 +75,6 @@ label {
 }
 .buffDiv  {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: center;
   margin-top: 5px;
   zoom: 45%;

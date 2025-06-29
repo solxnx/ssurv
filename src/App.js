@@ -17,7 +17,7 @@ const store = observable({
   generalistCount: [0, 0, 0, 0],
   synchronyCount: [0, 0, 0, 0],
   runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false, DevastatingBlow: false},
-  icons: {debuffs: true, buffs: true, traits: false, types: false},
+  icons: {debuffs: true, buffs: true, traits: false, debuffDep: false, buffDep: false, types: false},
   filter: 'All',
   weaponFilter: '',
   titanFilter: 'All',
@@ -55,6 +55,8 @@ const store = observable({
   },
   showIcons (val)  {
     this.icons[val] = !this.icons[val];
+    if (val === 'Buff Dependencies') this.icons['buffDep'] = !this.icons['buffDep'];
+    if (val === 'Debuff Dependencies') this.icons['debuffDep'] = !this.icons['debuffDep'];
   },
   runeSwitch (val) {
     this.runes[val] = !this.runes[val];
@@ -134,6 +136,43 @@ const store = observable({
 /* END MobX BLOCK */ 
 
 /* START COMPONENTS BLOCK */
+function SmallIcons ({arr})  {
+  return (
+    <>
+      {(store.icons['debuffs'] && arr.hasOwnProperty('debuffs')) &&
+      <div className='buffDiv'>
+        {arr.debuffs.map((b, ix) => {
+          return <img key={ix} style={{ outlineOffset: "-4px", outline: "5px solid crimson", borderRadius: "50px"}} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+        })}
+      </div>}
+      {(store.icons['buffs'] && arr.hasOwnProperty('buffs')) &&
+      <div className='buffDiv'>
+        {arr.buffs.map((b, ix) => {
+          return <img key={ix} style={{outlineOffset: "-4px", outline: "5px solid greenyellow", borderRadius: "50px"}} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+        })}
+      </div>}
+      {(store.icons['traits'] && arr.hasOwnProperty('traits')) &&
+      <div className='buffDiv'>
+        {arr.traits.map((b, ix) => {
+          return <img key={ix} style={{outlineOffset: "-5px", outline: "5px solid orange", borderRadius: "50px"}} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+        })}
+      </div>}
+      {(store.icons['debuffDep'] && arr.hasOwnProperty('debuffDep')) &&
+      <div className='buffDiv'>
+        {arr.debuffDep.map((b, ix) => {
+          return <img key={ix} style={{outlineOffset: "-4px", outline: "5px solid aqua", borderRadius: "50px"}} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
+        })}
+      </div>}
+      {(store.icons['buffDep'] && arr.hasOwnProperty('buffDep')) &&
+      <div className='buffDiv'>
+        {arr.buffDep.map((b, ix) => {
+          return <img key={ix} style={{outlineOffset: "-4px", outline: "5px solid violet", borderRadius: "50px"}} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+        })}
+      </div>}
+    </>
+  )
+}
+
 function Skills ({arr}) {
   if (arr === "mastery") {
     arr = [];
@@ -159,24 +198,7 @@ function Skills ({arr}) {
             </div>}
             </Button>
           </Tooltip>
-          {(store.icons['debuffs'] && getSkill.hasOwnProperty('debuffs')) &&
-          <div className='buffDiv'>
-            {getSkill.debuffs.map((b, ix) => {
-              return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-            })}
-          </div>}
-          {(store.icons['buffs'] && getSkill.hasOwnProperty('buffs')) &&
-          <div className='buffDiv'>
-            {getSkill.buffs.map((b, ix) => {
-              return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-            })}
-          </div>}
-          {(store.icons['traits'] && getSkill.hasOwnProperty('traits')) &&
-          <div className='buffDiv' style={{marginTop: "-3px"}}>
-            {getSkill.traits.map((b, ix) => {
-              return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-            })}
-          </div>}
+          <SmallIcons arr={getSkill} />
         </div>
       )
     })
@@ -189,10 +211,10 @@ function TitanSkills ({arr}) {
       const getTitanSkill = titanSkills.get(i);
       return (
         <div key={idx} style={{textAlign: "center", marginRight: "30px", marginBottom: "15px"}}>
-            <Tooltip placement="top" title={<span className="tooltipInfo">{i}<br />{getTitanSkill.condition && "Condition: " + getTitanSkill.condition}</span>} followCursor>
-              <img style={{borderRadius: "60px", outline: getTitanSkill.condition && "2px solid red"}} width="80px" height="80px" src={`/img/titanSkills/${i.replaceAll(' ', '')}.webp`} alt="no"/>
-            </Tooltip>
-            <div>
+          <Tooltip placement="top" title={<span className="tooltipInfo">{i}<br />{getTitanSkill.condition && "Condition: " + getTitanSkill.condition}</span>} followCursor>
+            <img style={{borderRadius: "60px", outline: getTitanSkill.condition && "2px solid red"}} width="80px" height="80px" src={`/img/titanSkills/${i.replaceAll(' ', '')}.webp`} alt="no"/>
+          </Tooltip>
+          <div>
             {getTitanSkill.debuffs && 
               getTitanSkill.debuffs.map((b, ix) => {
                 return <img key={ix} width="30px" height="30px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
@@ -235,24 +257,7 @@ function Stage ({num, weapon}) {
             <img src={'/img/arrow.png'} alt='' />
             <div style={{display: "flex", alignItems: "center"}}>
               <img style={{zoom: '30%'}} src={`/img/weapons/${store.filter}/${allAP.get(weapon).power.replaceAll(' ', '')}.webp`} alt='' />
-              {(store.icons['debuffs'] && allAP.get(weapon).hasOwnProperty('debuffs')) &&
-                <div className='buffDiv'>
-                  {allAP.get(weapon).debuffs.map((b, ix) => {
-                    return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-                  })}          
-                </div>}
-              {(store.icons['buffs'] && allAP.get(weapon).hasOwnProperty('buffs')) &&
-                <div className='buffDiv'>
-                  {allAP.get(weapon).buffs.map((b, ix) => {
-                    return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-                  })}          
-                </div>}
-              {(store.icons['traits'] && allAP.get(weapon).hasOwnProperty('traits')) &&
-                <div className='buffDiv' style={{marginTop: "-3px"}}>
-                  {allAP.get(weapon).traits.map((b, ix) => {
-                    return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-                  })}
-                </div>}
+              <SmallIcons arr={allAP.get(weapon)} />
             </div>
           </div>}
           {store.runes['SingularFocus'] && <div style={{color: "pink", textAlign: "center", fontSize: "15pt", margin: "2px"}}>Multipicking!</div>}
@@ -278,24 +283,7 @@ function Stage ({num, weapon}) {
                 </div>}
                 </Button>
               </Tooltip>
-              {(store.icons['debuffs'] && i.hasOwnProperty('debuffs')) &&
-              <div className='buffDiv'>
-                {i.debuffs.map((b, ix) => {
-                  return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-                })}          
-              </div>}
-              {(store.icons['buffs'] && i.hasOwnProperty('buffs')) &&
-              <div className='buffDiv'>
-                {i.buffs.map((b, ix) => {
-                  return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-                })}          
-              </div>}
-              {(store.icons['traits'] && i.hasOwnProperty('traits')) &&
-              <div className='buffDiv' style={{marginTop: "-3px"}}>
-                {i.traits.map((b, ix) => {
-                  return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-                })}
-              </div>}
+              <SmallIcons arr={i} />
             </div>
           )
         })}
@@ -334,24 +322,7 @@ function WeaponList ({hero})  {
           <img src={'/img/arrow.png'} alt='' />
           <div style={{display: "flex", alignItems: "center"}}>
             <img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.power.replaceAll(' ', '')}.webp`} alt='' />
-            {(store.icons['debuffs'] && getWeapon.hasOwnProperty('debuffs')) &&
-              <div className='buffDiv'>
-                {getWeapon.debuffs.map((b, ix) => {
-                  return <img key={ix} width="60px" height="60px" src={`/img/debuffs/${b}.png`} title={b} alt="no"/>
-                })}          
-              </div>}
-            {(store.icons['buffs'] && getWeapon.hasOwnProperty('buffs')) &&
-              <div className='buffDiv'>
-                {getWeapon.buffs.map((b, ix) => {
-                  return <img key={ix} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
-                })}          
-              </div>}
-            {(store.icons['traits'] && getWeapon.hasOwnProperty('traits')) &&
-              <div className='buffDiv' style={{marginTop: "-3px"}}>
-                {getWeapon.traits.map((b, ix) => {
-                  return <img key={ix} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
-                })}
-              </div>}
+            <SmallIcons arr={getWeapon} />
           </div>
         </div>
       )
@@ -433,6 +404,8 @@ function App() {
                     <Icons name={'debuffs'} check={store.icons['debuffs']} />
                     <Icons name={'buffs'} check={store.icons['buffs']} />
                     <Icons name={'traits'} check={store.icons['traits']} />
+                    <Icons name={'Debuff Dependencies'} check={store.icons['debuffDep']} />
+                    <Icons name={'Buff Dependencies'} check={store.icons['buffDep']} />
                     <Icons name={'types'} check={store.icons['types']} />
                   </div>
                   <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>
