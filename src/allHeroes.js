@@ -1,11 +1,12 @@
 export const allHeroes = new Map ([
     ['barbarian', {
-        weapons: ['Barbaric Cleavers', 'Skullbreaker', 'Tempest Battle Axes', 'Bloodgods Legacy'],
+        weapons: ['Barbaric Cleavers', 'Skullbreaker', 'Tempest Battle Axes', 'Bloodgods Legacy', 'Blades Of Damnation'],
         wArray: [
             'Whirlwind', 'Throw Axe', 
             'Shockwave', 'Demolish', 
             'Thundering Slash', 'Thunder Clap', 
-            'Heavy Strike', 'Ground Slam'
+            'Heavy Strike', 'Ground Slam',
+            'Flesh Impale', 'Battle Shout'
         ],
         sArray: [
             'Piercing Shout', 'Savage Strike', 'Scent Of Blood', 'Armor Shatter', 'Bladestorm', 
@@ -18,12 +19,13 @@ export const allHeroes = new Map ([
         ],
     }],
     ['pyromancer', {
-        weapons: ['Pyromancers Firestarter', 'Stormcaller', 'Shard of Chaos', 'Damnatus Spire of Shadows'],
+        weapons: ['Pyromancers Firestarter', 'Stormcaller', 'Shard of Chaos', 'Damnatus Spire of Shadows', 'Emberweaver'],
         wArray: [
             'Fire Slash', 'Fire Walk', 
             'Lightning Field', 'Overcharged Blast', 
             'Chaotic Inferno', 'Chaos Eruption', 
-            'Dark Swarm', 'Gathering Shadows'
+            'Dark Swarm', 'Gathering Shadows',
+            'Runic Ember', 'Arcane Storm'
         ],
         sArray: [
             'Conflagrate', 'Fire Wall', 'Meteor Shower', 'Arcane Beam', 'Arcane Disc', 
@@ -35,12 +37,13 @@ export const allHeroes = new Map ([
         ],
     }], 
     ['houndmaster', {
-        weapons: ['Rusted Blaster', 'Riflemens Vengeance', 'Toxin Cannon', 'Dragonfire Scattergun'],
+        weapons: ['Rusted Blaster', 'Riflemens Vengeance', 'Toxin Cannon', 'Dragonfire Scattergun', 'Vulcans Howl'],
         wArray: [
             'Mortar Shot', 'Bombardment',
             'Buckshot', 'Power Blast',
             'Pesticide Burst', 'Threshing Blast', 
-            'Bolt Barrage', 'Cyclone Shot'
+            'Bolt Barrage', 'Cyclone Shot',
+            'Blazehound Shot', 'Lava Howl'
         ],
         sArray: [
             'Bear Trap', 'Shrapnel Mine', 'Weakening Grenade', 'Acid Rain', 'Bladed Chakram',
@@ -53,12 +56,13 @@ export const allHeroes = new Map ([
         ],
     }],
     ['spellblade', {
-        weapons: ['Silver Spellblade', 'Arcane Scimitar', 'Icelords Blade', 'Scorching Edge'],
+        weapons: ['Silver Spellblade', 'Arcane Scimitar', 'Icelords Blade', 'Scorching Edge', 'Runeforged Greatsword'],
         wArray: [
             'Arcane Slash',  'Arcane Overload', 
             'Slash', 'Uppercut',
             'Arctic Assault', 'Frozen Blade',
-            'Firestorm', 'Fiery Blades'
+            'Firestorm', 'Fiery Blades',
+            'Piercing Tempest', 'Seeker Blades'
         ],
         sArray: [
             'Arcane Assault', 'Arcane Blade', 'Arcane Rift', 'Arcane Beam', 'Arcane Disc', 

@@ -67,7 +67,7 @@ label {
 .runeLabel > input + img{
   outline: 2px solid red;
   border-radius: 25%;
-  margin: 15px 10px 0px 0px;
+  margin: 10px 10px 0px 0px;
   padding: 1px;
 }
 .runeLabel > input:checked + img{

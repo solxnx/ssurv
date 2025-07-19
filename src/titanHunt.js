@@ -11,6 +11,10 @@ export const titans = new Map ([
     ['Mhyzahet', {
         skills: ['Blood Parasites', 'Crushing Pincer', 'Heart of Sand', 'Queens Stinger', 'Sandstorm', 'Sandwalker', 'Scorpid Carapace', 'Violent Toxins'],
     }],
+    ['Midorahk', {
+        skills: ['Golden Tremor', 'Goldrush', 'Radiant Cracks', 'Searing Ash', 'Skittering Perception', 'Spiked Carapace', 'Sunpiercer', 'Toxic Proliferation'],
+    }],
+    
 ]);
 
 export const titanSkills = new Map ([
@@ -18,26 +22,26 @@ export const titanSkills = new Map ([
     ['Fangs of Doom', {debuffs: ['Doom'], condition: 'Doom'}],
     ['Frenzied Bites', {buffs: ['Haste']}],
     ['Huntress Snare', {debuffs: ['Slow'], condition: 'Aptitude'}],
-    ['Potent Toxin', {debuffs: ['Dazed'], condition: '2x Poison'}],
+    ['Potent Toxin', {debuffs: ['Dazed'], condition: 'Poison'}],
     ['Spider Senses', {text: 'Multicast', condition: 'Thrust'}],
     ['Ultimate Assassin', {text: ['Cast freq'], condition: 'Ambush'}],
-    ['Web of Confusion', {debuffs: ['Disoriented'], condition: '2x Disarray'}],
+    ['Web of Confusion', {debuffs: ['Disoriented'], condition: 'Disarray'}],
 
     ['Combat Expertise', {buffs: ['Prowess'], condition: 'Prowess'}],
     ['Emperors Blessing', {buffs: ['Purity'], condition: 'Purity'}],
     ['Gladiatorial Instincts', {text: 'Dmg, Cast freq'}],
-    ['Purifying Sands', {buffs: ['Purity'], condition: '2x Resilience'}],
+    ['Purifying Sands', {buffs: ['Purity'], condition: 'Resilience'}],
     ['Sandscale Wrath', {text: 'Burn explosion', condition: 'Burn'}],
     ['Savagery', {traits: ['Brutal'], condition: 'Brutal'}],
     ['Seasoned Gladiator', {text: 'Crit dmg nearby'}],
     ['Unstoppable Force', {debuffs: ['Shattered']}],
 
     ['Chaos Stabilizer', {buffs: ['Purity'], condition: 'Chaotic'}],
-    ['Demolition Expert', {traits: ['Devastating'], condition: 'Devastating skill/rune'}],
-    ['Excavators Strength', {buffs: ['Prowess'], condition: "2x Shattered"}],
+    ['Demolition Expert', {traits: ['Devastating'], condition: 'Devastating'}],
+    ['Excavators Strength', {buffs: ['Prowess'], condition: "Shattered"}],
     ['Hasty Reload', {buffs: ['Ammunition'], condition: 'Ammunition'}],
-    ['Kobold Fortitude', {text: 'Heath, area'}],
-    ['Rust Corrosion', {debuffs: ['Brittle'], condition: '2x Slow'}],
+    ['Kobold Fortitude', {text: 'Heath, Area'}],
+    ['Rust Corrosion', {debuffs: ['Brittle'], condition: 'Slow'}],
     ['Static Storm', {buffs: ['Electrified']}],
     ['Tinkers Elegance', {buffs: ['Finesse'], condition: 'Radiance'}],
 
@@ -48,5 +52,14 @@ export const titanSkills = new Map ([
     ['Sandstorm', {debuffs: ['Brittle'], condition: 'Colossal'}],
     ['Sandwalker', {buffs: ['Form']}],
     ['Scorpid Carapace', {text: 'Armor, Block'}],
-    ['Violent Toxins', {text: 'Poison tick rate', condition: '3x Poison'}],
+    ['Violent Toxins', {text: 'Poison tick rate', condition: 'Poison'}],
+
+    ['Golden Tremor', {buffs: ['Colossal'], condition: 'Brittle'}],
+    ['Goldrush', {text: 'Crit dmg, Cast freq'}],
+    ['Radiant Cracks', {buffs: ['Radiance'], condition: 'Fragility'}],
+    ['Searing Ash', {text: 'Crit per burn stacks', condition: 'Burn'}],
+    ['Skittering Perception', {buffs: ['Aptitude']}],
+    ['Spiked Carapace', {buffs: ['Resilience'], condition: 'Resilience'}],
+    ['Sunpiercer', {traits: ['Piercing'], condition: 'Piercing'}],
+    ['Toxic Proliferation', {text: 'Poison spread', condition: 'Poison'}],
 ]);

@@ -9,6 +9,8 @@ export const allSkills = new Map ([
     ['Thunder Clap', {name: 'Thunder Clap', buffs: ['Electrified', 'Prowess'], traits: ['Brutal'], types: ['Electric', 'Slam'], allTypes: ['Electric', 'Slam', 'Frontal', 'Physical']}],
     ['Heavy Strike', {name: 'Heavy Strike', buffs: ['Prowess', 'Resilience'], debuffs: ['Bleed'], types: ['Slam'], allTypes: ['Slam', 'Frontal', 'Physical']}],
     ['Ground Slam', {name: 'Ground Slam', buffs: ['Prowess'], debuffDep: ['Bleed'], types: ['Slam'], allTypes: ['Slam', 'Area', 'Burst', 'Physical']}],
+    ['Flesh Impale', {name: 'Flesh Impale', buffs: ['Form'], debuffs: ['Exposed'], types: ['Thrust'], allTypes: ['Thrust', 'Frontal', 'Physical']}],
+    ['Battle Shout', {name: 'Battle Shout', buffs: ['Form'], debuffDep: ['Exposed'], types: ['Thrust'], allTypes: ['Thrust', 'Area', 'Burst', 'Physical']}],
 
     ['Fire Slash', {name: 'Fire Slash', buffs: ['Haste'], debuffs: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Missile', 'Frontal', 'Magical']}],
     ['Fire Walk', {name: 'Fire Walk', debuffs: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Lasting', 'Area', 'Magical']}],
@@ -18,6 +20,8 @@ export const allSkills = new Map ([
     ['Chaos Eruption', {name: 'Chaos Eruption', traits: ['Chaotic'], debuffDep: ['Burn'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Frontal', 'Burst', 'Physical']}],
     ['Dark Swarm', {name: 'Dark Swarm', debuffs: ['Disoriented', 'Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Nissile', 'Frontal', 'Magical']}],
     ['Gathering Shadows', {name: 'Gathering Shadows', debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Area', 'Magical']}],
+    ['Runic Ember', {name: 'Runic Ember', buffs: ['Radiance'], debuffs: ['Fragility'], debuffDep: ['Fragility'], types: ['Arcane'], allTypes: ['Arcane', 'Missile', 'Frontal', 'Magical']}],
+    ['Arcane Storm', {name: 'Arcane Storm', buffs: ['Radiance'], debuffs: ['Fragility'], types: ['Arcane'], allTypes: ['Arcane', 'Lasting', 'Area', 'Magical']}],
 
     ['Mortar Shot', {name: 'Mortar Shot', debuffs: ['Bleed'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Frontal', 'Burst', 'Physical']}],
     ['Bombardment', {name: 'Bombardment', debuffs: ['Bleed'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Burst', 'Physical']}],
@@ -27,6 +31,8 @@ export const allSkills = new Map ([
     ['Threshing Blast', {name: 'Threshing Blast', buffs: ['Ammunition'], debuffDep: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Frontal', 'Burst', 'Physical']}],
     ['Bolt Barrage', {name: 'Bolt Barrage', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Burst', 'Physical']}],
     ['Cyclone Shot', {name: 'Cyclone Shot', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Physical']}],
+    ['Blazehound Shot', {name: 'Blazehound Shot', buffs: ['Haste'], traits: ['Impactful'], debuffs: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Area', 'Chain', 'Physical']}],
+    ['Lava Howl', {name: 'Lava Howl', debuffs: ['Burn'], debuffDep: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Lasting', 'Area', 'Physical']}],
 
     ['Arcane Slash', {name: 'Arcane Slash', buffs: ['Finesse', 'Radiance'], types: ['Arcane', 'Swing'], allTypes: ['Arcane', 'Swing', 'Frontal', 'Magical', 'Physical']}],
     ['Arcane Overload', {name: 'Arcane Overload', buffs: ['Radiance'], types: ['Arcane', 'Swing'], allTypes: ['Arcane', 'Swing', 'Area', 'Magical', 'Physical']}],
@@ -36,6 +42,8 @@ export const allSkills = new Map ([
     ['Frozen Blade', {name: 'Frozen Blade', buffs: ['IcyVeins'], traits: ['Devastating'], types: ['Ice', 'Swing'], allTypes: ['Ice', 'Swing', 'Missile', 'Frontal', 'Physical']}],
     ['Firestorm', {name: 'Firestorm', buffs: ['Haste'], debuffs: ['Burn'], types: ['Fire', 'Swing'], allTypes: ['Fire', 'Swing', 'Lasting', 'Magical', 'Physical']}],
     ['Fiery Blades', {name: 'Fiery Blades', traits: ['Cunning'], debuffDep: ['Burn'], debuffs: ['Burn'], types: ['Fire', 'Swing'], allTypes: ['Fire', 'Swing', 'Summon', 'Magical', 'Physical']}],
+    ['Piercing Tempest', {name: 'Piercing Tempest', buffs: ['Form'], traits: ['Devastating'], types: ['Thrust'], allTypes: ['Thrust', 'Area', 'Frontal', 'Physical']}],
+    ['Seeker Blades', {name: 'Seeker Blades', buffs: ['Form'], traits: ['Piercing'], debuffs: ['Exposed'], types: ['Thrust'], allTypes: ['Thrust', 'Missile', 'Frontal', 'Magical']}],
 
     ['Arcane Missiles', {name: 'Arcane Missiles', buffs: ['Radiance'], debuffs: ['Brittle'], types: ['Arcane'], allTypes: ['Arcane', 'Missile', 'Burst', 'Magical']}],
     ['Arcane Explosion', {name: 'Arcane Explosion', buffs: ['Radiance'], debuffs: ['Brittle'], debuffDep: ['Brittle'], types: ['Arcane'], allTypes: ['Arcane', 'Area', 'Burst', 'Magical']}],
@@ -253,7 +261,7 @@ export const allSkills = new Map ([
     ['Shadow Bolt', {name: 'Shadow Bolt', buffs: ['Aptitude'], debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Magical', 'Physical']}],
     ['Shadow orb', {name: 'Shadow orb', debuffs: ['Doom', 'Disoriented'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Lasting', 'Frontal', 'Magical']}],
     ['Shadow Spikes', {name: 'Shadow Spikes', debuffDep: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Missile', 'Burst', 'Physical']}],
-    ['Summon Chaos Golem', {name: 'Summon Chaos Golem', traits: ['Taunt'], debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Summon', 'Magical', 'Physical']}],
+    ['Summon Chaos Golem', {name: 'Summon Chaos Golem', traits: ['Taunt'], debuffs: ['Disarray', 'Stun'], types: ['Chaos'], allTypes: ['Chaos', 'Summon', 'Magical', 'Physical']}],
     ['Void', {name: 'Void', debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Lasting', 'Area', 'Magical']}],
     ['Bear Trap', {name: 'Bear Trap', debuffs: ['Bleed', 'Weakness'], types: ['Bomb'], allTypes: ['Bomb', 'Lasting', 'Static', 'Physical']}],
     ['Shrapnel Mine', {name: 'Shrapnel Mine', debuffs: ['Bleed'], types: ['Bomb'], allTypes: ['Bomb', 'Lasting', 'Static', 'Physical']}],

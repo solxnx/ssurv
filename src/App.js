@@ -317,11 +317,11 @@ function WeaponList ({hero})  {
     allHeroes.get(hero).weapons.map((i, idx) => {
       const getWeapon = allAP.get(i);
       return (
-        <div key={idx} id={getWeapon.name.replaceAll(' ', '')} className='weapons' style={{display: 'flex', alignItems: 'center', marginBottom: "3px"}} onClick={(e) => store.changeWeapon(i, e.currentTarget.id)}>
-          <img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.name.replaceAll(' ', '')}.webp`} alt='' />
+        <div key={idx} id={getWeapon.name.replaceAll(' ', '')} className='weapons' style={{display: 'flex', alignItems: 'center', marginBottom: "2px"}} onClick={(e) => store.changeWeapon(i, e.currentTarget.id)}>
+          <img style={{zoom: '28%'}} src={`/img/weapons/${hero}/${getWeapon.name.replaceAll(' ', '')}.webp`} alt='' />
           <img src={'/img/arrow.png'} alt='' />
           <div style={{display: "flex", alignItems: "center"}}>
-            <img style={{zoom: '30%'}} src={`/img/weapons/${hero}/${getWeapon.power.replaceAll(' ', '')}.webp`} alt='' />
+            <img style={{zoom: '28%'}} src={`/img/weapons/${hero}/${getWeapon.power.replaceAll(' ', '')}.webp`} alt='' />
             <SmallIcons arr={getWeapon} />
           </div>
         </div>
@@ -366,7 +366,7 @@ function App() {
 
   return (
     <>
-    <div style={{position: 'absolute', fontSize: '10pt'}}>Version 1.0</div>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>Version 1.1</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields / Titan Hunt Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
@@ -394,7 +394,7 @@ function App() {
                   </div>
                 </div>
               </>}
-              <div align="center" className='title' style={{marginTop: "20px"}}>Titans</div>
+              <div align="center" className='title' style={{marginTop: "5px"}}>Titans</div>
               <div className='tList'>{titansList}</div>
             </div>
             <div className='center'>
