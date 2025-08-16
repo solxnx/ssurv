@@ -17,7 +17,7 @@ const store = observable({
   generalistCount: [0, 0, 0, 0],
   synchronyCount: [0, 0, 0, 0],
   runes: {ImprovedRepetory: false, FocusedMind: false, Generalist: false, Synchrony: false, SingularFocus: false, DevastatingBlow: false},
-  icons: {debuffs: true, buffs: true, traits: false, debuffDep: false, buffDep: false, types: false},
+  icons: {debuffs: true, buffs: true, traits: false, debuffDep: false, buffDep: false, statDep: false, types: false},
   filter: 'All',
   weaponFilter: '',
   titanFilter: 'All',
@@ -57,6 +57,7 @@ const store = observable({
     this.icons[val] = !this.icons[val];
     if (val === 'Buff Dependencies') this.icons['buffDep'] = !this.icons['buffDep'];
     if (val === 'Debuff Dependencies') this.icons['debuffDep'] = !this.icons['debuffDep'];
+    if (val === 'Primary Stat Dependencies') this.icons['statDep'] = !this.icons['statDep'];
   },
   runeSwitch (val) {
     this.runes[val] = !this.runes[val];
@@ -154,7 +155,7 @@ function SmallIcons ({arr})  {
       {(store.icons['traits'] && arr.hasOwnProperty('traits')) &&
       <div className='buffDiv'>
         {arr.traits.map((b, ix) => {
-          return <img key={ix} style={{outlineOffset: "-5px", outline: "5px solid orange", borderRadius: "50px"}} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
+          return <img key={ix} style={{outlineOffset: "-5px", outline: "5px solid darkorange", borderRadius: "50px"}} width="60px" height="60px" src={`/img/traits/${b}.png`} title={b} alt="no"/>
         })}
       </div>}
       {(store.icons['debuffDep'] && arr.hasOwnProperty('debuffDep')) &&
@@ -167,6 +168,12 @@ function SmallIcons ({arr})  {
       <div className='buffDiv'>
         {arr.buffDep.map((b, ix) => {
           return <img key={ix} style={{outlineOffset: "-4px", outline: "5px solid violet", borderRadius: "50px"}} width="60px" height="60px" src={`/img/buffs/${b}.png`} title={b} alt="no"/>
+        })}
+      </div>}
+      {(store.icons['statDep'] && arr.hasOwnProperty('statDep')) &&
+      <div className='buffDiv'>
+        {arr.statDep.map((b, ix) => {
+          return <img key={ix} style={{outlineOffset: "-4px", outline: "5px solid wheat", borderRadius: "50px"}} width="60px" height="60px" src={`/img/stats/${b}.png`} title={b} alt="no"/>
         })}
       </div>}
     </>
@@ -406,6 +413,7 @@ function App() {
                     <Icons name={'traits'} check={store.icons['traits']} />
                     <Icons name={'Debuff Dependencies'} check={store.icons['debuffDep']} />
                     <Icons name={'Buff Dependencies'} check={store.icons['buffDep']} />
+                    <Icons name={'Primary Stat Dependencies'} check={store.icons['statDep']} />
                     <Icons name={'types'} check={store.icons['types']} />
                   </div>
                   <div className="items"><Skills arr={allHeroes.get(store.filter).wArray} /></div>

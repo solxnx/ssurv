@@ -65,7 +65,7 @@ export const titanSkills = new Map ([
     ['Sunpiercer', {traits: ['Piercing'], condition: 'Piercing'}],
     ['Toxic Proliferation', {text: 'Poison spread', condition: 'Poison'}],
 
-    ['Putrid Strength', {text: 'Health, dmg mod'}],
+    ['Putrid Strength', {text: 'Health, dmg'}],
     ['Distance Decay', {text: 'Crit chance'}],
     ['Exposed Spores', {debuffs: ['Exposed'], condition: 'Bleed'}],
     ['Psychedelic Precision', {buffs: ['Aptitude'], condition: 'Aptitude'}],
