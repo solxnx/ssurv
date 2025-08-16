@@ -27,21 +27,25 @@ export const allAP = new Map ([
     ['Ignis Greatstaff of Despair', {name: 'Ignis Greatstaff of Despair', power: 'Mana Beam Fire', type: 'Fire', debuffs:['Burn']}],
     ['Benedictio Staff of Dawn', {name: 'Benedictio Staff of Dawn', power: 'Mana Beam Holy', type: 'Holy', debuffs:['Dazed']}],
     ['Glacies Rod of Eternal Ice', {name: 'Glacies Rod of Eternal Ice', power: 'Mana Beam Ice', type: 'Ice', debuffs:['Slow']}],
+    ['Pandemonium Spire of Chaos', {name: 'Pandemonium Spire of Chaos', power: 'Mana Beam Chaos', type: 'Chaos', debuffs: ['Disarray']}],
 
     ['Huntress Bow', {name: 'Huntress Bow', power: 'Arrow Barrage Projectile', type: 'Projectile', debuffs: ['Fragility']}],
     ['Siege Recurve Bow', {name: 'Siege Recurve Bow', power: 'Arrow Barrage Bomb', type: 'Bomb', debuffs: ['Bleed']}],
     ['Miserys End', {name: 'Miserys End', power: 'Arrow Barrage Shadow', type: 'Shadow', debuffs: ['Doom']}],
     ['Noxious Longbow', {name: 'Noxious Longbow', power: 'Arrow Barrage Nature', type: 'Nature', debuffs: ['Poison']}],
+    ['Soulfrost', {name: 'Soulfrost', power: 'Arrow Barrage Ice', type: 'Ice', debuffs: ['Slow']}],
 
     ['Sacred Warhammer', {name: 'Sacred Warhammer', power: 'Blessed Hammer Holy', type: 'Holy', buffs: ['Purity']}],
     ['Harbinger of Justice', {name: 'Harbinger of Justice', power: 'Blessed Hammer Swing', type: 'Swing', buffs: ['Finesse']}],
     ['Arcane Scepter of Light', {name: 'Arcane Scepter of Light', power: 'Blessed Hammer Arcane', type: 'Arcane', buffs: ['Radiance']}],
     ['Dawnbreakers Mace', {name: 'Dawnbreakers Mace', power: 'Blessed Hammer Slam', type: 'Slam', buffs: ['Prowess']}],
+    ['Golden Lions Crusher', {name: 'Golden Lions Crusher', power: 'Blessed Hammer Electric', type: 'Electric', buffs: ['Electrified']}],
 
     ['Skull of Draxiz', {name: 'Skull of Draxiz', power: 'Affliction Orbs Chaos', type: 'Chaos', debuffs: ['Disarray']}],
     ['Artifact of Corruption', {name: 'Artifact of Corruption', power: 'Affliction Orbs Nature', type: 'Nature', debuffs: ['Poison']}],
     ['Flamewalkers Spire', {name: 'Flamewalkers Spire', power: 'Affliction Orbs Fire', type: 'Fire', debuffs: ['Burn']}],
     ['Azramiels Blessing', {name: 'Azramiels Blessing', power: 'Affliction Orbs Holy', type: 'Holy', debuffs: ['Dazed']}],
+    ['Voidwalkers Echo', {name: 'Voidwalkers Echo', power: 'Affliction Orbs Shadow', type: 'Shadow', debuffs: ['Doom']}],
 
     ['Wild Cleaver', {name: 'Wild Cleaver', power: 'Watchful Hawk Nature', type: 'Nature', debuffs: ['Poison']}],
     ['Natures Fury', {name: 'Natures Fury', power: 'Watchful Hawk Swing', type: 'Swing', debuffs: ['Fragility']}],
@@ -112,4 +116,6 @@ export const allAP = new Map ([
     ['Shadowfang', {name: 'Shadowfang', power: 'Untouchable Shadow', type: 'Shadow', debuffs: ['Doom']}],
     ['Executioners Burden', {name: 'Executioners Burden', power: 'Untouchable Slam', type: 'Slam', debuffs: ['Shattered']}],
     ['Last Ember', {name: 'Last Ember', power: 'Untouchable Fire', type: 'Fire', debuffs: ['Burn']}],
+
+    ['Hephaestus Hammer', {name: 'Hephaestus Hammer', power: 'Hammerfall'}],
 ]);

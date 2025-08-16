@@ -53,6 +53,8 @@ export const allSkills = new Map ([
     ['Celestial Retribution', {name: 'Celestial Retribution', buffs: ['Purity'], debuffDep: ['Exposed'], types: ['Holy'], allTypes: ['Holy', 'Area', 'Burst', 'Magical']}],
     ['Frost Beam', {name: 'Frost Beam', buffs: ['IcyVeins'], debuffDep: ['Slow'], types: ['Ice'], allTypes: ['Ice', 'Lasting', 'Frontal', 'Magical']}],
     ['Ice Shield', {name: 'Ice Shield', debuffs: ['Slow', 'Fragility'], types: ['Ice'], allTypes: ['Ice', 'Lasting', 'Aura', 'Magical']}],
+    ['Fractured Volley', {name: 'Fractured Volley', debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Burst', 'Magical']}],
+    ['Chaotic Swirl', {name: 'Chaotic Swirl', debuffs: ['Disarray'], traits: ['Chaotic'], types: ['Chaos'], allTypes: ['Chaos', 'Area', 'Magical']}],
 
     ['Shoot', {name: 'Shoot', buffs: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Missile', 'Frontal', 'Physical']}],
     ['Rain Of Arrows', {name: 'Rain Of Arrows', buffs: ['Aptitude'], buffDep: ['Aptitude'], types: ['Projectile'], allTypes: ['Projectile', 'Lasting', 'Area', 'Physical']}],
@@ -62,6 +64,8 @@ export const allSkills = new Map ([
     ['Void Trap', {name: 'Void Trap', debuffs: ['Doom', 'Weakness'], types: ['Shadow', 'Bomb'], allTypes: ['Shadow', 'Bomb', 'Lasting', 'Static', 'Physical']}],
     ['Noxious Shot', {name: 'Noxious Shot', buffs: ['Aptitude'], debuffs: ['Poison'], types: ['Nature'], allTypes: ['Nature', 'Missile', 'Frontal', 'Physical']}],
     ['Venomous Volley', {name: 'Venomous Volley', debuffs: ['Poison', 'Weakness'], types: ['Nature'], allTypes: ['Nature', 'Missile', 'Frontal', 'Burst' ,'Physical']}],
+    ['Frozen Salvo', {name: 'Frozen Salvo', debuffs: ['Slow'], debuffDep: ['Slow'], types: ['Ice'], allTypes: ['Ice', 'Area', 'Frontal', 'Physical']}],
+    ['Arctic Shot', {name: 'Arctic Shot', debuffs: ['Slow'], traits: ['Piercing'], types: ['Ice'], allTypes: ['Ice', 'Missile', 'Frontal', 'Physical']}],
 
     ['Blades Of Light', {name: 'Blades Of Light', buffs: ['Purity', 'Prowess'], types: ['Holy', 'Swing'], allTypes: ['Holy', 'Swing', 'Frontal', 'Physical']}],
     ['Holy Fire', {name: 'Holy Fire', buffs: ['Purity'], buffDep: ['Purity'], types: ['Holy'], allTypes: ['Holy', 'Missile', 'Frontal', 'Burst', 'Physical']}],
@@ -71,6 +75,8 @@ export const allSkills = new Map ([
     ['Arcane Mace', {name: 'Arcane Mace', buffs: ['Radiance'], buffDep: ['Radiance'], types: ['Arcane', 'Slam'], allTypes: ['Arcane', 'Slam', 'Area', 'Frontal', 'Magical']}],
     ['Fissure Strike', {name: 'Fissure Strike', buffs: ['Prowess', 'Resilience'], types: ['Slam'], allTypes: ['Slam', 'Missile', 'Burst', 'Physical']}],
     ['Staggering Blow', {name: 'Staggering Blow', buffs: ['Prowess'], buffDep: ['Prowess'], types: ['Slam'], allTypes: ['Slam', 'Frontal', 'Physical']}],
+    ['Hammer of Wrath', {name: 'Hammer of Wrath', buffs: ['Electrified'], debuffs: ['Dazed'], traits: ['Brutal'], types: ['Electric'], allTypes: ['Electric', 'Slam', 'Area', 'Frontal', 'Magical']}],
+    ['Gods Rebuke', {name: 'Gods Rebuke', buffs: ['Electrified'], debuffs: ['Dazed'], debuffDep: ['Dazed'], types: ['Electric'], allTypes: ['Electric', 'Missile', 'Frontal', 'Magical']}],
 
     ['Chaotic Missile', {name: 'Chaotic Missile', traits: ['Chaotic', 'Piercing'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Frontal', 'Magical']}],
     ['Unchained Chaos', {name: 'Unchained Chaos', traits: ['Chaotic'], debuffs: ['Disarray'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Chain', 'Magical']}],
@@ -80,6 +86,8 @@ export const allSkills = new Map ([
     ['Volcano Eruption', {name: 'Volcano Eruption', debuffs: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Static', 'Summon', 'Magical']}],
     ['Ripple Of Light', {name: 'Ripple Of Light', buffs: ['Purity'], traits: ['Brutal'], types: ['Holy'], allTypes: ['Holy', 'Area', 'Burst', 'Magical']}],
     ['Sanctified Orb', {name: 'Sanctified Orb', buffs: ['Purity'], debuffs: ['Dazed'], types: ['Holy'], allTypes: ['Holy', 'Missile', 'Lasting', 'Frontal', 'Magical']}],
+    ['Death and Decay', {name: 'Death and Decay', debuffs: ['Doom'], types: ['Shadow'], allTypes: ['Shadow', 'Lasting', 'Area', 'Magical']}],
+    ['Crushing Darkness', {name: 'Crushing Darkness', debuffs: ['Stun'], debuffDep: ['Doom'], traits: ['Impactful'], types: ['Shadow'], allTypes: ['Shadow', 'Area', 'Burst', 'Magical']}],
 
     ['Venomous Strike', {name: 'Venomous Strike', buffs: ['Finesse'], debuffs: ['Poison'], types: ['Nature', 'Swing'], allTypes: ['Nature', 'Swing', 'Frontal', 'Physical']}],
     ['Plague Viper', {name: 'Plague Viper', traits: ['Cunning'], debuffs: ['Poison', 'Weakness'], types: ['Nature'], allTypes: ['Nature', 'Summon', 'Magical', 'Physical']}],
@@ -206,6 +214,9 @@ export const allSkills = new Map ([
     ['Blade Impale', {name: 'Blade Impale', buffs: ['Resilience'], debuffs: ['Condemned', 'Stun'], types: ['Slam'], allTypes: ['Slam', 'Area', 'Physical']}],
     ['Molten Fang', {name: 'Molten Fang', buffs: ['Haste'], debuffs: ['Condemned', 'Burn'], types: ['Fire'], allTypes: ['Fire', 'Frontal', 'Magical', 'Physical']}],
     ['Ignition Spiral', {name: 'Ignition Spiral', debuffs: ['Condemned'], debuffDep: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Area', 'Magical', 'Physical']}],
+
+    ['Anvil Slam', {name: 'Anvil Slam', buffs: ['Prowess', 'Swiftness'], types: ['Slam'], allTypes: ['Slam', 'Area', 'Frontal', 'Physical']}],
+    ['Blacksmiths Surge', {name: 'Blacksmiths Surge', buffs: ['Electrified'], types: ['Electric'], allTypes: ['Electric', 'Slam', 'Empowering', 'Area', 'Physical']}],
 
     //ALL SKILLS --------------------------------------------------------------------------------------
     ['Piercing Shout', {name: 'Piercing Shout', debuffs: ['Shattered'], types: ['Thrust'], allTypes: ['Thrust', 'Empowering', 'Lasting', 'Area', 'Physical']}],
@@ -361,4 +372,26 @@ export const allSkills = new Map ([
     ['Last Stand', {name: 'Last Stand', buffs: ['Finesse'], debuffs: ['Condemned', 'Fragility'], types: ['Swing'], allTypes: ['Swing', 'Lasting', 'Aura', 'Magical']}],
     ['Ruthlessness', {name: 'Ruthlessness', debuffDep: ['Condemned'], types: ['Shadow'], allTypes: ['Shadow', 'Empowering', 'Lasting', 'Area', 'Physical']}],
     ['Scorching Katana', {name: 'Scorching Katana', debuffs: ['Burn', 'Condemned'], debuffDep: ['Burn'], types: ['Fire'], allTypes: ['Fire', 'Missile', 'Magical', 'Physical']}],
+    ['Arcane Staff', {name: 'Arcane Staff', buffs: ['Radiance'], debuffDep: ['Brittle'], traits: ['Cunning'], types: ['Arcane'], allTypes: ['Arcane', 'Area', 'Burst', 'Summon', 'Magical']}],
+    ['Worn Daggers', {name: 'Worn Daggers', buffs: ['Form', 'Haste'], debuffs: ['Bleed'], traits: ['Ambush', 'Cunning'], types: ['Thrust'], allTypes: ['Thrust', 'Summon', 'Physical']}],
+    ['Barbaric Cleavers', {name: 'Barbaric Cleavers', buffs: ['Bulwark', 'Finesse'], traits: ['Piercing', 'Cunning'], types: ['Swing'], allTypes: ['Swing', 'Area', 'Summon', 'Physical']}],
+    ['Wild Cleaver', {name: 'Wild Cleaver', buffs: ['Finesse'], debuffs: ['Poison', 'Weakness'], traits: ['Cunning'], types: ['Nature'], allTypes: ['Nature', 'Summon', 'Magical', 'Physical']}],
+    ['Skull of Draxiz', {name: 'Skull of Draxiz', debuffs: ['Disarray'], traits: ['Piercing', 'Cunning'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Chain', 'Summon', 'Magical']}],
+    ['Unholy Claymore', {name: 'Unholy Claymore', buffs: ['Finesse'], debuffs: ['Doom'], traits: ['Cunning'], types: ['Shadow'], allTypes: ['Shadow', 'Lasting', 'Summon', 'Magical', 'Physical']}],
+    ['Bloodbane Crossbow', {name: 'Bloodbane Crossbow', debuffs: ['Disarray'], traits: ['Cunning'], types: ['Chaos'], allTypes: ['Chaos', 'Missile', 'Summon', 'Magical', 'Physical']}],
+    ['Scepter of Thunder', {name: 'Scepter of Thunder', buffs: ['Electrified'], debuffDep: ['Dazed'], traits: ['Cunning'], types: ['Electric'], allTypes: ['Electric', 'Lasting', 'Area', 'Summon', 'Magical']}],
+    ['Ammo Devourer', {name: 'Ammo Devourer', buffs: ['Aptitude'], debuffs: ['Dazed'], traits: ['Brutal', 'Impactful', 'Cunning'], types: ['Projectile'], allTypes: ['Projectile', 'Lasting', 'Burst', 'Summon', 'Magical']}],
+    ['Rusted Blaster', {name: 'Rusted Blaster', debuffs: ['Bleed'], traits: ['Cunning'], types: ['Bomb'], allTypes: ['Bomb', 'Area', 'Burst', 'Summon', 'Physical']}],
+    ['Light Spear', {name: 'Light Spear', buffs: ['Form', 'Resilience'], traits: ['Cunning'], types: ['Thrust'], allTypes: ['Thrust', 'Summon', 'Physical']}],
+    ['Soulcore MK-V', {name: 'Soulcore MK-V', buffs: ['Radiance'], debuffs: ['Brittle'], debuffDep: ['Brittle'], traits: ['Piercing', 'Cunning'], types: ['Arcane'], allTypes: ['Arcane', 'Lasting', 'Aura', 'Summon', 'Magical']}],
+    ['Immortals Staff', {name: 'Immortals Staff', buffs: ['Prowess'], debuffs: ['Shattered'], debuffDep: ['Shattered'], traits: ['Cunning'], types: ['Slam'], allTypes: ['Slam', 'Missile', 'Summon', 'Physical']}],
+    ['Song of the Sirens', {name: 'Song of the Sirens', buffs: ['IcyVeins'], buffDep: ['IcyVeins'], debuffs: ['Slow'], traits: ['Cunning'], types: ['Ice'], allTypes: ['Ice', 'Thrust', 'Chain', 'Summon', 'Physical']}],
+    ['Wooden Scythe', {name: 'Wooden Scythe', debuffs: ['Doom', 'Crippled'], traits: ['Cunning'], types: ['Shadow'], allTypes: ['Shadow', 'Area', 'Summon', 'Magical', 'Physical']}],
+    ['Sacred Warhammer', {name: 'Sacred Warhammer', buffs: ['Purity', 'Prowess'], buffDep: ['Purity'], traits: ['Cunning'], types: ['Holy'], allTypes: ['Holy', 'Swing', 'Missile', 'Summon', 'Physical']}],
+    ['Iron Tide', {name: 'Iron Tide', buffs: ['Cursed', 'Ammunition'], traits: ['Cunning'], types: ['Blast'], allTypes: ['Blast', 'Missile', 'Burst', 'Summon', 'Physical']}],
+    ['Pyromancers Firestarter', {name: 'Pyromancers Firestarter', buffs: ['Haste'], debuffs: ['Burn'], traits: ['Cunning'], types: ['Fire'], allTypes: ['Fire', 'Missile', 'Lasting', 'Summon', 'Magical']}],
+    ['Veilpiercer', {name: 'Veilpiercer', buffs: ['Finesse'], debuffs: ['Condemned'], buffDep: ['Finesse'],  traits: ['Cunning'], types: ['Swing'], allTypes: ['Swing', 'Missile', 'Summon', 'Physical']}],
+    ['Huntress Bow', {name: 'Huntress Bow', buffs: ['Aptitude'], buffDep: ['Aptitude'], traits: ['Cunning'], types: ['Projectile'], allTypes: ['Projectile', 'Lasting', 'Area', 'Summon', 'Physical']}],
+    ['Spinevine Whip', {name: 'Spinevine Whip', buffs: ['Ancestry'], debuffs: ['Poison'], traits: ['Cunning'], types: ['Nature'], allTypes: ['Nature', 'Swing', 'Summon', 'Physical']}],
+    ['Silver Spellblade', {name: 'Silver Spellblade', buffs: ['Radiance', 'Finesse'], traits: ['Cunning'], types: ['Arcane'], allTypes: ['Arcane', 'Area', 'Summon', 'Magical', 'Physical']}],
 ]);

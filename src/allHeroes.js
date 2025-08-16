@@ -75,12 +75,13 @@ export const allHeroes = new Map ([
         ],
     }],
     ['arcaneweaver', {
-        weapons: ['Arcane Staff', 'Ignis Greatstaff of Despair', 'Benedictio Staff of Dawn', 'Glacies Rod of Eternal Ice'],
+        weapons: ['Arcane Staff', 'Ignis Greatstaff of Despair', 'Benedictio Staff of Dawn', 'Glacies Rod of Eternal Ice', 'Pandemonium Spire of Chaos'],
         wArray: [
             'Arcane Missiles', 'Arcane Explosion',
             'Fiery Missiles', 'Fire Pillar',
             'Sacred Orb', 'Celestial Retribution',
-            'Frost Beam', 'Ice Shield'
+            'Frost Beam', 'Ice Shield',
+            'Fractured Volley', 'Chaotic Swirl'
         ],
         sArray: [
             'Arcane Conjuration', 'Arcane Orb', 'Arcane shield', 'Arcane Beam', 'Arcane Disc', 
@@ -93,12 +94,13 @@ export const allHeroes = new Map ([
         ],
     }],
     ['sentinel', {
-        weapons: ['Huntress Bow', 'Siege Recurve Bow', 'Miserys End', 'Noxious Longbow'],
+        weapons: ['Huntress Bow', 'Siege Recurve Bow', 'Miserys End', 'Noxious Longbow', 'Soulfrost'],
         wArray: [
             'Shoot', 'Rain Of Arrows', 
             'Explosive Arrows', 'Cluster Bomb', 
             'Obscure Arrow', 'Void Trap', 
-            'Noxious Shot', 'Venomous Volley'
+            'Noxious Shot', 'Venomous Volley',
+            'Frozen Salvo', 'Arctic Shot'
         ],
         sArray: [
             'Ricochet Shot', 'Sniper Shot', 'Split Shot', 'Acid Rain', 'Avalanche',
@@ -111,12 +113,13 @@ export const allHeroes = new Map ([
         ],
     }],
     ['paladin', {
-        weapons: ['Sacred Warhammer', 'Harbinger of Justice', 'Arcane Scepter of Light', 'Dawnbreakers Mace'],
+        weapons: ['Sacred Warhammer', 'Harbinger of Justice', 'Arcane Scepter of Light', 'Dawnbreakers Mace', 'Golden Lions Crusher'],
         wArray: [
             'Blades Of Light', 'Holy Fire', 
             'Heroic Strike', 'Hammer Of Justice',
             'Radiant Light', 'Arcane Mace',
-            'Fissure Strike', 'Staggering Blow'
+            'Fissure Strike', 'Staggering Blow',
+            'Hammer of Wrath', 'Gods Rebuke'
         ],
         sArray: [
             'Beacon Of Light', 'Penance', 'Templars Verdict', 'Arcane Beam', 'Arcane Disc',
@@ -128,12 +131,13 @@ export const allHeroes = new Map ([
         ],
     }],
     ['chaoswalker', {
-        weapons: ['Skull of Draxiz', 'Artifact of Corruption', 'Flamewalkers Spire', 'Azramiels Blessing'],
+        weapons: ['Skull of Draxiz', 'Artifact of Corruption', 'Flamewalkers Spire', 'Azramiels Blessing', 'Voidwalkers Echo'],
         wArray: [
             'Chaotic Missile', 'Unchained Chaos', 
             'Infected Shot', 'Corrosion', 
             'Orbs Of Destruction', 'Volcano Eruption', 
-            'Ripple Of Light', 'Sanctified Orb'
+            'Ripple Of Light', 'Sanctified Orb',
+            'Death and Decay', 'Crushing Darkness'
         ],
         sArray: [
             'Chaos Totem', 'Chaos Wave', 'Manifestations Of Chaos', 'Acid Rain', 'Bloodlust', 
@@ -394,6 +398,19 @@ export const allHeroes = new Map ([
             'Flame Wave', 'Frenzied Bunnies', 'Ground Break', 'Heartrending Strike', 'Meteor',
             'Resonant Slam', 'Seismic Shock', 'Shadow Bolt', 'Shadow orb', 'Shadow Spikes',
             'Subdue', 'Summon Chaos Golem', 'Titans Cleaver', 'Void',
+        ],
+    }],
+    ['blacksmith', {
+        weapons: ['Hephaestus Hammer'],
+        wArray: [
+            'Anvil Slam', 'Blacksmiths Surge',
+        ],
+        sArray: [
+            'Arcane Staff', 'Worn Daggers', 'Barbaric Cleavers', 'Wild Cleaver',
+            'Skull of Draxiz', 'Unholy Claymore', 'Bloodbane Crossbow', 'Scepter of Thunder',
+            'Ammo Devourer', 'Rusted Blaster', 'Light Spear', 'Soulcore MK-V', 'Immortals Staff',
+            'Song of the Sirens', 'Wooden Scythe', 'Sacred Warhammer', 'Iron Tide', 'Pyromancers Firestarter',
+            'Veilpiercer', 'Huntress Bow', 'Spinevine Whip', 'Silver Spellblade'
         ],
     }],
 ]);

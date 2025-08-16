@@ -14,7 +14,9 @@ export const titans = new Map ([
     ['Midorahk', {
         skills: ['Golden Tremor', 'Goldrush', 'Radiant Cracks', 'Searing Ash', 'Skittering Perception', 'Spiked Carapace', 'Sunpiercer', 'Toxic Proliferation'],
     }],
-    
+    ['Fellipox', {
+        skills: ['Distance Decay', 'Exposed Spores', 'Fungal Frenzy', 'Fungal Impact', 'Ironshroom', 'Maddening Mold', 'Psychedelic Precision', 'Putrid Strength'],
+    }],
 ]);
 
 export const titanSkills = new Map ([
@@ -49,17 +51,26 @@ export const titanSkills = new Map ([
     ['Crushing Pincer', {debuffs: ['Exposed']}],
     ['Heart of Sand', {traits: ['Artifact'], condition: 'Artifact'}],
     ['Queens Stinger', {debuffs: ['Fragility'], condition: 'Weakness'}],
-    ['Sandstorm', {debuffs: ['Brittle'], condition: 'Colossal'}],
+    ['Sandstorm', {debuffs: ['Dazed'], condition: 'Colossal'}],
     ['Sandwalker', {buffs: ['Form']}],
     ['Scorpid Carapace', {text: 'Armor, Block'}],
     ['Violent Toxins', {text: 'Poison tick rate', condition: 'Poison'}],
 
     ['Golden Tremor', {buffs: ['Colossal'], condition: 'Brittle'}],
     ['Goldrush', {text: 'Crit dmg, Cast freq'}],
-    ['Radiant Cracks', {buffs: ['Radiance'], condition: 'Fragility'}],
+    ['Radiant Cracks', {buffs: ['Radiance'], condition: 'Exposed'}],
     ['Searing Ash', {text: 'Crit per burn stacks', condition: 'Burn'}],
     ['Skittering Perception', {buffs: ['Aptitude']}],
     ['Spiked Carapace', {buffs: ['Resilience'], condition: 'Resilience'}],
     ['Sunpiercer', {traits: ['Piercing'], condition: 'Piercing'}],
     ['Toxic Proliferation', {text: 'Poison spread', condition: 'Poison'}],
+
+    ['Putrid Strength', {text: 'Health, dmg mod'}],
+    ['Distance Decay', {text: 'Crit chance'}],
+    ['Exposed Spores', {debuffs: ['Exposed'], condition: 'Bleed'}],
+    ['Psychedelic Precision', {buffs: ['Aptitude'], condition: 'Aptitude'}],
+    ['Fungal Impact', {traits: ['Impactful'], condition: 'Impactful'}],
+    ['Ironshroom', {text: 'Dmg per Bulwark', condition: 'Bulwark'}],
+    ['Fungal Frenzy', {text: 'Cast freq w/ Nature', condition: 'Nature'}],
+    ['Maddening Mold', {text: 'More Chaotic triggers', condition: 'Chaotic'}],
 ]);

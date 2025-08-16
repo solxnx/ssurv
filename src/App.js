@@ -366,7 +366,7 @@ function App() {
 
   return (
     <>
-    <div style={{position: 'absolute', fontSize: '10pt'}}>Version 1.1</div>
+    <div style={{position: 'absolute', fontSize: '10pt'}}>Version 1.2</div>
     <div className="mainTitle" align="center">Soulstone Survivors The Unholy Cathedral / Void Fields / Titan Hunt Build Planner by Solxnx</div>
       <div className="parent">
         <div className='left'>
